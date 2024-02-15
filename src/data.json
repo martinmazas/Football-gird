@@ -1,0 +1,32 @@
+[
+    {
+        "first_name": "Federico Valverde",
+        "team": "Real Madrid",
+        "country": "Uruguay"
+    },
+    {
+        "first_name": "Casemiro",
+        "team": "Manchester United",
+        "country": "Brazil"
+    },
+    {
+        "first_name": "Lautaro Martinez",
+        "team": "Inter Milan",
+        "country": "Argentina"
+    },
+    {
+        "first_name": "Luka Modric",
+        "team": "Real Madrid",
+        "country": "Croatia"
+    },
+    {
+        "first_name": "Ronald Araujo",
+        "team": "Barcelona",
+        "country": "Uruguay"
+    },
+    {
+        "first_name": "Rodrigo Bentancur",
+        "team": "Tottenham",
+        "country": "Uruguay"
+    }
+]
