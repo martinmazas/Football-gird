@@ -1,7 +1,6 @@
 import ReactCountryFlag from "react-country-flag"
 import countries from './countries.json'
 import teams from './teams.json'
-import { useEffect, useState } from "react";
 
 const styles = {
     td: {
@@ -19,34 +18,9 @@ const styles = {
 
 }
 
-const getRandomNumbers = (requiredElements, elementsNum) => {
-    const result = new Set()
 
-    while (result.size < requiredElements - 1) {
-        const rand = Math.floor(Math.random() * (elementsNum.length))
-        result.add(rand)
-    }
-
-    return Array.from(result)
-}
-
-
-const Cells = () => {
-
-    const rows = 4;
-    const columns = 4;
-
-    const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
-    const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
-
-    useEffect(() => {
-        const randomCountries = getRandomNumbers(rows, countries)
-        setRandomNumbersCountries(randomCountries)
-
-        const randomTeams = getRandomNumbers(columns, teams)
-        setRandomNumbersTeams(randomTeams)
-    }, [])
-
+const Cells = (props) => {
+    const { rows, columns, randomNumbersCountries, randomNumbersTeams } = { ...props }
 
     return (
         <>
