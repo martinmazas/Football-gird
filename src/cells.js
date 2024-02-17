@@ -1,11 +1,14 @@
 import ReactCountryFlag from "react-country-flag"
 import countries from './countries.json'
 import teams from './teams.json'
+import React from 'react';
 
 const styles = {
     td: {
         width: '10vw',
         height: '10vw',
+        textAlign: 'center',
+        backgroundColor: '#07396b'
     },
     flag: {
         fontSize: '15em'
@@ -27,7 +30,7 @@ const Cells = (props) => {
             {[...Array(rows)].map((_, rowIndex) => (
                 <tr key={rowIndex}>
                     {[...Array(columns)].map((_, cellIndex) => (
-                        <td style={styles.td} key={[rowIndex, cellIndex]} >
+                        <td className="td-cell" style={styles.td} key={[rowIndex, cellIndex]} >
                             {
                                 (randomNumbersTeams.length && randomNumbersCountries.length) ?
                                     (rowIndex === 0 && cellIndex > 0 && cellIndex < columns) ?

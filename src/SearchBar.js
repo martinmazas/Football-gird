@@ -1,27 +1,28 @@
-const styles = {
-    searchBar: {
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: '150vh',
-        overflow: 'hidden',
-        whiteSpace: 'nowrap',
-        width: '150vw'
-    }
-}
+import React, { useState } from 'react';
 
-const SearchBar = () => (
-    <form action="/" method="get">
-        <label htmlFor="header-search">
-            <span className="visually-hidden" style={styles.searchBar}>Search blog posts</span>
-        </label>
-        <input
-            type="text"
-            id="header-search"
-            placeholder="Search blog posts"
-            name="s"
-        />
-        <button type="submit">Search</button>
-    </form>
-);
+function SearchBar() {
+    const [query, setQuery] = useState('');
+
+    const handleChange = (event) => {
+        setQuery(event.target.value);
+    };
+
+    const handleGuess = () => {
+        console.log(query)
+    };
+
+    return (
+        <>
+            <input
+                className="guess-input"
+                type="text"
+                placeholder="Enter player's name"
+                value={query}
+                onChange={handleChange}
+            />
+            <button className='guess-button' onClick={handleGuess}>Guess</button>
+        </>
+    );
+}
 
 export default SearchBar;
