@@ -1,31 +1,37 @@
 [
     {
-        "first_name": "Federico Valverde",
+        "first_name": "Federico",
+        "second_name": "Valverde",
         "team": "Real Madrid",
         "country": "Uruguay"
     },
     {
-        "first_name": "Casemiro",
+        "first_name": "",
+        "second_name": "Casemiro",
         "team": "Manchester United",
         "country": "Brazil"
     },
     {
-        "first_name": "Lautaro Martinez",
+        "first_name": "Lautaro",
+        "second_name": "Martinez",
         "team": "Inter Milan",
         "country": "Argentina"
     },
     {
-        "first_name": "Luka Modric",
+        "first_name": "Luka",
+        "second_name": "Modric",
         "team": "Real Madrid",
         "country": "Croatia"
     },
     {
-        "first_name": "Ronald Araujo",
+        "first_name": "Ronald",
+        "second_name": "Araujo",
         "team": "Barcelona",
         "country": "Uruguay"
     },
     {
-        "first_name": "Rodrigo Bentancur",
+        "first_name": "Rodrigo",
+        "second_name": "Bentancur",
         "team": "Tottenham",
         "country": "Uruguay"
     }

@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
-import { getRandomNumbers } from "./Utils/functions";
 import Cells from "./cells";
-import countries from './countries.json'
-import teams from './teams.json'
 import React from 'react';
-
 
 const styles = {
     tbody: {
@@ -17,21 +12,8 @@ const styles = {
 }
 
 
-const GridTable = () => {
-    const rows = 4;
-    const columns = 4;
-
-    const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
-    const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
-
-    useEffect(() => {
-        const randomCountries = getRandomNumbers(rows, countries)
-        const randomTeams = getRandomNumbers(columns, teams)
-
-        setRandomNumbersCountries(randomCountries)
-        setRandomNumbersTeams(randomTeams)
-    }, [])
-
+const GridTable = (props) => {
+    const { rows, columns, randomNumbersCountries, randomNumbersTeams } = { ...props }
 
     return (
         <>
