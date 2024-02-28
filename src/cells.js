@@ -34,7 +34,7 @@ const Cells = (props) => {
                             {
                                 (randomNumbersTeams.length && randomNumbersCountries.length) ?
                                     (rowIndex === 0 && cellIndex > 0 && cellIndex < columns) ?
-                                        <ReactCountryFlag countryCode={`${countries[randomNumbersCountries[cellIndex - 1]].code}`}
+                                        <ReactCountryFlag svg countryCode={`${countries[randomNumbersCountries[cellIndex - 1]].code}`}
                                             style={styles.flag} />
                                         :
                                         (cellIndex === 0 && rowIndex > 0 && rowIndex < rows) ?

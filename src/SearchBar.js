@@ -19,12 +19,12 @@ const styles = {
 function SearchBar(props) {
     const { randomNumbersCountries, randomNumbersTeams } = { ...props }
     const [query, setQuery] = useState('');
-    const [teamNames, setTeamNames] = useState([])
-    const [countryNames, setCountryNames] = useState([])
+    const [countryNames, setCountryNames] = useState(randomNumbersCountries)
+    const [teamNames, setTeamNames] = useState(randomNumbersTeams)
 
     useEffect(() => {
-        randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country]]))
-        randomNumbersTeams.map(team => setTeamNames(teamNames => [...teamNames, teams[team]]))
+        randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
+        randomNumbersTeams.map(team => setTeamNames(teamNames => [...teamNames, teams[team].name]))
     }, [randomNumbersCountries, randomNumbersTeams])
 
     const handleChange = (event) => {

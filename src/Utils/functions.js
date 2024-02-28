@@ -12,12 +12,19 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
 }
 
 export const getPlayer = (playerName, countries, teams) => {
-    const playerResult = players.find(p => p.second_name === playerName)
-    let playerResultWithCondition
-    if (playerResult !== undefined) {
-        playerResultWithCondition = countries.find(c => c.name.includes(playerResult.country)) && teams.find(t => t.name.includes(playerResult.team))
-    }
-    else console.log('NO');
+    // Find the player by second name
+    const playerResult = players.find(p => p.second_name.toLocaleLowerCase() === playerName.toLocaleLowerCase())
+    console.log(countries)
 
-    console.log(playerResultWithCondition)
+    let playerCountry
+    let playerTeam
+
+    if (playerResult !== undefined) {
+        // Check if the player and country are in the board
+        playerCountry = countries.find(c => c.includes(playerResult.country)) 
+        playerTeam = teams.find(t => t.includes(playerResult.team))
+    }
+
+    if (playerCountry && playerTeam) console.log(playerCountry.value, playerTeam);
+
 }
