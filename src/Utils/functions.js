@@ -16,15 +16,23 @@ export const getPlayer = (playerName, countries, teams) => {
     const playerResult = players.find(p => p.second_name.toLocaleLowerCase() === playerName.toLocaleLowerCase())
     console.log(countries)
 
-    let playerCountry
-    let playerTeam
+    let playerCountry, playerTeam
 
     if (playerResult !== undefined) {
         // Check if the player and country are in the board
-        playerCountry = countries.find(c => c.includes(playerResult.country)) 
+        playerCountry = countries.find(c => c.includes(playerResult.country))
+
+        // Check if the player and team are in the board
         playerTeam = teams.find(t => t.includes(playerResult.team))
     }
 
-    if (playerCountry && playerTeam) console.log(playerCountry.value, playerTeam);
+    return [playerCountry, playerTeam]
+}
 
+export const markCell = (arr, cellRow, cellCol) => {
+    arr[cellRow][cellCol] = 1
+}
+
+export const checkCell = (arr, cellRow, cellCol) => {
+    
 }
