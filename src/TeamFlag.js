@@ -1,3 +1,4 @@
+import React from "react"
 import { markCell } from "./Utils/functions"
 
 const styles = {
