@@ -3,7 +3,8 @@
         "first_name": "Federico",
         "second_name": "Valverde",
         "team": "Real Madrid",
-        "country": "Uruguay"
+        "country": "Uruguay",
+        "imgPath": "./images/Valverde.jpg"
     },
     {
         "first_name": "",

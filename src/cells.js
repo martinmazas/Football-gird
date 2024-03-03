@@ -31,7 +31,9 @@ const Cells = (props) => {
                                     : (cellIndex === 0 && rowIndex > 0) ?
                                         <TeamFlag team={teams[randomNumbersTeams[rowIndex - 1]]} rowIndex={rowIndex} table={table} />
                                     : (cellIndex !== 0 && rowIndex !== 0) ?
-                                        <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}></div>
+                                        <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}>
+                                            <img style={{width:100, height:100}} src={require('./images/Valverde.jpg')} alt='test'/>
+                                        </div>
                                     : null
                                 }   
                             </td>
