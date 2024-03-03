@@ -32,7 +32,8 @@ function SearchBar(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, countryNames, teamNames)
+        const [playerCountry, playerTeam] = [...getPlayer(query, countryNames, teamNames)]
+        playerCountry && playerTeam ? console.log(playerCountry, playerTeam) : alert('Need to find the function')
     };
 
     return (

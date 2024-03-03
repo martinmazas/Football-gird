@@ -10,7 +10,6 @@ import teams from './teams.json'
 const styles = {
   button: {
     margin: '2vh 10vw',
-    // height: '40px',
     fontSize: '30px',
   },
   playGame: {
@@ -25,27 +24,32 @@ function App() {
   }
 
   const rows = 4;
-    const columns = 4;
+  const columns = 4;
+  const table = Array.from({ length: rows }, () => Array(columns).fill(null))
 
-    const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
-    const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
 
-    useEffect(() => {
-        const randomCountries = getRandomNumbers(rows, countries)
-        const randomTeams = getRandomNumbers(columns, teams)
+  const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
+  const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
 
-        setRandomNumbersCountries(randomCountries)
-        setRandomNumbersTeams(randomTeams)
-    }, [])
+  useEffect(() => {
+    const randomCountries = getRandomNumbers(rows, countries)
+    const randomTeams = getRandomNumbers(columns, teams)
+
+    setRandomNumbersCountries(randomCountries)
+    setRandomNumbersTeams(randomTeams)
+  }, [])
+
 
   return (
-    <div className="App">
-      <GridTable rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
-      <div className="play-game" style={styles.playGame}>
-        <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
-        <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
+    (randomNumbersCountries.length && randomNumbersTeams.length) ?
+      <div className="App">
+        <GridTable rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} table={table} />
+        <div className="play-game" style={styles.playGame}>
+          <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
+          <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
+        </div>
       </div>
-    </div>
+      : null
   );
 }
 

@@ -1,7 +1,8 @@
-import ReactCountryFlag from "react-country-flag"
 import countries from './countries.json'
 import teams from './teams.json'
 import React from 'react';
+import CountryFlag from "./CountryFlag";
+import TeamFlag from './TeamFlag';
 
 const styles = {
     td: {
@@ -9,40 +10,31 @@ const styles = {
         height: '10vw',
         textAlign: 'center',
         backgroundColor: '#07396b'
-    },
-    flag: {
-        fontSize: '15em'
-    },
-    logos: {
-        width: '15em',
-        height: '15em',
-        margin: 'auto'
     }
-
 }
 
 
 const Cells = (props) => {
-    const { rows, columns, randomNumbersCountries, randomNumbersTeams } = { ...props }
+    const { rows, columns, randomNumbersCountries, randomNumbersTeams, table } = { ...props }
+
+    console.log(countries, randomNumbersCountries)
 
     return (
         <>
             {[...Array(rows)].map((_, rowIndex) => (
                 <tr key={rowIndex}>
                     {[...Array(columns)].map((_, cellIndex) => (
-                        <td className={`td-cell`} style={styles.td} key={[rowIndex, cellIndex]} >
-                            {
-                                (randomNumbersTeams.length && randomNumbersCountries.length) ?
-                                    (rowIndex === 0 && cellIndex > 0 && cellIndex < columns) ?
-                                        <ReactCountryFlag svg countryCode={`${countries[randomNumbersCountries[cellIndex - 1]].code}`}
-                                            style={styles.flag} />
-                                        :
-                                        (cellIndex === 0 && rowIndex > 0 && rowIndex < rows) ?
-                                            <img src={require(`./images/${teams[randomNumbersTeams[rowIndex - 1]].code}.jpeg`)} alt={`${teams[randomNumbersTeams[rowIndex - 1]].code}`} style={styles.logos} />
-                                            : null
+                            <td style={styles.td} key={[rowIndex, cellIndex]} >
+                                {
+                                    (rowIndex === 0 && cellIndex > 0) ?
+                                        <CountryFlag country={countries[randomNumbersCountries[cellIndex - 1]]} cellIndex={cellIndex} table={table} />
+                                    : (cellIndex === 0 && rowIndex > 0) ?
+                                        <TeamFlag team={teams[randomNumbersTeams[rowIndex - 1]]} rowIndex={rowIndex} table={table} />
+                                    : (cellIndex !== 0 && rowIndex !== 0) ?
+                                        <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}></div>
                                     : null
-                            }
-                        </td>
+                                }   
+                            </td>
                     ))}
                 </tr>
             ))}

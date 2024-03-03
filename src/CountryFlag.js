@@ -2,6 +2,7 @@ import ReactCountryFlag from "react-country-flag"
 import { markCell } from "./Utils/functions"
 import React from "react"
 
+
 const styles = {
     flag: {
         fontSize: '15em'
