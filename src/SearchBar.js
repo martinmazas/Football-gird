@@ -19,8 +19,8 @@ const styles = {
 function SearchBar(props) {
     const { randomNumbersCountries, randomNumbersTeams } = { ...props }
     const [query, setQuery] = useState('');
-    const [countryNames, setCountryNames] = useState(randomNumbersCountries)
-    const [teamNames, setTeamNames] = useState(randomNumbersTeams)
+    const [countryNames, setCountryNames] = useState([])
+    const [teamNames, setTeamNames] = useState([])
 
     useEffect(() => {
         randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
@@ -32,8 +32,9 @@ function SearchBar(props) {
     };
 
     const handleGuess = () => {
-        const [playerCountry, playerTeam] = [...getPlayer(query, countryNames, teamNames)]
-        playerCountry && playerTeam ? console.log(playerCountry, playerTeam) : alert('Need to find the function')
+        getPlayer(query, countryNames, teamNames)
+        // const [playerCountry, playerTeam] = [...getPlayer(query, countryNames, teamNames)]
+        // playerCountry && playerTeam ? console.log(playerCountry, playerTeam) : alert('Need to find the function')
     };
 
     return (

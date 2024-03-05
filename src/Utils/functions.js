@@ -26,7 +26,9 @@ export const getPlayer = (playerName, countries, teams) => {
         playerTeam = teams.find(t => t.includes(playerResult.team))
     }
 
-    return [playerCountry, playerTeam]
+    (playerCountry && playerTeam) ? addPhoto(playerResult) : alert('Nothing')
+
+    // return [playerCountry, playerTeam]
 }
 
 export const markCell = (arr, cellRow, cellCol) => {
@@ -34,5 +36,18 @@ export const markCell = (arr, cellRow, cellCol) => {
 }
 
 export const checkCell = (arr, cellRow, cellCol) => {
-    
+
+}
+
+export const addPhoto = (player) => {
+    const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`)
+    if (playerDiv[0]) {
+        const img = document.createElement('img')
+        img.src = require(`../images/${player.imgPath}`)
+        img.alt = `${player.second_name}`
+        img.width = 100
+        img.height = 100
+        console.log(img)
+        playerDiv[0].appendChild(img)
+    }
 }
