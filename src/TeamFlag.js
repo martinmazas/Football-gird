@@ -1,5 +1,4 @@
 import React from "react"
-import { markCell } from "./Utils/functions"
 
 const styles = {
     logos: {
@@ -10,9 +9,7 @@ const styles = {
 }
 
 const TeamFlag = (props) => {
-    const { team, rowIndex, table } = { ...props }
-
-    markCell(table, 0, rowIndex)
+    const { team } = { ...props }
 
     return (
         <img className={`flag-${team.name}`} src={require(`./images/${team.code}.jpeg`)} alt={`${team.code}`} style={styles.logos} />

@@ -14,7 +14,6 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
 export const getPlayer = (playerName, countries, teams) => {
     // Find the player by second name
     const playerResult = players.find(p => p.second_name.toLocaleLowerCase() === playerName.toLocaleLowerCase())
-    console.log(countries)
 
     let playerCountry, playerTeam
 
@@ -27,30 +26,27 @@ export const getPlayer = (playerName, countries, teams) => {
     }
 
     (playerCountry && playerTeam) ? addPhoto(playerResult) : alert('Nothing')
-
-    // return [playerCountry, playerTeam]
 }
 
-export const markCell = (arr, cellRow, cellCol) => {
-    arr[cellRow][cellCol] = 1
-}
-
-export const checkCell = (arr, cellRow, cellCol) => {
-
-}
 
 export const addPhoto = (player) => {
+    // Get the team and country div for the selected player
     const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`)
-    
+
     if (playerDiv[0]) {
+        // Get the parent of the player's div
         const parentDiv = playerDiv[0].parentNode
+
+        // Create the player image
         const img = document.createElement('img')
         img.src = require(`../images/${player.imgPath}`)
         img.alt = `${player.second_name}`
         img.style.width = '80%'
         img.style.height = '80%'
         img.style.margin = 'auto'
+
+        // Add the player image and delete the previous div
         parentDiv.prepend(img)
         parentDiv.removeChild(playerDiv[0])
-    } else alert('NOOO')
+    }
 }
