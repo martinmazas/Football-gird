@@ -41,13 +41,16 @@ export const checkCell = (arr, cellRow, cellCol) => {
 
 export const addPhoto = (player) => {
     const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`)
+    
     if (playerDiv[0]) {
+        const parentDiv = playerDiv[0].parentNode
         const img = document.createElement('img')
         img.src = require(`../images/${player.imgPath}`)
         img.alt = `${player.second_name}`
-        img.width = 100
-        img.height = 100
-        console.log(img)
-        playerDiv[0].appendChild(img)
-    }
+        img.style.width = '80%'
+        img.style.height = '80%'
+        img.style.margin = 'auto'
+        parentDiv.prepend(img)
+        parentDiv.removeChild(playerDiv[0])
+    } else alert('NOOO')
 }

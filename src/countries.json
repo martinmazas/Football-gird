@@ -4,5 +4,6 @@
   {"name": "Uruguay", "code": "UY"},
   {"name": "Chile", "code": "CL"}, 
   {"name": "Spain", "code": "ES"}, 
-  {"name": "Germany", "code": "DE"}
+  {"name": "Germany", "code": "DE"},
+  {"name": "Italy", "code": "IT"}
 ]
