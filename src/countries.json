@@ -1,9 +1,30 @@
-[ 
-  {"name": "Argentina", "code": "AR"}, 
-  {"name": "Brazil", "code": "BR"}, 
-  {"name": "Uruguay", "code": "UY"},
-  {"name": "Chile", "code": "CL"}, 
-  {"name": "Spain", "code": "ES"}, 
-  {"name": "Germany", "code": "DE"},
-  {"name": "Italy", "code": "IT"}
+[
+  {
+    "name": "Argentina",
+    "code": "AR"
+  },
+  {
+    "name": "Brazil",
+    "code": "BR"
+  },
+  {
+    "name": "Uruguay",
+    "code": "UY"
+  },
+  {
+    "name": "Chile",
+    "code": "CL"
+  },
+  {
+    "name": "Spain",
+    "code": "ES"
+  },
+  {
+    "name": "Germany",
+    "code": "DE"
+  },
+  {
+    "name": "Italy",
+    "code": "IT"
+  }
 ]

@@ -25,8 +25,6 @@ function App() {
 
   const rows = 4;
   const columns = 4;
-  const table = Array.from({ length: rows }, () => Array(columns).fill(null))
-
 
   const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
   const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
@@ -43,7 +41,7 @@ function App() {
   return (
     (randomNumbersCountries.length && randomNumbersTeams.length) ?
       <div className="App">
-        <GridTable rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} table={table} />
+        <GridTable rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
         <div className="play-game" style={styles.playGame}>
           <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
