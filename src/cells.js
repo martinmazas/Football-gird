@@ -22,7 +22,7 @@ const Cells = (props) => {
             {[...Array(rows)].map((_, rowIndex) => (
                 <tr key={rowIndex}>
                     {[...Array(columns)].map((_, cellIndex) => (
-                            <td style={styles.td} key={[rowIndex, cellIndex]} >
+                            <td className={`${rowIndex}-${cellIndex}`} style={styles.td} key={[rowIndex, cellIndex]} >
                                 {
                                     (rowIndex === 0 && cellIndex > 0) ?
                                         <CountryFlag country={countries[randomNumbersCountries[cellIndex - 1]]} cellIndex={cellIndex} table={table} />
