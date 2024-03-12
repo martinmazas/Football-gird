@@ -39,7 +39,7 @@ export const addPhoto = (player) => {
 
         // Create the player image
         const img = document.createElement('img')
-        img.src = require(`../images/${player.imgPath}`)
+        img.src = require(`../images/${player.imgPath}.jpeg`)
         img.alt = `${player.second_name}`
         img.style.width = '80%'
         img.style.height = '80%'
