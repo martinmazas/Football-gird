@@ -1,4 +1,5 @@
 import players from '../data.json'
+import axios from 'axios'
 
 export const getRandomNumbers = (requiredElements, elementsNum) => {
     const result = new Set()
@@ -12,6 +13,11 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
 }
 
 export const getPlayer = (playerName, countries, teams) => {
+    const findPlayer = axios.get('http://localhost:8080/players', {headers: {
+        "Content-type": "application/json",
+    }})
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
     // Find the player by second name
     const playerResult = players.find(p => p.second_name.toLocaleLowerCase() === playerName.toLocaleLowerCase())
 
