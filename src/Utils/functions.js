@@ -13,25 +13,17 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
 }
 
 export const getPlayer = (playerName, countries, teams) => {
-    const findPlayer = axios.get('http://localhost:8080/players', {headers: {
-        "Content-type": "application/json",
-    }})
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
-    // Find the player by second name
-    const playerResult = players.find(p => p.second_name.toLocaleLowerCase() === playerName.toLocaleLowerCase())
-
-    let playerCountry, playerTeam
-
-    if (playerResult !== undefined) {
-        // Check if the player and country are in the board
-        playerCountry = countries.find(c => c.includes(playerResult.country))
-
-        // Check if the player and team are in the board
-        playerTeam = teams.find(t => t.includes(playerResult.team))
-    }
-
-    (playerCountry && playerTeam) ? addPhoto(playerResult) : alert('Nothing')
+    const findPlayer = axios.get('http://localhost:8080/players/guessPlayer', {
+        headers: {
+            "Content-type": "application/json",
+        }, params: {
+            "playerName": playerName,
+            "countries": countries,
+            "teams": teams
+        }
+    })
+        .then(data => addPhoto(data.data))
+        .catch(err => console.log(err))
 }
 
 
