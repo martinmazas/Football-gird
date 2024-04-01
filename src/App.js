@@ -15,6 +15,9 @@ const styles = {
   playGame: {
     whiteSpace: 'nowrap',
     margin: 'auto 35vw',
+  },
+  grid: {
+    margin: 'auto auto'
   }
 }
 
@@ -41,7 +44,7 @@ function App() {
   return (
     (randomNumbersCountries.length && randomNumbersTeams.length) ?
       <div className="App">
-        <GridTable rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
+        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
         <div className="play-game" style={styles.playGame}>
           <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
