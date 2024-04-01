@@ -1,11 +1,28 @@
 import { useState } from 'react'
 
+const styles = {
+    label: {
+        display: 'block',
+        marginBottom: 10,
+        color: 'white',
+    },
+    form: {
+        padding: '20vh',
+    },
+    input: {
+        width: '100%',
+        padding: 10,
+        marginTop: 5,
+        marginBottom: 10
+    }
+}
+
 export default function AddPlayer() {
     const [formData, setFormData] = useState({ firstName: '', secondName: '', imgPath: '', country: '', team: '', img: '' })
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(event)
+        console.log(formData)
     }
 
     const handleChange = (event) => {
@@ -14,26 +31,34 @@ export default function AddPlayer() {
     }
 
     return (
-        <form onSubmit={handleSubmit} >
-            <label htmlFor='First Name'>First Name:</label>
-            <input type='text' id='firstName' name='firstName' value={formData.firstName} onChange={handleChange} />
+        <>
+            <form style={styles.form} onSubmit={handleSubmit} >
+                <label style={styles.label} htmlFor='First Name'>First Name:
+                    <input style={styles.input} type='text' id='firstName' name='firstName' value={formData.firstName} onChange={handleChange} />
+                </label>
 
-            <label htmlFor='Second Name'>Second Name:</label>
-            <input type='text' id='secondName' name='secondName' value={formData.secondName} onChange={handleChange} />
+                <label style={styles.label} htmlFor='Second Name'>Second Name:
+                    <input style={styles.input} type='text' id='secondName' name='secondName' value={formData.secondName} onChange={handleChange} />
+                </label>
 
-            <label htmlFor='Image Path'>Image Path:</label>
-            <input type='text' id='imgPath' name='imgPath' value={formData.imgPath} onChange={handleChange} />
+                <label style={styles.label} htmlFor='Image Path'>Image Path:
+                    <input style={styles.input} type='text' id='imgPath' name='imgPath' value={formData.imgPath} onChange={handleChange} />
+                </label>
 
-            <label htmlFor='Country'>Country:</label>
-            <input type='text' id='country' name='country' value={formData.country} onChange={handleChange} />
+                <label style={styles.label} htmlFor='Country'>Country:
+                    <input style={styles.input} type='text' id='country' name='country' value={formData.country} onChange={handleChange} />
+                </label>
 
-            <label htmlFor='Team'>Team:</label>
-            <input type='text' id='team' name='team' value={formData.team} onChange={handleChange} />
+                <label style={styles.label} htmlFor='Team'>Team:
+                    <input style={styles.input} type='text' id='team' name='team' value={formData.team} onChange={handleChange} />
+                </label>
 
-            <label htmlFor='Image'>Image:</label>
-            <input type='text' id='img' name='img' value={formData.img} onChange={handleChange} />
+                <label style={styles.label} htmlFor='Image'>Image:
+                    <input style={styles.input} type='text' id='img' name='img' value={formData.img} onChange={handleChange} />
+                </label>
 
-            <button type='submit'>submit</button>
-        </form>
+                <button type='submit'>submit</button>
+            </form>
+        </>
     )
 }
