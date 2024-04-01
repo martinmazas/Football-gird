@@ -1,4 +1,3 @@
-import players from '../data.json'
 import axios from 'axios'
 
 export const getRandomNumbers = (requiredElements, elementsNum) => {

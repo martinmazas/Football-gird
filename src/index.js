@@ -12,7 +12,6 @@ root.render(
       <Routes>
         <Route exact path='/' Component={App} />
         <Route path='/addPlayer' Component={AddPlayer} />
-        {/* <App /> */}
       </Routes>
     </Router>
   </>

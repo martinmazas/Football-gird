@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 const styles = {
     label: {
@@ -18,11 +19,16 @@ const styles = {
 }
 
 export default function AddPlayer() {
-    const [formData, setFormData] = useState({ firstName: '', secondName: '', imgPath: '', country: '', team: '', img: '' })
+    const [formData, setFormData] = useState({ firstName: '', secondName: '', imgPath: '', country: '', team: '' })
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(formData)
+
+        axios.post('http://localhost:8080/players/newPlayer', {
+            formData
+        })
+            .then(data => console.log(data))
+            .catch(err => console.log(err))
     }
 
     const handleChange = (event) => {
@@ -53,9 +59,9 @@ export default function AddPlayer() {
                     <input style={styles.input} type='text' id='team' name='team' value={formData.team} onChange={handleChange} />
                 </label>
 
-                <label style={styles.label} htmlFor='Image'>Image:
+                {/* <label style={styles.label} htmlFor='Image'>Image:
                     <input style={styles.input} type='text' id='img' name='img' value={formData.img} onChange={handleChange} />
-                </label>
+                </label> */}
 
                 <button type='submit'>submit</button>
             </form>
