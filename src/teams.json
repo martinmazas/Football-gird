@@ -1,9 +1,30 @@
-[ 
-  {"name": "Real Madrid", "code": "RealMadrid"}, 
-  {"name": "Barcelona", "code": "Barcelona"}, 
-  {"name": "Inter Milan", "code": "InterMilan"},
-  {"name": "Milan", "code": "Milan"},
-  {"name": "Tottenham", "code": "Tottenham"},
-  {"name": "Manchester United", "code": "ManUtd"},
-  {"name": "Manchester City", "code": "ManCity"}
+[
+  {
+    "name": "Real Madrid",
+    "code": "RealMadrid"
+  },
+  {
+    "name": "Barcelona",
+    "code": "Barcelona"
+  },
+  {
+    "name": "Inter Milan",
+    "code": "InterMilan"
+  },
+  {
+    "name": "Milan",
+    "code": "Milan"
+  },
+  {
+    "name": "Tottenham",
+    "code": "Tottenham"
+  },
+  {
+    "name": "Manchester United",
+    "code": "ManUtd"
+  },
+  {
+    "name": "Manchester City",
+    "code": "ManCity"
+  }
 ]
