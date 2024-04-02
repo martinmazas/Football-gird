@@ -27,7 +27,11 @@ export default function AddPlayer() {
         axios.post('http://localhost:8080/players/newPlayer', {
             formData
         })
-            .then(data => console.log(data))
+            .then(data => {
+                // Alert with the server response (added or not) and reload the current page
+                alert(data.data)
+                window.location.reload()
+            })
             .catch(err => console.log(err))
     }
 
