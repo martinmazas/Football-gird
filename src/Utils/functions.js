@@ -27,7 +27,7 @@ export const getPlayer = (playerName, countries, teams) => {
 
 
 export const addPhoto = (player) => {
-    if (player === 'No matches') return alert('NOO')
+    if (player === 'No matches') return alert('Player not found')
 
     // Get the team and country div for the selected player
     const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`)
