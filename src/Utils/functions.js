@@ -12,7 +12,7 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
 }
 
 export const getPlayer = (playerName, countries, teams) => {
-    const findPlayer = axios.get('http://localhost:8080/players/guessPlayer', {
+    axios.get('http://localhost:8080/players/guessPlayer', {
         headers: {
             "Content-type": "application/json",
         }, params: {
@@ -27,7 +27,7 @@ export const getPlayer = (playerName, countries, teams) => {
 
 
 export const addPhoto = (player) => {
-    if (player === 'No matches') return alert('Player not found')
+    if (player === 'No matches') return alert(`No matches for this player`)
 
     // Get the team and country div for the selected player
     const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`)
@@ -47,5 +47,7 @@ export const addPhoto = (player) => {
         // Add the player image and delete the previous div
         parentDiv.prepend(img)
         parentDiv.removeChild(playerDiv[0])
+    } else {
+        alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
     }
 }
