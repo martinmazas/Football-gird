@@ -59,10 +59,6 @@ export default function AddPlayer() {
                     <input style={styles.input} type='text' id='team' name='team' value={formData.team} onChange={handleChange} />
                 </label>
 
-                {/* <label style={styles.label} htmlFor='Image'>Image:
-                    <input style={styles.input} type='text' id='img' name='img' value={formData.img} onChange={handleChange} />
-                </label> */}
-
                 <button type='submit'>submit</button>
             </form>
         </>
