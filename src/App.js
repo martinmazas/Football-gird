@@ -31,6 +31,7 @@ function App() {
 
   const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
   const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
+  const [score, setScore] = useState(0)
 
   useEffect(() => {
     const randomCountries = getRandomNumbers(rows, countries)
@@ -40,13 +41,17 @@ function App() {
     setRandomNumbersTeams(randomTeams)
   }, [])
 
+  useEffect(() => {
+    if (score === (rows - 1) * (columns - 1)) alert('You won')
+  }, [score])
+
 
   return (
     (randomNumbersCountries.length && randomNumbersTeams.length) ?
       <div className="App">
         <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
         <div className="play-game" style={styles.playGame}>
-          <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
+          <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} scoreState={{score, setScore}} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div>

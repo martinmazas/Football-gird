@@ -3,6 +3,7 @@ import axios from 'axios'
 export const getRandomNumbers = (requiredElements, elementsNum) => {
     const result = new Set()
 
+    // Picks x random numbers in order to get random teams and countries
     while (result.size < requiredElements - 1) {
         const rand = Math.floor(Math.random() * (elementsNum.length))
         result.add(rand)
@@ -11,7 +12,7 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
     return Array.from(result)
 }
 
-export const getPlayer = (playerName, countries, teams) => {
+export const getPlayer = (playerName, countries, teams, score, setScore) => {
     axios.get('http://localhost:8080/players/guessPlayer', {
         headers: {
             "Content-type": "application/json",
@@ -21,12 +22,12 @@ export const getPlayer = (playerName, countries, teams) => {
             teams
         }
     })
-        .then(data => addPhoto(data.data))
+        .then(data => addPhoto(data.data, score, setScore))
         .catch(err => console.log(err))
 }
 
 
-export const addPhoto = (player) => {
+export const addPhoto = (player, score, setScore) => {
     if (player === 'No matches') return alert(`No matches for this player`)
 
     // Get the team and country div for the selected player
@@ -47,6 +48,7 @@ export const addPhoto = (player) => {
         // Add the player image and delete the previous div
         parentDiv.prepend(img)
         parentDiv.removeChild(playerDiv[0])
+        setScore(score + 1)
     } else {
         alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
     }

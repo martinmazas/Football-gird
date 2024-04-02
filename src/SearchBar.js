@@ -17,7 +17,7 @@ const styles = {
 }
 
 function SearchBar(props) {
-    const { randomNumbersCountries, randomNumbersTeams } = { ...props }
+    const { randomNumbersCountries, randomNumbersTeams, scoreState } = { ...props }
     const [query, setQuery] = useState('');
     const [countryNames, setCountryNames] = useState([])
     const [teamNames, setTeamNames] = useState([])
@@ -32,7 +32,7 @@ function SearchBar(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, countryNames, teamNames)
+        getPlayer(query, countryNames, teamNames, scoreState.score, scoreState.setScore)
     };
 
     return (
