@@ -16,9 +16,9 @@ export const getPlayer = (playerName, countries, teams) => {
         headers: {
             "Content-type": "application/json",
         }, params: {
-            "playerName": playerName,
-            "countries": countries,
-            "teams": teams
+            playerName,
+            countries,
+            teams
         }
     })
         .then(data => addPhoto(data.data))
