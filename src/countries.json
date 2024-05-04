@@ -26,5 +26,9 @@
   {
     "name": "Italy",
     "code": "IT"
+  },
+  {
+    "name": "France",
+    "code": "FR"
   }
 ]
