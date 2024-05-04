@@ -42,7 +42,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (score === (rows - 1) * (columns - 1)) alert('You won')
+    if (score === (rows - 1) * (columns - 1)) alert('You win')
   }, [score])
 
 

@@ -26,5 +26,9 @@
   {
     "name": "Manchester City",
     "code": "ManCity"
+  },
+  {
+    "name": "Bayern Munich",
+    "code": "BayernMunich"
   }
 ]

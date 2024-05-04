@@ -29,7 +29,7 @@ export default function AddPlayer() {
         })
             .then(data => {
                 // Alert with the server response (added or not) and reload the current page
-                alert(data.data)
+                // alert(data.data)
                 window.location.reload()
             })
             .catch(err => console.log(err))
