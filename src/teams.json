@@ -30,5 +30,13 @@
   {
     "name": "Bayern Munich",
     "code": "BayernMunich"
+  },
+  {
+    "name": "Arsenal",
+    "code": "Arsenal"
+  },
+  {
+    "name": "Galatasaray",
+    "code": "Galatasaray"
   }
 ]
