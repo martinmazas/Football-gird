@@ -12,10 +12,6 @@
     "code": "UY"
   },
   {
-    "name": "Chile",
-    "code": "CL"
-  },
-  {
     "name": "Spain",
     "code": "ES"
   },
@@ -38,5 +34,21 @@
   {
     "name": "Turkiye",
     "code": "TR"
+  },
+  {
+    "name": "Netherlands",
+    "code": "NL"
+  },
+  {
+    "name": "Denmark",
+    "code": "DK"
+  },
+  {
+    "name": "Portugal",
+    "code": "PT"
+  },
+  {
+    "name": "Poland",
+    "code": "PL"
   }
 ]
