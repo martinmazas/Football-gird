@@ -22,15 +22,18 @@ export const getPlayer = (playerName, countries, teams, score, setScore, setPlay
             teams
         }
     })
-        .then(data => addPhoto(data.data, score, setScore, setPlayerOptions))
+        .then(data => {
+            if (data.data.length <= 1) addPhoto(data.data, score, setScore)
+            else setPlayerOptions(data.data)
+        })
         .catch(err => console.log(err))
 }
 
 
-export const addPhoto = (players, score, setScore, setPlayerOptions) => {
+export const addPhoto = (players, score, setScore) => {
     if (players.length === 0) return alert(`No matches`)
 
-    const player = players.length === 1 ? players[0] : setPlayerOptions(players)
+    const player = players[0]
 
     if (player) {
         // Get the team and country div for the selected player
