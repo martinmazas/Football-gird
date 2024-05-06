@@ -14,5 +14,29 @@
   {
     "name": "Manchester United",
     "code": "ManUtd"
+  },
+  {
+    "name": "Milan",
+    "code": "Milan"
+  },
+  {
+    "name": "Tottenham",
+    "code": "Tottenham"
+  },
+  {
+    "name": "Manchester City",
+    "code": "ManCity"
+  },
+  {
+    "name": "Bayern Munich",
+    "code": "BayernMunich"
+  },
+  {
+    "name": "Arsenal",
+    "code": "Arsenal"
+  },
+  {
+    "name": "Galatasaray",
+    "code": "Galatasaray"
   }
 ]
