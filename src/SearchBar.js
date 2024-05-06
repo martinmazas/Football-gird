@@ -33,6 +33,7 @@ function SearchBar(props) {
 
     const handleGuess = () => {
         getPlayer(query, countryNames, teamNames, scoreState.score, scoreState.setScore, setPlayerOptions)
+        setQuery('')
     };
 
     return (
