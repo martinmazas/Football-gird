@@ -43,7 +43,7 @@ export const addPhoto = (players, score, setScore, setPlayerOptions) => {
             // Create the player image
             const img = document.createElement('img')
             img.src = require(`../images/${player.imgPath}.jpeg`)
-            img.alt = `${player.second_name}`
+            img.alt = `${player.secondName}`
             img.style.width = '80%'
             img.style.height = '80%'
             img.style.margin = 'auto'
