@@ -7,18 +7,7 @@ import { Button } from '@mui/material';
 import { useState } from 'react';
 
 export default function RowRadioButtonsGroup(props) {
-    const { playerOptions, setPlayerOptions } = { ...props }
-    const [value, setValue] = useState('')
-
-    const handleChange = (event) => {
-        setValue(event.target.value)
-    }
-
-    const handleSubmit = (value) => {
-        const name = value.split(" ")
-        const player = playerOptions.filter(p => p.first_name === name[0] && p.secondName === name[1])
-        setPlayerOptions(player)
-    }
+    const { playerOptions, handleSubmit, handleChange, value } = { ...props }
 
     return (
         <FormControl>
