@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getPlayer } from './Utils/functions';
 import countries from './countries.json'
 import teams from './teams.json'
+import RowRadioButtonsGroup from './RowRadioButtonsGroup';
 
 const styles = {
     searchBar: {
@@ -17,10 +18,11 @@ const styles = {
 }
 
 function SearchBar(props) {
-    const { randomNumbersCountries, randomNumbersTeams, scoreState, setPlayerOptions } = { ...props }
+    const { randomNumbersCountries, randomNumbersTeams, scoreState } = { ...props }
     const [query, setQuery] = useState('');
     const [countryNames, setCountryNames] = useState([])
     const [teamNames, setTeamNames] = useState([])
+    const [playerOptions, setPlayerOptions] = useState([])
 
     useEffect(() => {
         randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
@@ -38,6 +40,15 @@ function SearchBar(props) {
 
     return (
         <>
+            {playerOptions.length > 1 ? <div style={{
+                backgroundColor: "white",
+                width: '500px',
+                height: '100px',
+                margin: 'auto auto',
+                position: 'absolute',
+            }}>
+                <RowRadioButtonsGroup playerOptions={playerOptions} setPlayerOptions={setPlayerOptions} />
+            </div> : null}
             <input
                 className="guess-input"
                 type="text"
