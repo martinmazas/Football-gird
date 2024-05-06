@@ -4,7 +4,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { Button } from '@mui/material';
-import { useState } from 'react';
 
 export default function RowRadioButtonsGroup(props) {
     const { playerOptions, handleSubmit, handleChange, value } = { ...props }
