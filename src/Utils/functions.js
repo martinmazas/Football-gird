@@ -23,7 +23,7 @@ export const getPlayer = (playerName, countries, teams, score, setScore, setPlay
         }
     })
         .then(data => {
-            if (typeof(data.data) === 'string') alert(data.data)
+            if (typeof(data.data) === 'string' || data.data.length === 0) alert(data.data)
             else if (data.data.length === 1) addPhoto(data.data, score, setScore)
             else setPlayerOptions(data.data)
         })
