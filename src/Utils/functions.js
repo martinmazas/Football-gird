@@ -71,6 +71,7 @@ export const getFinalResult = (randomCountries, randomTeams, setFinalResult) => 
     })
         .then(data => {
             setFinalResult(data.data.playersNumber)
+            console.log(data.data.noPossiblePlayers)
         })
         .catch(err => console.log(err))
 }

@@ -7,6 +7,7 @@ import { getRandomNumbers } from "./Utils/functions";
 import countries from './countries.json'
 import teams from './teams.json'
 import { getFinalResult } from "./Utils/functions";
+import CircularIndeterminate from "./CircularIndeterminate";
 
 const styles = {
   button: {
@@ -27,6 +28,11 @@ const styles = {
     margin: 'auto auto',
     position: 'absolute',
     visibility: 'hidden'
+  },
+  waiting: {
+    width: 1000,
+    height: 100,
+    margin: 'auto auto'
   }
 }
 
@@ -74,7 +80,7 @@ function App() {
 
 
   return (
-    (randomNumbersCountries.length && randomNumbersTeams.length) ?
+    (finalResult) ?
       <div className="App">
         <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
         <div className="play-game" style={styles.playGame}>
@@ -82,7 +88,7 @@ function App() {
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div >
-      : null
+      : <CircularIndeterminate />
   );
 }
 
