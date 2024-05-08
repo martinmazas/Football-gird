@@ -60,7 +60,7 @@ export const addPhoto = (players, score, setScore) => {
     }
 }
 
-export const getFinalResult = (randomCountries, randomTeams) => {
+export const getFinalResult = (randomCountries, randomTeams, setFinalResult) => {
     axios.get('http://localhost:8080/players/finalResult', {
         headers: {
             "Content-type": "application/json",
@@ -70,7 +70,7 @@ export const getFinalResult = (randomCountries, randomTeams) => {
         }
     })
         .then(data => {
-            console.log(data)
+            setFinalResult(data.data.playersNumber)
         })
         .catch(err => console.log(err))
 }

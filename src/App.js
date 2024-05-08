@@ -43,6 +43,7 @@ function App() {
   const [score, setScore] = useState(0)
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
+  const [finalResult, setFinalResult] = useState('')
 
   useEffect(() => {
     const randomCountries = getRandomNumbers(rows, countries)
@@ -59,13 +60,17 @@ function App() {
 
 
   useEffect(() => {
-    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames)
+    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames, setFinalResult)
   }, [countryNames, teamNames])
 
   useEffect(() => {
-    console.log(score)
-    if (score === (rows - 1) * (columns - 1)) alert('You won')
+    if (score === finalResult) alert('You won')
   }, [score], setTimeout(1200))
+
+
+  useEffect(() => {
+    console.log(finalResult)
+  }, [finalResult])
 
 
   return (
