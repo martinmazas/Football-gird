@@ -3,6 +3,7 @@ import teams from './teams.json'
 import React from 'react';
 import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
+import CloseIcon from '@mui/icons-material/Close';
 
 const styles = {
     td: {
@@ -15,8 +16,8 @@ const styles = {
 
 
 const Cells = (props) => {
-    const { rows, columns, randomNumbersCountries, randomNumbersTeams } = { ...props }
-
+    const { rows, columns, randomNumbersCountries, randomNumbersTeams, nonPlayers } = { ...props }
+    
     return (
         <>
             {[...Array(rows)].map((_, rowIndex) => (
@@ -29,7 +30,9 @@ const Cells = (props) => {
                                     : (cellIndex === 0 && rowIndex > 0) ?
                                         <TeamFlag team={teams[randomNumbersTeams[rowIndex - 1]]} rowIndex={rowIndex} />
                                         : (cellIndex !== 0 && rowIndex !== 0) ?
-                                            <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}></div>
+                                            <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}>
+                                                {nonPlayers.includes(`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`) ? <CloseIcon /> : null}
+                                            </div>
                                             : null
                             }
                         </td>

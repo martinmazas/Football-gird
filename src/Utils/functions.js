@@ -21,7 +21,7 @@ export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
         }
     })
         .then(data => {
-            if (typeof(data.data) === 'string' || data.data.length === 0) alert(data.data)
+            if (typeof (data.data) === 'string' || data.data.length === 0) alert(data.data)
             else if (data.data.length === 1) addPhoto(data.data, score, setScore)
             else setPlayerOptions(data.data)
         })
@@ -29,7 +29,7 @@ export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
 }
 
 
-export const addPhoto = (players, score, setScore) => {
+export const addPhoto = (players, score = null, setScore = null) => {
     if (players.length === 0) return alert(`No matches`)
 
     const player = players[0]
@@ -60,7 +60,7 @@ export const addPhoto = (players, score, setScore) => {
     }
 }
 
-export const getFinalResult = (randomCountries, randomTeams, setFinalResult) => {
+export const getFinalResult = (randomCountries, randomTeams, setFinalResult, setNonPlayers) => {
     axios.get('http://localhost:8080/players/finalResult', {
         headers: {
             "Content-type": "application/json",
@@ -70,8 +70,14 @@ export const getFinalResult = (randomCountries, randomTeams, setFinalResult) => 
         }
     })
         .then(data => {
-            setFinalResult(data.data.playersNumber)
-            console.log(data.data.noPossiblePlayers)
+            const { playersNumber, noPossiblePlayers } = { ...data.data }
+            setFinalResult(playersNumber)
+            
+            const noPlayerPair = noPossiblePlayers.map(player => {
+                return player.join('-')
+            })
+
+            setNonPlayers(noPlayerPair)
         })
         .catch(err => console.log(err))
 }

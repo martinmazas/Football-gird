@@ -50,6 +50,7 @@ function App() {
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
   const [finalResult, setFinalResult] = useState('')
+  const [nonPlayers, setNonPlayers] = useState([])
 
   useEffect(() => {
     const randomCountries = getRandomNumbers(rows, countries)
@@ -66,23 +67,17 @@ function App() {
 
 
   useEffect(() => {
-    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames, setFinalResult)
+    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames, setFinalResult, setNonPlayers)
   }, [countryNames, teamNames])
 
   useEffect(() => {
     if (score === finalResult) alert('You won')
   }, [score], setTimeout(1200))
 
-
-  useEffect(() => {
-    console.log(finalResult)
-  }, [finalResult])
-
-
   return (
-    (finalResult) ?
+    (finalResult && nonPlayers) ?
       <div className="App">
-        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
+        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SearchBar scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
