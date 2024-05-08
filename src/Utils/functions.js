@@ -12,14 +12,12 @@ export const getRandomNumbers = (requiredElements, elementsNum) => {
     return Array.from(result)
 }
 
-export const getPlayer = (playerName, countries, teams, score, setScore, setPlayerOptions) => {
+export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
     axios.get('http://localhost:8080/players/guessPlayer', {
         headers: {
             "Content-type": "application/json",
         }, params: {
-            playerName,
-            countries,
-            teams
+            playerName
         }
     })
         .then(data => {
@@ -60,4 +58,19 @@ export const addPhoto = (players, score, setScore) => {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
         }
     }
+}
+
+export const getFinalResult = (randomCountries, randomTeams) => {
+    axios.get('http://localhost:8080/players/finalResult', {
+        headers: {
+            "Content-type": "application/json",
+        }, params: {
+            randomCountries,
+            randomTeams
+        }
+    })
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => console.log(err))
 }

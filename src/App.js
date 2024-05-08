@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getRandomNumbers } from "./Utils/functions";
 import countries from './countries.json'
 import teams from './teams.json'
+import { getFinalResult } from "./Utils/functions";
 
 const styles = {
   button: {
@@ -40,6 +41,8 @@ function App() {
   const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
   const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
   const [score, setScore] = useState(0)
+  const [countryNames, setCountryNames] = useState([])
+  const [teamNames, setTeamNames] = useState([])
 
   useEffect(() => {
     const randomCountries = getRandomNumbers(rows, countries)
@@ -50,6 +53,17 @@ function App() {
   }, [])
 
   useEffect(() => {
+    randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
+    randomNumbersTeams.map(team => setTeamNames(teamNames => [...teamNames, teams[team].name]))
+  }, [randomNumbersCountries, randomNumbersTeams])
+
+
+  useEffect(() => {
+    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames)
+  }, [countryNames, teamNames])
+
+  useEffect(() => {
+    console.log(score)
     if (score === (rows - 1) * (columns - 1)) alert('You won')
   }, [score], setTimeout(1200))
 
@@ -59,7 +73,7 @@ function App() {
       <div className="App">
         <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} />
         <div className="play-game" style={styles.playGame}>
-          <SearchBar randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} scoreState={{ score, setScore }} />
+          <SearchBar scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div >

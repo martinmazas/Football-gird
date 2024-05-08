@@ -1,8 +1,6 @@
 import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { addPhoto, getPlayer } from './Utils/functions';
-import countries from './countries.json'
-import teams from './teams.json'
 import RowRadioButtonsGroup from './RowRadioButtonsGroup';
 
 const styles = {
@@ -18,10 +16,9 @@ const styles = {
 }
 
 function SearchBar(props) {
-    const { randomNumbersCountries, randomNumbersTeams, scoreState } = { ...props }
+    const { scoreState } = { ...props }
     const [query, setQuery] = useState('');
-    const [countryNames, setCountryNames] = useState([])
-    const [teamNames, setTeamNames] = useState([])
+
     const [playerOptions, setPlayerOptions] = useState([])
     const [value, setValue] = useState('')
 
@@ -35,17 +32,12 @@ function SearchBar(props) {
         setPlayerOptions(player)
     }
 
-    useEffect(() => {
-        randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
-        randomNumbersTeams.map(team => setTeamNames(teamNames => [...teamNames, teams[team].name]))
-    }, [randomNumbersCountries, randomNumbersTeams])
-
     const handleChangeQuery = (event) => {
         setQuery(event.target.value);
     };
 
     const handleGuess = () => {
-        getPlayer(query, countryNames, teamNames, scoreState.score, scoreState.setScore, setPlayerOptions)
+        getPlayer(query, scoreState.score, scoreState.setScore, setPlayerOptions)
         setQuery('')
     };
 
