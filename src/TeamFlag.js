@@ -9,10 +9,10 @@ const styles = {
 }
 
 const TeamFlag = (props) => {
-    const { team } = { ...props }
+    const { teamNames } = { ...props }
 
     return (
-        <img className={`flag-${team.name}`} src={require(`./images/${team.code}.jpeg`)} alt={`${team.code}`} style={styles.logos} />
+        <img className={`flag-${teamNames.name}`} src={require(`./images/${teamNames.code}.jpeg`)} alt={`${teamNames.code}`} style={styles.logos} />
     )
 }
 

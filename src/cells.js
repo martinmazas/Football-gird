@@ -16,8 +16,8 @@ const styles = {
 
 
 const Cells = (props) => {
-    const { rows, columns, randomNumbersCountries, randomNumbersTeams, nonPlayers } = { ...props }
-    
+    const { rows, columns, randomNumbersCountries, teamNames, nonPlayers } = { ...props }
+
     return (
         <>
             {[...Array(rows)].map((_, rowIndex) => (
@@ -28,10 +28,10 @@ const Cells = (props) => {
                                 (rowIndex === 0 && cellIndex > 0) ?
                                     <CountryFlag country={countries[randomNumbersCountries[cellIndex - 1]]} cellIndex={cellIndex} />
                                     : (cellIndex === 0 && rowIndex > 0) ?
-                                        <TeamFlag team={teams[randomNumbersTeams[rowIndex - 1]]} rowIndex={rowIndex} />
+                                        <TeamFlag teamNames={teamNames[rowIndex - 1]} rowIndex={rowIndex} />
                                         : (cellIndex !== 0 && rowIndex !== 0) ?
-                                            <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`}>
-                                                {nonPlayers.includes(`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teams[randomNumbersTeams[rowIndex - 1]].name}`) ? <CloseIcon /> : null}
+                                            <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teamNames[rowIndex - 1].name}`}>
+                                                {nonPlayers.includes(`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teamNames[rowIndex - 1].name}`) ? <CloseIcon /> : null}
                                             </div>
                                             : null
                             }

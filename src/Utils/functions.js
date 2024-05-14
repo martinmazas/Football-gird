@@ -1,5 +1,20 @@
 import axios from 'axios'
 
+export const getTeams = async () => {
+    const teams = []
+    await axios.get('http://localhost:8080/teams', {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(data => {
+            teams.push(data.data)
+        })
+        .catch(err => console.log(err))
+    
+    return teams
+}
+
 export const getRandomNumbers = (requiredElements, elementsNum) => {
     const result = new Set()
 
@@ -61,6 +76,8 @@ export const addPhoto = (players, score = null, setScore = null) => {
 }
 
 export const getFinalResult = (randomCountries, randomTeams, setFinalResult, setNonPlayers) => {
+    randomTeams = randomTeams.map(team => team.name)
+
     axios.get('http://localhost:8080/players/finalResult', {
         headers: {
             "Content-type": "application/json",
@@ -72,7 +89,7 @@ export const getFinalResult = (randomCountries, randomTeams, setFinalResult, set
         .then(data => {
             const { playersNumber, noPossiblePlayers } = { ...data.data }
             setFinalResult(playersNumber)
-            
+
             const noPlayerPair = noPossiblePlayers.map(player => {
                 return player.join('-')
             })

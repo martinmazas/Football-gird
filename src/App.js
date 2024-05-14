@@ -3,9 +3,8 @@ import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
 import React from 'react';
 import { useEffect, useState } from "react";
-import { getRandomNumbers } from "./Utils/functions";
+import { getRandomNumbers, getTeams } from "./Utils/functions";
 import countries from './countries.json'
-import teams from './teams.json'
 import { getFinalResult } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 
@@ -45,7 +44,6 @@ function App() {
   const columns = 4;
 
   const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
-  const [randomNumbersTeams, setRandomNumbersTeams] = useState([])
   const [score, setScore] = useState(0)
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
@@ -53,17 +51,20 @@ function App() {
   const [nonPlayers, setNonPlayers] = useState([])
 
   useEffect(() => {
+    getTeams()
+    .then(data => {
+      const teams = [...data]
+      teams[0].map(team => {
+        setTeamNames(teamNames => [...teamNames, team])})
+    })
     const randomCountries = getRandomNumbers(rows, countries)
-    const randomTeams = getRandomNumbers(columns, teams)
 
     setRandomNumbersCountries(randomCountries)
-    setRandomNumbersTeams(randomTeams)
   }, [])
 
   useEffect(() => {
     randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
-    randomNumbersTeams.map(team => setTeamNames(teamNames => [...teamNames, teams[team].name]))
-  }, [randomNumbersCountries, randomNumbersTeams])
+  }, [randomNumbersCountries])
 
 
   useEffect(() => {
@@ -77,7 +78,7 @@ function App() {
   return (
     (finalResult && nonPlayers) ?
       <div className="App">
-        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} randomNumbersTeams={randomNumbersTeams} nonPlayers={nonPlayers} />
+        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SearchBar scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
