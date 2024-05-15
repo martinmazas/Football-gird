@@ -1,5 +1,3 @@
-import countries from './countries.json'
-import teams from './teams.json'
 import React from 'react';
 import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
