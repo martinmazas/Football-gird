@@ -16,7 +16,7 @@ const styles = {
 
 
 const Cells = (props) => {
-    const { rows, columns, randomNumbersCountries, teamNames, nonPlayers } = { ...props }
+    const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props }
 
     return (
         <>
@@ -26,12 +26,12 @@ const Cells = (props) => {
                         <td className={`${rowIndex}-${cellIndex}`} style={styles.td} key={[rowIndex, cellIndex]} >
                             {
                                 (rowIndex === 0 && cellIndex > 0) ?
-                                    <CountryFlag country={countries[randomNumbersCountries[cellIndex - 1]]} cellIndex={cellIndex} />
+                                    <CountryFlag country={countryNames[cellIndex - 1]} cellIndex={cellIndex} />
                                     : (cellIndex === 0 && rowIndex > 0) ?
                                         <TeamFlag teamNames={teamNames[rowIndex - 1]} rowIndex={rowIndex} />
                                         : (cellIndex !== 0 && rowIndex !== 0) ?
-                                            <div className={`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teamNames[rowIndex - 1].name}`}>
-                                                {nonPlayers.includes(`${countries[randomNumbersCountries[cellIndex - 1]].name}-${teamNames[rowIndex - 1].name}`) ? <CloseIcon /> : null}
+                                            <div className={`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`}>
+                                                {nonPlayers.includes(`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`) ? <CloseIcon /> : null}
                                             </div>
                                             : null
                             }

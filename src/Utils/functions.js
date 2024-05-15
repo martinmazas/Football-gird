@@ -11,20 +11,23 @@ export const getTeams = async () => {
             teams.push(data.data)
         })
         .catch(err => console.log(err))
-    
+
     return teams
 }
 
-export const getRandomNumbers = (requiredElements, elementsNum) => {
-    const result = new Set()
+export const getCountries = async () => {
+    const countries = []
+    await axios.get('http://localhost:8080/countries', {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(data => {
+            countries.push(data.data)
+        })
+        .catch(err => console.log(err))
 
-    // Picks x random numbers in order to get random teams and countries
-    while (result.size < requiredElements - 1) {
-        const rand = Math.floor(Math.random() * (elementsNum.length))
-        result.add(rand)
-    }
-
-    return Array.from(result)
+    return countries
 }
 
 export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
@@ -77,6 +80,7 @@ export const addPhoto = (players, score = null, setScore = null) => {
 
 export const getFinalResult = (randomCountries, randomTeams, setFinalResult, setNonPlayers) => {
     randomTeams = randomTeams.map(team => team.name)
+    randomCountries = randomCountries.map(country => country.name)
 
     axios.get('http://localhost:8080/players/finalResult', {
         headers: {

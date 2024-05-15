@@ -3,8 +3,7 @@ import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
 import React from 'react';
 import { useEffect, useState } from "react";
-import { getRandomNumbers, getTeams } from "./Utils/functions";
-import countries from './countries.json'
+import { getCountries, getTeams } from "./Utils/functions";
 import { getFinalResult } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 
@@ -43,7 +42,6 @@ function App() {
   const rows = 4;
   const columns = 4;
 
-  const [randomNumbersCountries, setRandomNumbersCountries] = useState([])
   const [score, setScore] = useState(0)
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
@@ -52,19 +50,21 @@ function App() {
 
   useEffect(() => {
     getTeams()
-    .then(data => {
-      const teams = [...data]
-      teams[0].map(team => {
-        setTeamNames(teamNames => [...teamNames, team])})
-    })
-    const randomCountries = getRandomNumbers(rows, countries)
+      .then(data => {
+        const teams = [...data]
+        teams[0].map(team => {
+          setTeamNames(teamNames => [...teamNames, team])
+        })
+      })
 
-    setRandomNumbersCountries(randomCountries)
+    getCountries()
+      .then(data => {
+        const countries = [...data]
+        countries[0].map(country => {
+          setCountryNames(countryNames => [...countryNames, country])
+        })
+      })
   }, [])
-
-  useEffect(() => {
-    randomNumbersCountries.map(country => setCountryNames(countryNames => [...countryNames, countries[country].name]))
-  }, [randomNumbersCountries])
 
 
   useEffect(() => {
@@ -78,7 +78,7 @@ function App() {
   return (
     (finalResult && nonPlayers) ?
       <div className="App">
-        <GridTable style={styles.grid} rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} teamNames={teamNames} nonPlayers={nonPlayers} />
+        <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SearchBar scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>

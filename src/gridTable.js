@@ -13,13 +13,14 @@ const styles = {
 
 
 const GridTable = (props) => {
-    const { rows, columns, randomNumbersCountries, teamNames, nonPlayers } = { ...props }
+    const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props }
+    console.log(countryNames)
 
     return (
         <>
             <table border="1" style={styles.table}>
                 <tbody className="tbody" style={styles.tbody}>
-                    <Cells rows={rows} columns={columns} randomNumbersCountries={randomNumbersCountries} teamNames={teamNames} nonPlayers={nonPlayers} />
+                    <Cells rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
                 </tbody>
             </table>
         </>
