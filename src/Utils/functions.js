@@ -1,33 +1,31 @@
 import axios from 'axios'
 
-export const getTeams = async () => {
+export const getPlayParams = async () => {
     const teams = []
-    await axios.get('http://localhost:8080/teams', {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(data => {
-            teams.push(data.data)
-        })
-        .catch(err => console.log(err))
-
-    return teams
-}
-
-export const getCountries = async () => {
     const countries = []
-    await axios.get('http://localhost:8080/countries', {
+    let gridRows = 0
+    let gridColumns = 0
+    let playerNumber = 0
+    const noPossiblePlayerList = []
+
+    await axios.get('http://localhost:8080/parameters', {
         headers: {
             "Content-Type": "application/json"
         }
     })
         .then(data => {
-            countries.push(data.data)
+            const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data.data }
+            gridRows = rows
+            gridColumns = columns
+            playerNumber = playerNumbers
+
+            noPossiblePlayerList.push(noPossiblePlayers[0])
+            teams.push(randomTeams)
+            countries.push(randomCountries)
         })
         .catch(err => console.log(err))
 
-    return countries
+    return { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList }
 }
 
 export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
@@ -76,29 +74,4 @@ export const addPhoto = (players, score = null, setScore = null) => {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
         }
     }
-}
-
-export const getFinalResult = (randomCountries, randomTeams, setFinalResult, setNonPlayers) => {
-    randomTeams = randomTeams.map(team => team.name)
-    randomCountries = randomCountries.map(country => country.name)
-
-    axios.get('http://localhost:8080/players/finalResult', {
-        headers: {
-            "Content-type": "application/json",
-        }, params: {
-            randomCountries,
-            randomTeams
-        }
-    })
-        .then(data => {
-            const { playersNumber, noPossiblePlayers } = { ...data.data }
-            setFinalResult(playersNumber)
-
-            const noPlayerPair = noPossiblePlayers.map(player => {
-                return player.join('-')
-            })
-
-            setNonPlayers(noPlayerPair)
-        })
-        .catch(err => console.log(err))
 }

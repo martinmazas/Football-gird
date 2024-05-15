@@ -18,9 +18,9 @@ const Cells = (props) => {
 
     return (
         <>
-            {[...Array(rows)].map((_, rowIndex) => (
+            {Array.from({ length: rows }, (_, rowIndex) => (
                 <tr key={rowIndex}>
-                    {[...Array(columns)].map((_, cellIndex) => (
+                    {Array.from({ length: columns }, (_, cellIndex) => (
                         <td className={`${rowIndex}-${cellIndex}`} style={styles.td} key={[rowIndex, cellIndex]} >
                             {
                                 (rowIndex === 0 && cellIndex > 0) ?

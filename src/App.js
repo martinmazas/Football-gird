@@ -3,8 +3,7 @@ import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
 import React from 'react';
 import { useEffect, useState } from "react";
-import { getCountries, getTeams } from "./Utils/functions";
-import { getFinalResult } from "./Utils/functions";
+import { getPlayParams } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 
 const styles = {
@@ -39,37 +38,36 @@ function App() {
     window.location.reload()
   }
 
-  const rows = 4;
-  const columns = 4;
-
   const [score, setScore] = useState(0)
+  const [rows, setRows] = useState(0)
+  const [columns, setColumns] = useState(0)
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
   const [finalResult, setFinalResult] = useState('')
   const [nonPlayers, setNonPlayers] = useState([])
 
   useEffect(() => {
-    getTeams()
+    getPlayParams()
       .then(data => {
-        const teams = [...data]
-        teams[0].map(team => {
-          setTeamNames(teamNames => [...teamNames, team])
-        })
-      })
+        const { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList } = { ...data }
 
-    getCountries()
-      .then(data => {
-        const countries = [...data]
-        countries[0].map(country => {
+        setRows(gridRows)
+        setColumns(gridColumns)
+        setFinalResult(playerNumber)
+
+        noPossiblePlayerList[0].map(player => 
+          setNonPlayers(nonPlayers => [...nonPlayers, player.join('-')])
+        )
+
+        teams[0].map(team => 
+          setTeamNames(teamNames => [...teamNames, team])
+        )
+
+        countries[0].map(country => 
           setCountryNames(countryNames => [...countryNames, country])
-        })
+        )
       })
   }, [])
-
-
-  useEffect(() => {
-    if (countryNames.length && teamNames.length) getFinalResult(countryNames, teamNames, setFinalResult, setNonPlayers)
-  }, [countryNames, teamNames])
 
   useEffect(() => {
     if (score === finalResult) alert('You won')

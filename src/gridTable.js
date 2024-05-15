@@ -14,7 +14,6 @@ const styles = {
 
 const GridTable = (props) => {
     const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props }
-    console.log(countryNames)
 
     return (
         <>
