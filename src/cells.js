@@ -14,7 +14,7 @@ const styles = {
 
 
 const Cells = (props) => {
-    const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props }
+    const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props.props }
 
     return (
         <>
