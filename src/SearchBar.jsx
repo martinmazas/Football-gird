@@ -5,15 +5,14 @@ import RowRadioButtonsGroup from './RowRadioButtonsGroup';
 import FullWidthTextField from './FullWidthTextField';
 
 const styles = {
-    searchBar: {
-        margin: '0 auto',
-        width: 250,
-        height: 40,
-    },
+    // searchBar: {
+    //     margin: '0 auto',
+    //     width: 250,
+    //     height: 40,
+    // },
     button: {
-        margin: '2vh 1vw',
+        // margin: '2vh 1vw',
         fontSize: '30px',
-        position: 'relative'
     },
 }
 

@@ -8,12 +8,16 @@ import CircularIndeterminate from "./CircularIndeterminate";
 
 const styles = {
   button: {
-    margin: '2vh 10vw',
+    // margin: '2vh 10vw',
     fontSize: '30px',
   },
   playGame: {
-    whiteSpace: 'nowrap',
-    margin: 'auto 35vw',
+    // whiteSpace: 'nowrap',
+    margin: '2vh 35vw',
+    // backgroundColor: 'yellow',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   grid: {
     margin: 'auto auto'
