@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { addPhoto, getPlayer } from './Utils/functions';
 import RowRadioButtonsGroup from './RowRadioButtonsGroup';
+import FullWidthTextField from './FullWidthTextField';
 
 const styles = {
     searchBar: {
@@ -12,6 +13,7 @@ const styles = {
     button: {
         margin: '2vh 1vw',
         fontSize: '30px',
+        position: 'relative'
     },
 }
 
@@ -56,14 +58,7 @@ function SearchBar(props) {
             }}>
                 <RowRadioButtonsGroup playerOptions={playerOptions} handleChange={handleChange} handleSubmit={handleSubmit} value={value} />
             </div> : null}
-            <input
-                className="guess-input"
-                type="text"
-                placeholder="Enter player's name"
-                value={query}
-                onChange={handleChangeQuery}
-                style={styles.searchBar}
-            />
+            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} />
             <Button className="guess-button" style={styles.button} onClick={handleGuess} variant="contained">Guess</Button>
         </>
     );

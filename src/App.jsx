@@ -77,6 +77,7 @@ function App() {
   }, [score], setTimeout(1200))
 
   return (
+    // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <div className="App">
         <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
