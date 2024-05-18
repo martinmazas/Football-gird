@@ -5,6 +5,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { getPlayParams } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
+import SimpleDialogDemo from "./SimpleDialogDemo";
 
 const styles = {
   button: {
@@ -89,6 +90,7 @@ function App() {
           <SearchBar scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
+        <SimpleDialogDemo />
       </div >
       : <CircularIndeterminate />
   );
