@@ -1,4 +1,3 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -10,52 +9,38 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+import { useEffect, useState } from 'react';
+import { getPlayer, addPhoto } from './Utils/functions';
+import FullWidthTextField from './FullWidthTextField';
 
 function SimpleDialog(props) {
-    const { onClose, selectedValue, open } = props;
+    const { onClose, open, playerOptions } = props;
 
     const handleClose = () => {
-        onClose(selectedValue);
+        onClose(playerOptions);
     };
 
-    const handleListItemClick = (value) => {
-        onClose(value);
+    const handleListItemClick = (player) => {
+        onClose(player);
     };
 
     return (
         <Dialog onClose={handleClose} open={open}>
-            <DialogTitle>Set backup account</DialogTitle>
+            <DialogTitle>Select one of the plyers</DialogTitle>
             <List sx={{ pt: 0 }}>
-                {emails.map((email) => (
-                    <ListItem disableGutters key={email}>
-                        <ListItemButton onClick={() => handleListItemClick(email)}>
+                {playerOptions.map((player) => (
+                    <ListItem disableGutters key={`${player.first_name}-${player.secondName}`}>
+                        <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                                     <PersonIcon />
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={email} />
+                            <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                         </ListItemButton>
                     </ListItem>
                 ))}
-                <ListItem disableGutters>
-                    <ListItemButton
-                        autoFocus
-                        onClick={() => handleListItemClick('addAccount')}
-                    >
-                        <ListItemAvatar>
-                            <Avatar>
-                                <AddIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary="Add account" />
-                    </ListItemButton>
-                </ListItem>
             </List>
         </Dialog>
     );
@@ -64,36 +49,56 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    selectedValue: PropTypes.string.isRequired,
 };
 
-export default function SimpleDialogDemo() {
-    const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+export default function SimpleDialogDemo(props) {
+    const [open, setOpen] = useState(false);
+    const [query, setQuery] = useState('');
+    const { scoreState } = { ...props }
+    const [playerOptions, setPlayerOptions] = useState([])
+
+    const handleSubmit = (value) => {
+        const { first_name, secondName } = { ...value }
+        const player = playerOptions.filter(p => p.first_name === first_name && p.secondName === secondName)
+        setPlayerOptions(player)
+    }
+
+    useEffect(() => {
+        if (playerOptions.length === 1) addPhoto(playerOptions, scoreState.score, scoreState.setScore)
+    }, [playerOptions])
 
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    const handleGuess = () => {
+        getPlayer(query, scoreState.score, scoreState.setScore, setPlayerOptions)
+        setQuery('')
+        handleClickOpen()
+    };
+
+    const handleChangeQuery = (event) => {
+        setQuery(event.target.value);
+    };
+
     const handleClose = (value) => {
         setOpen(false);
-        setSelectedValue(value);
+        handleSubmit(value)
     };
 
     return (
-        <div>
-            <Typography variant="subtitle1" component="div">
-                Selected: {selectedValue}
-            </Typography>
-            <br />
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open simple dialog
+        <>
+            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} />
+            <Button style={{ fontSize: '30px' }} variant="contained" onClick={handleGuess}>
+                Guess
             </Button>
-            <SimpleDialog
-                selectedValue={selectedValue}
-                open={open}
-                onClose={handleClose}
-            />
-        </div>
+            {playerOptions.length > 1 ?
+                <SimpleDialog
+                    open={open}
+                    onClose={handleClose}
+                    playerOptions={playerOptions}
+                /> : null
+            }
+        </>
     );
 }

@@ -1,4 +1,3 @@
-import SearchBar from "./SearchBar";
 import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
 import React from 'react';
@@ -9,13 +8,10 @@ import SimpleDialogDemo from "./SimpleDialogDemo";
 
 const styles = {
   button: {
-    // margin: '2vh 10vw',
     fontSize: '30px',
   },
   playGame: {
-    // whiteSpace: 'nowrap',
     margin: '2vh 35vw',
-    // backgroundColor: 'yellow',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -87,10 +83,9 @@ function App() {
       <div className="App">
         <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
-          <SearchBar scoreState={{ score, setScore }} />
+          <SimpleDialogDemo scoreState={{ score, setScore }} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
-        <SimpleDialogDemo />
       </div >
       : <CircularIndeterminate />
   );
