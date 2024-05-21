@@ -14,12 +14,13 @@ export const getPlayParams = async () => {
         }
     })
         .then(data => {
+            console.log(data.data)
             const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data.data }
             gridRows = rows
             gridColumns = columns
             playerNumber = playerNumbers
 
-            noPossiblePlayerList.push(noPossiblePlayers[0])
+            noPossiblePlayerList.push(noPossiblePlayers)
             teams.push(randomTeams)
             countries.push(randomCountries)
         })
