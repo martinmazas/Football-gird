@@ -74,8 +74,9 @@ function App() {
   }, [])
 
   useEffect(() => {
+    setTimeout(100)
     if (score === finalResult) alert('You won')
-  }, [score], setTimeout(1200))
+  }, [score])
 
   return (
     // Wait until finalResult and nonPlayers is ready
