@@ -17,12 +17,12 @@ const styles = {
     alignItems: 'center'
   },
   grid: {
-    margin: 'auto auto'
+    margin: 'auto'
   },
   waiting: {
-    width: 1000,
-    height: 100,
-    margin: 'auto auto'
+    width: '80vw',
+    height: '20vh',
+    margin: 'auto',
   }
 }
 
