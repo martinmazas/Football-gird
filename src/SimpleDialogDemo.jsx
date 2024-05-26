@@ -86,9 +86,15 @@ export default function SimpleDialogDemo(props) {
         handleSubmit(value)
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            handleGuess();
+        }
+    };
+
     return (
         <>
-            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} />
+            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} />
             <Button style={{ fontSize: '30px' }} variant="contained" onClick={handleGuess}>
                 Guess
             </Button>
