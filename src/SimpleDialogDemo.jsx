@@ -26,7 +26,7 @@ function SimpleDialog(props) {
     };
 
     return (
-        <Dialog onClose={handleClose} open={open}>
+        <Dialog fullWidth={true} onClose={handleClose} open={open}>
             <DialogTitle>Select one of the plyers</DialogTitle>
             <List sx={{ pt: 0 }}>
                 {playerOptions.map((player) => (

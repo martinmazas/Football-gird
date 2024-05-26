@@ -14,7 +14,6 @@ export const getPlayParams = async () => {
         }
     })
         .then(data => {
-            console.log(data.data)
             const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data.data }
             gridRows = rows
             gridColumns = columns
