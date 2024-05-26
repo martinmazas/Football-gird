@@ -3,20 +3,17 @@ import React from 'react';
 
 const styles = {
     table: {
-        margin: '2vh auto 0',
+        margin: '2vh auto',
     }
 }
 
-
 const GridTable = (props) => {
     return (
-        <>
-            <table border="1" style={styles.table}>
-                <tbody className="tbody">
-                    <Cells props={props} />
-                </tbody>
-            </table>
-        </>
+        <table border="1" style={styles.table}>
+            <tbody className="tbody">
+                <Cells props={props} />
+            </tbody>
+        </table>
     )
 }
 
