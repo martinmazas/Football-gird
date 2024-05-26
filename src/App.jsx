@@ -19,14 +19,6 @@ const styles = {
   grid: {
     margin: 'auto auto'
   },
-  options: {
-    backgroundColor: "white",
-    width: '500px',
-    height: '100px',
-    margin: 'auto auto',
-    position: 'absolute',
-    visibility: 'hidden'
-  },
   waiting: {
     width: 1000,
     height: 100,
