@@ -61,6 +61,7 @@ export default function SimpleDialogDemo(props) {
 
     useEffect(() => {
         if (playerOptions.length === 1) addPhoto(playerOptions, scoreState.score, scoreState.setScore)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playerOptions])
 
     const handleClickOpen = () => {

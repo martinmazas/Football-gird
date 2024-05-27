@@ -67,6 +67,7 @@ function App() {
 
   useEffect(() => {
     if (score === finalResult) alert('You won')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score])
 
   return (
