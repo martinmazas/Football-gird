@@ -69,6 +69,7 @@ export const addPhoto = (players, score = null, setScore = null) => {
             // Add the player image and delete the previous div
             parentDiv.prepend(img)
             parentDiv.removeChild(playerDiv[0])
+            setTimeout(1000)
             setScore(score + 1)
         } else {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)

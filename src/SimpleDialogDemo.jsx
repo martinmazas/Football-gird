@@ -8,8 +8,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import PersonIcon from '@mui/icons-material/Person';
-import { blue } from '@mui/material/colors';
 import { useEffect, useState } from 'react';
 import { getPlayer, addPhoto } from './Utils/functions';
 import FullWidthTextField from './FullWidthTextField';
@@ -33,9 +31,10 @@ function SimpleDialog(props) {
                     <ListItem disableGutters key={`${player.first_name}-${player.secondName}`}>
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
-                                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                                {/* <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
                                     <PersonIcon />
-                                </Avatar>
+                                </Avatar> */}
+                                <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
                             </ListItemAvatar>
                             <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                         </ListItemButton>

@@ -66,7 +66,6 @@ function App() {
   }, [])
 
   useEffect(() => {
-    setTimeout(1000)
     if (score === finalResult) alert('You won')
   }, [score])
 
