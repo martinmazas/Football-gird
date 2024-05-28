@@ -1,10 +1,9 @@
 import ReactCountryFlag from "react-country-flag"
 import React from "react"
 
-
 const styles = {
     flag: {
-        fontSize: '15em'
+        fontSize: '10em',
     }
 }
 

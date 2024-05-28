@@ -5,10 +5,10 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const styles = {
     td: {
-        width: '10vw',
-        height: '10vw',
+        width: '200px',
+        height: '200px',
         textAlign: 'center',
-        backgroundColor: '#07396b'
+        backgroundColor: '#07396b',
     }
 }
 

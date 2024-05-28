@@ -7,17 +7,23 @@ import CircularIndeterminate from "./CircularIndeterminate";
 import SimpleDialogDemo from "./SimpleDialogDemo";
 
 const styles = {
+  app: {
+  },
   button: {
     fontSize: '30px',
   },
   playGame: {
-    margin: '2vh 35vw',
+    margin: '2% 40%',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    // backgroundColor: 'yellow',
+    maxWidth: '830px'
   },
   grid: {
-    margin: 'auto'
+    margin: '0 35vw',
+    backgroundColor: 'green'
   },
   waiting: {
     width: '80vw',
@@ -67,13 +73,13 @@ function App() {
 
   useEffect(() => {
     if (score === finalResult) alert('You won')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score])
 
   return (
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
-      <div className="App">
+      <div className="App" style={styles.app}>
         <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SimpleDialogDemo scoreState={{ score, setScore }} />
