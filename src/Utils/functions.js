@@ -8,7 +8,8 @@ export const getPlayParams = async () => {
     let playerNumber = 0
     const noPossiblePlayerList = []
 
-    await axios.get('http://localhost:8080/parameters', {
+    // console.log(`${process.env.SERVER_DOMAIN}:${process.env.PORT}/parameters`)
+    await axios.get(`http://localhost:8080/parameters`, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -29,7 +30,7 @@ export const getPlayParams = async () => {
 }
 
 export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
-    axios.get('http://localhost:8080/players/guessPlayer', {
+    axios.get(`http://localhost:8080/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
         }, params: {

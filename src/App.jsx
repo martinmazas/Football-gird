@@ -8,18 +8,18 @@ import SimpleDialogDemo from "./SimpleDialogDemo";
 
 const styles = {
   app: {
+    width: '30%',
+    margin: '0 auto'
   },
   button: {
     fontSize: '30px',
   },
   playGame: {
-    margin: '2% 40%',
+    margin: '2vh 4vw',
     display: 'flex',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
-    // backgroundColor: 'yellow',
-    maxWidth: '830px'
   },
   grid: {
     margin: '0 35vw',
