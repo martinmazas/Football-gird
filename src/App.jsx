@@ -20,6 +20,7 @@ const styles = {
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
+    backgroundColor: "yellow",
   },
   grid: {
     margin: '0 35vw',
@@ -82,7 +83,7 @@ function App() {
       <div className="App" style={styles.app}>
         <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
-          <SimpleDialogDemo scoreState={{ score, setScore }} />
+          <SimpleDialogDemo setScore={setScore} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div >

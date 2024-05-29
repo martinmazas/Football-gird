@@ -24,12 +24,10 @@ export default function AddPlayer() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post('http://localhost:8080/players/newPlayer', {
+        axios.post('https://football-grid-edd30e867195.herokuapp.com/players/newPlayer', {
             formData
         })
             .then(data => {
-                // Alert with the server response (added or not) and reload the current page
-                // alert(data.data)
                 window.location.reload()
             })
             .catch(err => console.log(err))

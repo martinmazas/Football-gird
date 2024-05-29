@@ -50,7 +50,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { scoreState } = { ...props }
+    const { setScore } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -60,7 +60,7 @@ export default function SimpleDialogDemo(props) {
     }
 
     useEffect(() => {
-        if (playerOptions.length === 1) addPhoto(playerOptions, scoreState.score, scoreState.setScore)
+        if (playerOptions.length === 1) addPhoto(playerOptions, setScore)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playerOptions])
 
@@ -69,7 +69,7 @@ export default function SimpleDialogDemo(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, scoreState.score, scoreState.setScore, setPlayerOptions)
+        getPlayer(query, setScore, setPlayerOptions)
         setQuery('')
         handleClickOpen()
     };

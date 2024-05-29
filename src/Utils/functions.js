@@ -8,8 +8,7 @@ export const getPlayParams = async () => {
     let playerNumber = 0
     const noPossiblePlayerList = []
 
-    // console.log(`${process.env.SERVER_DOMAIN}:${process.env.PORT}/parameters`)
-    await axios.get(`http://localhost:8080/parameters`, {
+    await axios.get(`https://football-grid-edd30e867195.herokuapp.com/parameters`, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -29,8 +28,8 @@ export const getPlayParams = async () => {
     return { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList }
 }
 
-export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
-    axios.get(`http://localhost:8080/players/guessPlayer`, {
+export const getPlayer = (playerName, setScore, setPlayerOptions) => {
+    axios.get(`https://football-grid-edd30e867195.herokuapp.com/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
         }, params: {
@@ -39,14 +38,14 @@ export const getPlayer = (playerName, score, setScore, setPlayerOptions) => {
     })
         .then(data => {
             if (typeof (data.data) === 'string' || data.data.length === 0) alert(data.data)
-            else if (data.data.length === 1) addPhoto(data.data, score, setScore)
+            else if (data.data.length === 1) addPhoto(data.data, setScore)
             else setPlayerOptions(data.data)
         })
         .catch(err => console.log(err))
 }
 
 
-export const addPhoto = (players, score = null, setScore = null) => {
+export const addPhoto = async (players, setScore = null) => {
     if (players.length === 0) return alert(`No matches`)
 
     const player = players[0]
@@ -70,8 +69,11 @@ export const addPhoto = (players, score = null, setScore = null) => {
             // Add the player image and delete the previous div
             parentDiv.prepend(img)
             parentDiv.removeChild(playerDiv[0])
-            setTimeout(1000)
-            setScore(score + 1)
+
+            // Update the score
+            if (setScore) {
+                await setScore((prevScore) => prevScore + 1)
+            }
         } else {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
         }
