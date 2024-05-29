@@ -20,7 +20,6 @@ const styles = {
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
-    backgroundColor: "yellow",
   },
   grid: {
     margin: '0 35vw',
