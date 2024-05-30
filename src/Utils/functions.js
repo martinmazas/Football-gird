@@ -1,4 +1,6 @@
 import axios from 'axios'
+const server = 'https://football-grid-edd30e867195.herokuapp.com'
+// const server = 'http://localhost:8080'
 
 export const getPlayParams = async () => {
     const teams = []
@@ -8,7 +10,7 @@ export const getPlayParams = async () => {
     let playerNumber = 0
     const noPossiblePlayerList = []
 
-    await axios.get(`https://football-grid-edd30e867195.herokuapp.com/parameters`, {
+    await axios.get(`${server}/parameters`, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -29,7 +31,7 @@ export const getPlayParams = async () => {
 }
 
 export const getPlayer = (playerName, setScore, setPlayerOptions) => {
-    axios.get(`https://football-grid-edd30e867195.herokuapp.com/players/guessPlayer`, {
+    axios.get(`${server}/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
         }, params: {
@@ -62,9 +64,9 @@ export const addPhoto = async (players, setScore = null) => {
             const img = document.createElement('img')
             img.src = require(`../images/${player.imgPath}.jpeg`)
             img.alt = `${player.secondName}`
-            img.style.width = '80%'
-            img.style.height = '80%'
-            img.style.margin = 'auto'
+            img.style.width = '7rem'
+            img.style.height = '7rem'
+            // img.style.margin = 'auto'
 
             // Add the player image and delete the previous div
             parentDiv.prepend(img)
