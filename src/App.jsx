@@ -11,18 +11,18 @@ const styles = {
   app: {
     width: '50rem',
     margin: 'auto',
-    backgroundColor: 'yellow'
+    // backgroundColor: 'yellow'
   },
   button: {
-    fontSize: '2rem',
+    fontSize: '1rem',
   },
   playGame: {
     display: 'flex',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
-    backgroundColor: 'green',
-    padding: 20,
+    // backgroundColor: 'green',
+    padding: '1.5rem',
     boxSizing: 'border-box',
   }
 }
