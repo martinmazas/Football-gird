@@ -92,7 +92,7 @@ export default function SimpleDialogDemo(props) {
     return (
         <>
             <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} />
-            <Button color='primary' style={{ fontSize: '30px' }} variant="contained" onClick={handleGuess}>
+            <Button color='primary' style={{ fontSize: '2rem' }} variant="contained" onClick={handleGuess}>
                 Guess
             </Button>
             {playerOptions.length > 1 ?

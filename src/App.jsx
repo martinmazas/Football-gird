@@ -8,11 +8,12 @@ import SimpleDialogDemo from "./SimpleDialogDemo";
 
 const styles = {
   app: {
-    width: '30%',
-    margin: '0 auto'
+    width: '50rem',
+    margin: 'auto',
+    // backgroundColor: 'yellow'
   },
   button: {
-    fontSize: '30px',
+    fontSize: '2rem',
   },
   playGame: {
     margin: '2vh 4vw',
