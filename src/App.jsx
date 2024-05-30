@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getPlayParams } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 import SimpleDialogDemo from "./SimpleDialogDemo";
+import './index.css'
 
 const styles = {
   app: {
@@ -20,7 +21,9 @@ const styles = {
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    padding: 20,
+    boxSizing: 'border-box',
   }
 }
 
