@@ -6,14 +6,11 @@ export default function FullWidthTextField(props) {
   return (
     <Box
       sx={{
-        width: '10rem',
         maxWidth: '60%',
         backgroundColor: 'white',
-        // border: '2px solid',
-        fontSize: '1.5rem'
       }}
     >
-      <TextField variant='filled' size='medium' fullWidth label="Type the player here" id="playerName" value={query} onChange={handleChangeQuery} onKeyDown={handleKeyDown} />
+      <TextField variant='filled' size='small' label="Type the player here" id="playerName" value={query} onChange={handleChangeQuery} onKeyDown={handleKeyDown} />
     </Box>
   );
 }

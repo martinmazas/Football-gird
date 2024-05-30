@@ -19,11 +19,11 @@ const styles = {
   playGame: {
     display: 'flex',
     justifyContent: 'space-evenly',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    // flexWrap: 'wrap',
+    // alignItems: 'center',
     // backgroundColor: 'green',
-    padding: '1.5rem',
-    boxSizing: 'border-box',
+    padding: '1rem',
+    // boxSizing: 'border-box',
   }
 }
 
