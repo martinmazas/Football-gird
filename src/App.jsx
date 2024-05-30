@@ -10,26 +10,17 @@ const styles = {
   app: {
     width: '50rem',
     margin: 'auto',
-    // backgroundColor: 'yellow'
+    backgroundColor: 'yellow'
   },
   button: {
     fontSize: '2rem',
   },
   playGame: {
-    margin: '2vh 4vw',
     display: 'flex',
     justifyContent: 'space-evenly',
     flexWrap: 'wrap',
     alignItems: 'center',
-  },
-  grid: {
-    margin: '0 35vw',
     backgroundColor: 'green'
-  },
-  waiting: {
-    width: '80vw',
-    height: '20vh',
-    margin: 'auto',
   }
 }
 
@@ -81,7 +72,7 @@ function App() {
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <div className="App" style={styles.app}>
-        <GridTable style={styles.grid} rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
+        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} />
           <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
