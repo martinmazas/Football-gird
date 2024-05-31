@@ -11,7 +11,6 @@ const styles = {
   app: {
     width: '50rem',
     margin: 'auto',
-    // backgroundColor: 'yellow'
   },
   button: {
     fontSize: '1rem',
@@ -19,11 +18,7 @@ const styles = {
   playGame: {
     display: 'flex',
     justifyContent: 'space-evenly',
-    // flexWrap: 'wrap',
-    // alignItems: 'center',
-    // backgroundColor: 'green',
     padding: '1rem',
-    // boxSizing: 'border-box',
   }
 }
 
@@ -78,7 +73,7 @@ function App() {
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} />
-          <Button color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
+          <Button size="small" color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div >
       : <CircularIndeterminate />
