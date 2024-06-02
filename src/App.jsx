@@ -72,7 +72,7 @@ function App() {
       <div className="App" style={styles.app}>
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
-          <SimpleDialogDemo setScore={setScore} />
+          <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} />
           <Button size="small" color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
         </div>
       </div >

@@ -30,12 +30,14 @@ export const getPlayParams = async () => {
     return { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList }
 }
 
-export const getPlayer = (playerName, setScore, setPlayerOptions) => {
+export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames) => {
     axios.get(`${server}/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
         }, params: {
-            playerName
+            playerName,
+            countryNames,
+            teamNames
         }
     })
         .then(data => {

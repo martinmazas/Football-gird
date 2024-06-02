@@ -50,7 +50,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { setScore } = { ...props }
+    const { setScore, countryNames, teamNames } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -69,7 +69,7 @@ export default function SimpleDialogDemo(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, setScore, setPlayerOptions)
+        getPlayer(query, setScore, setPlayerOptions, countryNames, teamNames)
         setQuery('')
         handleClickOpen()
     };
