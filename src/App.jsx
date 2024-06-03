@@ -9,7 +9,7 @@ import './index.css'
 
 const styles = {
   app: {
-    width: '50rem',
+    width: '30rem',
     margin: 'auto',
   },
   button: {

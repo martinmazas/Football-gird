@@ -6,7 +6,7 @@ export default function FullWidthTextField(props) {
   return (
     <Box
       sx={{
-        maxWidth: '60%',
+        maxWidth: '60rem',
         backgroundColor: 'white',
       }}
     >
