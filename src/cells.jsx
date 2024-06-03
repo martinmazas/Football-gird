@@ -6,7 +6,8 @@ import CloseIcon from '@mui/icons-material/Close';
 const styles = {
     td: {
         textAlign: 'center',
-        backgroundColor: '#07396b',
+        backgroundColor: '#052031',
+        border: '1px solid #0096a9'
     }
 }
 

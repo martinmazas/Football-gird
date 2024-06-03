@@ -9,7 +9,7 @@ const styles = {
 
 const GridTable = (props) => {
     return (
-        <table border="1" style={styles.table}>
+        <table style={styles.table}>
             <tbody className="tbody">
                 <Cells props={props} />
             </tbody>
