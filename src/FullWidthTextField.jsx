@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
+
 
 const styles = {
   field: {
-
+    color: '#fff'
   },
   box: {
     bgcolor: '#031825',
@@ -19,7 +20,14 @@ export default function FullWidthTextField(props) {
   const { query, handleChangeQuery, handleKeyDown } = { ...props }
   return (
     <Box sx={styles.box}>
-      <TextField style={styles.field} variant='filled' size='small' label="Type the player here" id="playerName" value={query} onChange={handleChangeQuery} onKeyDown={handleKeyDown} />
+      <Input
+        style={styles.field}
+        placeholder="Type the player here"
+        id="playerName"
+        value={query}
+        onChange={handleChangeQuery}
+        onKeyDown={handleKeyDown}
+      />
     </Box>
   );
 }
