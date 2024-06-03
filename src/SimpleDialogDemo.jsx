@@ -95,12 +95,12 @@ export default function SimpleDialogDemo(props) {
             <Button size='small' color='primary' style={{ fontSize: '1rem' }} variant="contained" onClick={handleGuess}>
                 Guess
             </Button>
-            {playerOptions.length > 1 ?
+            {playerOptions.length > 1 &&
                 <SimpleDialog
                     open={open}
                     onClose={handleClose}
                     playerOptions={playerOptions}
-                /> : null
+                />
             }
         </>
     );
