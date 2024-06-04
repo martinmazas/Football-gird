@@ -15,5 +15,5 @@ code {
 
 #restart-button {
   background-color: #1a1724;
-  color: #000;
+  border: 0.2rem solid #f2b705;
 }

@@ -81,7 +81,7 @@ function App() {
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} buttonStyle={styles.button} />
-          <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{color: '#f2b705'}}/></Button>
+          <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{color: '#fff'}}/></Button>
         </div>
       </div >
       : <CircularIndeterminate />
