@@ -6,6 +6,7 @@ import { getPlayParams } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 import SimpleDialogDemo from "./SimpleDialogDemo";
 import './index.css'
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 const styles = {
   app: {
@@ -14,6 +15,13 @@ const styles = {
   },
   button: {
     fontSize: '1rem',
+    border: '0.2rem solid #f2b705',
+    backgroundColor: '#f2b705',
+    color: '#000',
+    outline: 'none',
+    margin: '0 0.3rem',
+    padding: '0.3rem 0.6rem',
+    borderRadius: '0.3rem'
   },
   playGame: {
     display: 'flex',
@@ -72,8 +80,8 @@ function App() {
       <div className="App" style={styles.app}>
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
-          <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} />
-          <Button size="small" color='error' className="restart-button" style={styles.button} onClick={handleClick} variant="contained">Restart</Button>
+          <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} buttonStyle={styles.button} />
+          <Button sx={styles.button} size="small" className="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon /></Button>
         </div>
       </div >
       : <CircularIndeterminate />

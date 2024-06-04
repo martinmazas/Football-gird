@@ -50,7 +50,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { setScore, countryNames, teamNames } = { ...props }
+    const { setScore, countryNames, teamNames, buttonStyle } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -61,7 +61,7 @@ export default function SimpleDialogDemo(props) {
 
     useEffect(() => {
         if (playerOptions.length === 1) addPhoto(playerOptions, setScore)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playerOptions])
 
     const handleClickOpen = () => {
@@ -92,9 +92,7 @@ export default function SimpleDialogDemo(props) {
     return (
         <>
             <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} />
-            <Button size='small' color='primary' style={{ fontSize: '1rem' }} variant="contained" onClick={handleGuess}>
-                Guess
-            </Button>
+            <Button size='small'sx={buttonStyle} variant="contained" onClick={handleGuess}>Guess</Button>
             {playerOptions.length > 1 &&
                 <SimpleDialog
                     open={open}
