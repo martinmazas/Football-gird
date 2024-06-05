@@ -49,7 +49,7 @@ export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, 
 }
 
 
-export const addPhoto = async (players, setScore = null) => {
+export const addPhoto = (players, setScore = null) => {
     if (players.length === 0) return alert(`No matches`)
 
     const player = players[0]
@@ -76,7 +76,9 @@ export const addPhoto = async (players, setScore = null) => {
 
             // Update the score
             if (setScore) {
-                await setScore((prevScore) => prevScore + 1)
+                setTimeout(() => {
+                    setScore((prevScore) => prevScore + 1);
+                }, 500);
             }
         } else {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
