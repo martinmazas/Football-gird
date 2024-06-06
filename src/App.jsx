@@ -31,20 +31,34 @@ const styles = {
 }
 
 function App() {
-  const handleClick = () => {
-    window.location.reload()
-  }
 
+  const [startPlay, setStartPlay] = useState(0)
   const [score, setScore] = useState(0)
   const [rows, setRows] = useState(0)
   const [columns, setColumns] = useState(0)
   const [countryNames, setCountryNames] = useState([])
   const [teamNames, setTeamNames] = useState([])
-  const [finalResult, setFinalResult] = useState('')
+  const [finalResult, setFinalResult] = useState(null)
   const [nonPlayers, setNonPlayers] = useState([])
+
+  const startGame = () => {
+    setScore(0)
+    setRows(0)
+    setColumns(0)
+    setCountryNames([])
+    setTeamNames([])
+    setFinalResult(null)
+    setNonPlayers([])
+  }
+
+  const handleClick = () => {
+    setStartPlay(startPlay => startPlay + 1)
+  }
 
   // When application starts
   useEffect(() => {
+    startGame()
+
     getPlayParams()
       .then(data => {
         const { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList } = { ...data }
@@ -67,7 +81,7 @@ function App() {
           setCountryNames(countryNames => [...countryNames, country])
         )
       })
-  }, [])
+  }, [startPlay])
 
   useEffect(() => {
     if (score === finalResult) alert('You won')
@@ -81,7 +95,7 @@ function App() {
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <div className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} buttonStyle={styles.button} />
-          <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{color: '#fff'}}/></Button>
+          <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </div>
       </div >
       : <CircularIndeterminate />
