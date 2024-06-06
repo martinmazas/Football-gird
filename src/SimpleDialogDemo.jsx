@@ -12,15 +12,16 @@ import { useEffect, useState } from 'react';
 import { getPlayer, addPhoto } from './Utils/functions';
 import FullWidthTextField from './FullWidthTextField';
 import './index.css'
-import ReactCountryFlag from "react-country-flag"
+// import ReactCountryFlag from "react-country-flag"
 
 function SimpleDialog(props) {
     const { onClose, open, playerOptions, countryNames } = props;
+    console.log(countryNames)
 
-    const getCountryCode = (country) => {
-        const code = countryNames.filter(c => c.name === country)[0].code
-        return code
-    }
+    // const getCountryCode = (country) => {
+    //     const code = countryNames.filter(c => c.name === country)[0].code
+    //     return code
+    // }
     
 
     const handleClose = () => {
@@ -40,7 +41,7 @@ function SimpleDialog(props) {
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
-                                <Avatar><ReactCountryFlag svg countryCode={`${getCountryCode(player.country)}`} className={`flag-${player.country.name}`} /></Avatar>
+                                {/* <Avatar><ReactCountryFlag svg countryCode={`${getCountryCode(player.country)}`} className={`flag-${player.country.name}`} /></Avatar> */}
                             </ListItemAvatar>
                             <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                         </ListItemButton>
