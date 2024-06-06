@@ -2,8 +2,8 @@ import React from "react"
 
 const styles = {
     logos: {
-        width: '7rem',
-        height: '7rem',
+        width: '6rem',
+        height: '6rem',
         margin: 'auto'
     }
 }

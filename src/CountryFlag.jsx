@@ -3,7 +3,7 @@ import React from "react"
 
 const styles = {
     flag: {
-        fontSize: '7rem',
+        fontSize: '6rem',
     }
 }
 

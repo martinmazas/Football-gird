@@ -7,7 +7,9 @@ const styles = {
     td: {
         textAlign: 'center',
         backgroundColor: '#052031',
-        border: '1px solid #0096a9'
+        border: '1px solid #0096a9',
+        // height: '6rem',
+        // width: '6rem'
     }
 }
 
