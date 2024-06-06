@@ -7,10 +7,11 @@ import CircularIndeterminate from "./CircularIndeterminate";
 import SimpleDialogDemo from "./SimpleDialogDemo";
 import './index.css'
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import Container from '@mui/material/Container';
 
 const styles = {
   app: {
-    width: '30rem',
+    // width: '30rem',
     margin: 'auto',
   },
   button: {
@@ -91,13 +92,13 @@ function App() {
   return (
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
-      <div className="App" style={styles.app}>
+      <Container maxWidth='sm' className="App" sx={styles.app}>
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
-        <div className="play-game" style={styles.playGame}>
+        <Container className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} buttonStyle={styles.button} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
-        </div>
-      </div >
+        </Container>
+      </Container >
       : <CircularIndeterminate />
   );
 }

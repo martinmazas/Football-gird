@@ -4,6 +4,7 @@ import React from 'react';
 const styles = {
     table: {
         margin: '3rem auto 0',
+        width: '8rem',
     }
 }
 
