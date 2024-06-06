@@ -11,9 +11,17 @@ import Dialog from '@mui/material/Dialog';
 import { useEffect, useState } from 'react';
 import { getPlayer, addPhoto } from './Utils/functions';
 import FullWidthTextField from './FullWidthTextField';
+import './index.css'
+import ReactCountryFlag from "react-country-flag"
 
 function SimpleDialog(props) {
-    const { onClose, open, playerOptions } = props;
+    const { onClose, open, playerOptions, countryNames } = props;
+
+    const getCountryCode = (country) => {
+        const code = countryNames.filter(c => c.name === country)[0].code
+        return code
+    }
+    
 
     const handleClose = () => {
         onClose(playerOptions);
@@ -32,6 +40,7 @@ function SimpleDialog(props) {
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
+                                <Avatar><ReactCountryFlag svg countryCode={`${getCountryCode(player.country)}`} className={`flag-${player.country.name}`} /></Avatar>
                             </ListItemAvatar>
                             <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                         </ListItemButton>
@@ -50,7 +59,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { setScore, countryNames, teamNames, buttonStyle } = { ...props }
+    const { setScore, countryNames, teamNames } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -92,12 +101,13 @@ export default function SimpleDialogDemo(props) {
     return (
         <>
             <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} />
-            <Button size='small'sx={buttonStyle} variant="contained" onClick={handleGuess}>Guess</Button>
+            <Button id='guess-button' size='small' variant="contained" onClick={handleGuess}>Guess</Button>
             {playerOptions.length > 1 &&
                 <SimpleDialog
                     open={open}
                     onClose={handleClose}
                     playerOptions={playerOptions}
+                    countryNames={countryNames}
                 />
             }
         </>

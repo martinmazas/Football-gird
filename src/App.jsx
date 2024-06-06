@@ -14,16 +14,6 @@ const styles = {
     // width: '30rem',
     margin: 'auto',
   },
-  button: {
-    fontSize: '1rem',
-    border: '0.2rem solid #f2b705',
-    backgroundColor: '#f2b705',
-    color: '#000',
-    outline: 'none',
-    margin: '0 0.3rem',
-    padding: '0.3rem 0.6rem',
-    borderRadius: '0.3rem',
-  },
   playGame: {
     display: 'flex',
     justifyContent: 'space-evenly',
@@ -95,7 +85,7 @@ function App() {
       <Container maxWidth='sm' className="App" sx={styles.app}>
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
         <Container className="play-game" style={styles.playGame}>
-          <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} buttonStyle={styles.button} />
+          <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </Container>
       </Container >
