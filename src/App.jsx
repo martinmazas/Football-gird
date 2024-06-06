@@ -98,7 +98,7 @@ function App() {
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </div>
       </div >
-      : <CircularIndeterminate />
+      : null
   );
 }
 
