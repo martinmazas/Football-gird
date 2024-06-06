@@ -1,6 +1,6 @@
 import axios from 'axios'
-const server = 'https://football-grid-edd30e867195.herokuapp.com'
-// const server = 'http://localhost:8080'
+// const server = 'https://football-grid-edd30e867195.herokuapp.com'
+const server = 'http://localhost:8080'
 
 export const getPlayParams = async () => {
     const teams = []
@@ -66,8 +66,8 @@ export const addPhoto = (players, setScore = null) => {
             const img = document.createElement('img')
             img.src = require(`../images/${player.imgPath}.jpeg`)
             img.alt = `${player.secondName}`
-            img.style.width = '7rem'
-            img.style.height = '7rem'
+            img.style.width = '6rem'
+            img.style.height = '6rem'
             // img.style.margin = 'auto'
 
             // Add the player image and delete the previous div
@@ -78,7 +78,7 @@ export const addPhoto = (players, setScore = null) => {
             if (setScore) {
                 setTimeout(() => {
                     setScore((prevScore) => prevScore + 1);
-                }, 500);
+                }, 200);
             }
         } else {
             alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
