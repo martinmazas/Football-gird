@@ -21,6 +21,7 @@ export default function FullWidthTextField(props) {
   return (
     <Box sx={styles.box}>
       <Input
+        disableUnderline={true}
         style={styles.field}
         placeholder="Type the player here"
         id="playerName"
