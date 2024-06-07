@@ -17,17 +17,9 @@ import { Box } from '@mui/material';
 
 function SimpleDialog(props) {
     const { onClose, open, playerOptions, countryNames, teamNames } = props;
-    
-    const getCountryCode = (country) => {
-        const code = countryNames.filter(c => c.name === country)[0].code
-        return code
-    }
 
-    const getTeamCode = (team) => {
-        const code = teamNames.filter(t => t.name === team)[0].code
-        return code
-    }
-
+    const getCountryCode = (country) => countryNames.filter(c => c.name === country)[0].code
+    const getTeamCode = (team) => teamNames.filter(t => t.name === team)[0].code
 
     const handleClose = () => {
         onClose(playerOptions);
@@ -45,13 +37,13 @@ function SimpleDialog(props) {
                     <ListItem disableGutters key={`${player.first_name}-${player.secondName}`}>
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
-                                <Box sx={{display:'flex', justifyContent: 'space-evenly'}} alignItems="center">
+                                <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }} alignItems="center">
                                     <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
                                     <ListItemText primary={`${player.first_name} ${player.secondName}`} />
-                                    <Avatar sx={{ width: '2rem', height: '2rem', bgcolor: 'white' }}>
+                                    <Avatar id='country-avatar'>
                                         <ReactCountryFlag svg countryCode={getCountryCode(player.country)} />
                                     </Avatar>
-                                    <Avatar sx={{ width: '2rem', height: '2rem' }} src={require(`./images/Teams/${getTeamCode(player.team)}.jpeg`)} />
+                                    <Avatar id='team-avatar' src={require(`./images/Teams/${getTeamCode(player.team)}.jpeg`)} />
                                 </Box>
                             </ListItemAvatar>
                         </ListItemButton>

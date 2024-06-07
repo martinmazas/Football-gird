@@ -11,7 +11,6 @@ import Container from '@mui/material/Container';
 
 const styles = {
   app: {
-    // width: '30rem',
     margin: 'auto',
   },
   playGame: {
