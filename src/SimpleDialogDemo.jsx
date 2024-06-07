@@ -12,17 +12,22 @@ import { useEffect, useState } from 'react';
 import { getPlayer, addPhoto } from './Utils/functions';
 import FullWidthTextField from './FullWidthTextField';
 import './index.css'
-// import ReactCountryFlag from "react-country-flag"
+import ReactCountryFlag from "react-country-flag"
+import { Box } from '@mui/material';
 
 function SimpleDialog(props) {
-    const { onClose, open, playerOptions, countryNames } = props;
-    console.log(countryNames)
-
-    // const getCountryCode = (country) => {
-    //     const code = countryNames.filter(c => c.name === country)[0].code
-    //     return code
-    // }
+    const { onClose, open, playerOptions, countryNames, teamNames } = props;
     
+    const getCountryCode = (country) => {
+        const code = countryNames.filter(c => c.name === country)[0].code
+        return code
+    }
+
+    const getTeamCode = (team) => {
+        const code = teamNames.filter(t => t.name === team)[0].code
+        return code
+    }
+
 
     const handleClose = () => {
         onClose(playerOptions);
@@ -34,16 +39,21 @@ function SimpleDialog(props) {
 
     return (
         <Dialog fullWidth={true} onClose={handleClose} open={open}>
-            <DialogTitle>Select one of the plyers</DialogTitle>
+            <DialogTitle>Select one of the players</DialogTitle>
             <List sx={{ pt: 0 }}>
                 {playerOptions.map((player) => (
                     <ListItem disableGutters key={`${player.first_name}-${player.secondName}`}>
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
-                                <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
-                                {/* <Avatar><ReactCountryFlag svg countryCode={`${getCountryCode(player.country)}`} className={`flag-${player.country.name}`} /></Avatar> */}
+                                <Box sx={{display:'flex', justifyContent: 'space-evenly'}} alignItems="center">
+                                    <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
+                                    <ListItemText primary={`${player.first_name} ${player.secondName}`} />
+                                    <Avatar sx={{ width: '2rem', height: '2rem', bgcolor: 'white' }}>
+                                        <ReactCountryFlag svg countryCode={getCountryCode(player.country)} />
+                                    </Avatar>
+                                    <Avatar sx={{ width: '2rem', height: '2rem' }} src={require(`./images/Teams/${getTeamCode(player.team)}.jpeg`)} />
+                                </Box>
                             </ListItemAvatar>
-                            <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -109,6 +119,7 @@ export default function SimpleDialogDemo(props) {
                     onClose={handleClose}
                     playerOptions={playerOptions}
                     countryNames={countryNames}
+                    teamNames={teamNames}
                 />
             }
         </>
