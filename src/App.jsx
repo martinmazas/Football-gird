@@ -22,8 +22,6 @@ const styles = {
 }
 
 function App() {
-  console.log(process.env) 
-
   const [startPlay, setStartPlay] = useState(0)
   const [score, setScore] = useState(0)
   const [rows, setRows] = useState(0)

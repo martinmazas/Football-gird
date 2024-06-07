@@ -2,7 +2,6 @@ import axios from 'axios'
 // const server = 'https://football-grid-edd30e867195.herokuapp.com'
 // const server = 'http://localhost:8080'
 const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080'
-console.log(process.env) 
 
 export const getPlayParams = async () => {
     const teams = []
