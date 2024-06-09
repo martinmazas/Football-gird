@@ -4,7 +4,6 @@ const styles = {
     logos: {
         width: '6rem',
         height: '6rem',
-        margin: 'auto'
     }
 }
 

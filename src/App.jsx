@@ -10,9 +10,6 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Container from '@mui/material/Container';
 
 const styles = {
-  app: {
-    margin: 'auto',
-  },
   playGame: {
     display: 'flex',
     justifyContent: 'space-evenly',
@@ -58,17 +55,15 @@ function App() {
         setFinalResult(playerNumber)
 
         // Set the country-team combination where there is no option
-        noPossiblePlayerList[0].map(player =>
-          setNonPlayers(nonPlayers => [...nonPlayers, player.join('-')])
-        )
+        if (noPossiblePlayerList.length) {
+          noPossiblePlayerList[0].map(player =>
+            setNonPlayers(nonPlayers => [...nonPlayers, player.join('-')])
+          )
+        }
 
         // Set teams and countries
-        teams[0].map(team =>
-          setTeamNames(teamNames => [...teamNames, team])
-        )
-        countries[0].map(country =>
-          setCountryNames(countryNames => [...countryNames, country])
-        )
+        teams[0].map(team => setTeamNames(teamNames => [...teamNames, team]))
+        countries[0].map(country => setCountryNames(countryNames => [...countryNames, country]))
       })
   }, [startPlay])
 
@@ -80,9 +75,9 @@ function App() {
   return (
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
-      <Container maxWidth='sm' className="App" sx={styles.app}>
+      <Container maxWidth='sm' className="App">
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
-        <Container className="play-game" style={styles.playGame}>
+        <Container maxWidth='sm' className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </Container>
