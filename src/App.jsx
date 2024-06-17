@@ -8,6 +8,8 @@ import SimpleDialogDemo from "./SimpleDialogDemo";
 import './index.css'
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Container from '@mui/material/Container';
+import Confetti from 'react-confetti'
+import WinnerDialog from "./WinnerDialog";
 
 const styles = {
   playGame: {
@@ -26,6 +28,7 @@ function App() {
   const [teamNames, setTeamNames] = useState([])
   const [finalResult, setFinalResult] = useState(null)
   const [nonPlayers, setNonPlayers] = useState([])
+  const [endGame, setEndGame] = useState(false)
 
   const startGame = () => {
     setScore(0)
@@ -35,6 +38,7 @@ function App() {
     setTeamNames([])
     setFinalResult(null)
     setNonPlayers([])
+    setEndGame(false)
   }
 
   const handleClick = () => {
@@ -68,7 +72,7 @@ function App() {
   }, [startPlay])
 
   useEffect(() => {
-    if (score === finalResult) alert('You won')
+    if (score === finalResult) setEndGame(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score])
 
@@ -81,6 +85,8 @@ function App() {
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </Container>
+        {endGame && <Confetti />}
+        <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} />
       </Container >
       : <CircularIndeterminate />
   );
