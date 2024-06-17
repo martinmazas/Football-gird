@@ -34,7 +34,7 @@ export default function WinnerDialog(props) {
                 open={endGame}
             >
                 <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                    You won!
+                    Congratulations!
                 </DialogTitle>
                 <IconButton
                     aria-label="close"

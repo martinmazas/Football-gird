@@ -62,7 +62,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { setScore, countryNames, teamNames } = { ...props }
+    const { setScore, countryNames, teamNames, isError, setIsError } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -81,12 +81,13 @@ export default function SimpleDialogDemo(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, setScore, setPlayerOptions, countryNames, teamNames)
+        getPlayer(query, setScore, setPlayerOptions, countryNames, teamNames, setIsError)
         setQuery('')
         handleClickOpen()
     };
 
     const handleChangeQuery = (event) => {
+        setIsError(false)
         setQuery(event.target.value);
     };
 
@@ -103,7 +104,7 @@ export default function SimpleDialogDemo(props) {
 
     return (
         <>
-            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} />
+            <FullWidthTextField query={query} handleChangeQuery={handleChangeQuery} handleKeyDown={handleKeyDown} isError={isError} />
             <Button id='guess-button' size='small' variant="contained" onClick={handleGuess}>Guess</Button>
             {playerOptions.length > 1 &&
                 <SimpleDialog

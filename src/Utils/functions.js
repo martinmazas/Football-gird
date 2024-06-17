@@ -29,7 +29,7 @@ export const getPlayParams = async () => {
     return { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList }
 }
 
-export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames) => {
+export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
     axios.get(`${server}/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
@@ -40,15 +40,15 @@ export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, 
         }
     })
         .then(data => {
-            if (typeof (data.data) === 'string' || data.data.length === 0) alert(data.data)
-            else if (data.data.length === 1) addPhoto(data.data, setScore)
+            if (typeof (data.data) === 'string' || data.data.length === 0) setIsError(data.data)
+            else if (data.data.length === 1) addPhoto(data.data, setIsError, setScore)
             else setPlayerOptions(data.data)
         })
         .catch(err => console.log(err))
 }
 
 
-export const addPhoto = (players, setScore = null) => {
+export const addPhoto = (players, setIsError, setScore = null) => {
     if (players.length === 0) return alert(`No matches`)
 
     const player = players[0]
@@ -80,7 +80,7 @@ export const addPhoto = (players, setScore = null) => {
                 }, 200);
             }
         } else {
-            alert(`The chosen position for Country:${player.country} and Team: ${player.team} is already in use`)
+            setIsError(`The chosen position for ${player.country}-${player.team} is already in use`)
         }
     }
 }
