@@ -15,6 +15,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-evenly',
     padding: '1rem',
+    maxWidth: '26rem'
   },
   errorMessage: {
     color: 'white',
