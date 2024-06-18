@@ -65,9 +65,7 @@ export const addPhoto = (players, setIsError, setScore = null) => {
             const img = document.createElement('img')
             img.src = require(`../images/${player.imgPath}.jpeg`)
             img.alt = `${player.secondName}`
-            img.style.width = '6rem'
-            img.style.height = '6rem'
-            // img.style.margin = 'auto'
+            img.id = 'player-img'
 
             // Add the player image and delete the previous div
             parentDiv.prepend(img)

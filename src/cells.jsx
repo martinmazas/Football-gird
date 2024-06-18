@@ -8,8 +8,8 @@ const styles = {
         textAlign: 'center',
         backgroundColor: '#052031',
         border: '1px solid #0096a9',
-        // height: '6rem',
-        // width: '6rem'
+        height: '5rem',
+        width: '5rem'
     }
 }
 

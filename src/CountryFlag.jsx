@@ -1,17 +1,12 @@
 import ReactCountryFlag from "react-country-flag"
 import React from "react"
-
-const styles = {
-    flag: {
-        fontSize: '6rem',
-    }
-}
+import './index.css'
 
 const CountryFlag = (props) => {
     const { country } = { ...props }
 
     return (
-        <ReactCountryFlag svg countryCode={`${country.code}`} style={styles.flag} className={`flag-${country.name}`} />
+        <ReactCountryFlag svg countryCode={`${country.code}`} id={`flag-${country.name}`} />
     )
 }
 

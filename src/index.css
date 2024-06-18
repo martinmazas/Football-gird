@@ -1,6 +1,7 @@
 :root {
   --background-color: #1a1724;
-  --yellow-border: #f2b705
+  --yellow-border: #f2b705;
+  --table-element: 4rem;
 }
 
 body {
@@ -38,4 +39,13 @@ code {
   width: 2rem;
   height: 2rem; 
   background-color: #fff 
+}
+
+[id^="shield-"], [id^="player-img"] {
+  width: var(--table-element);
+  height: var(--table-element);
+}
+
+[id^="flag-"] {
+  font-size: var(--table-element);
 }
