@@ -78,7 +78,8 @@ function App() {
   }, [startPlay]);
 
   useEffect(() => {
-    if (score === finalResult) setEndGame(true);
+    console.log(score, finalResult)
+    if (score === finalResult) setEndGame(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score]);
 
