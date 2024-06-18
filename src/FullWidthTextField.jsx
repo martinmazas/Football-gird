@@ -24,7 +24,7 @@ export default function FullWidthTextField(props) {
     field: {
       color: '#fff',
       width: '100%',
-      fontSize: '1rem',
+      fontSize: '0.875em',
       '@media (minWidth: 600px)': {
         fontSize: '1.2rem',
       },
