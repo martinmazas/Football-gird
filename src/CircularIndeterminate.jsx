@@ -12,7 +12,7 @@ export default function CircularIndeterminate() {
                 width: '100vw',
             }}
         >
-            <CircularProgress size={'10rem'}/>
+            <CircularProgress size={'6rem'}/>
         </Box>
     );
 }

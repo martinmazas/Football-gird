@@ -14,11 +14,11 @@ const styles = {
 }
 
 
-const Cells = (props) => {
+export default function Cells(props) {
     const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props.props }
 
     return (
-        <>
+        <tbody>
             {Array.from({ length: rows }, (_, rowIndex) => (
                 <tr key={rowIndex}>
                     {Array.from({ length: columns }, (_, cellIndex) => (
@@ -31,17 +31,15 @@ const Cells = (props) => {
                                         // The first column is reserved for the team logo
                                         <TeamFlag teamNames={teamNames[rowIndex - 1]} rowIndex={rowIndex} />
                                         : (cellIndex !== 0 && rowIndex !== 0) &&
-                                            // Where there is no player possible, add an icon to indicate that there is no option
-                                            <div className={`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`}>
-                                                {nonPlayers.includes(`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`) && <CloseIcon fontSize='large' color='error'/>}
-                                            </div>
+                                        // Where there is no player possible, add an icon to indicate that there is no option
+                                        <div className={`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`}>
+                                            {nonPlayers.includes(`${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`) && <CloseIcon fontSize='large' color='error' />}
+                                        </div>
                             }
                         </td>
                     ))}
                 </tr>
             ))}
-        </>
+        </tbody>
     )
 }
-
-export default Cells

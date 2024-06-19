@@ -7,14 +7,10 @@ const styles = {
     }
 }
 
-const GridTable = (props) => {
+export default function GridTable(props) {
     return (
         <table style={styles.table}>
-            <tbody className="tbody">
-                <Cells props={props} />
-            </tbody>
+            <Cells props={props} />
         </table>
     )
 }
-
-export default GridTable;
