@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
-import React, { useEffect, useState } from "react";
 import { getPlayParams } from "./Utils/functions";
 import CircularIndeterminate from "./CircularIndeterminate";
 import SimpleDialogDemo from "./SimpleDialogDemo";
@@ -9,6 +9,9 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Container from '@mui/material/Container';
 import Confetti from 'react-confetti';
 import WinnerDialog from "./WinnerDialog";
+import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 
 const styles = {
   playGame: {
@@ -35,6 +38,7 @@ function App() {
   const [nonPlayers, setNonPlayers] = useState([]);
   const [endGame, setEndGame] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
 
   const startGame = () => {
     setScore(0);
@@ -79,7 +83,6 @@ function App() {
   }, [startPlay]);
 
   useEffect(() => {
-    console.log(score, finalResult)
     if (score === finalResult) setEndGame(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score]);
@@ -95,6 +98,28 @@ function App() {
         </Container>
         {isError && <div style={styles.errorMessage}><p>{isError}</p></div>}
         {endGame && <Confetti />}
+        <Dialog
+          open={openModal}
+          onClose={() => setOpenModal(false)}
+          aria-labelledby="how-to-play-title"
+          maxWidth="sm"
+          fullWidth
+          PaperProps={{
+            style: {
+              margin: 0,
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              position: 'absolute',
+              borderRadius: '3rem',
+              // backgroundColor: 'pink'
+            }
+          }}
+        >
+          <DialogContent>
+            <SwipeableTextMobileStepper />
+          </DialogContent>
+        </Dialog>
         <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} />
       </Container>
       : <CircularIndeterminate />
