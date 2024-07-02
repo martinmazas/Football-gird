@@ -112,7 +112,6 @@ function App() {
               transform: 'translate(-50%, -50%)',
               position: 'absolute',
               borderRadius: '3rem',
-              // backgroundColor: 'pink'
             }
           }}
         >
