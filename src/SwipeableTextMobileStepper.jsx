@@ -25,6 +25,12 @@ const images = [
         title: 'Guess a player'
     },
     {
+        label: 'see-team',
+        imgPath: require('./images/Intro/see-team.jpeg'),
+        text: 'By clicking on the team shield, you will be forwarded to the transfermarkt web page and check which player could be a good match. (Last update from 30/6/24, season 23/24)',
+        title: 'Check the team'
+    },
+    {
         label: 'two-player',
         imgPath: require('./images/Intro/two-player.jpeg'),
         text: 'The game will continue until you successfully add all the possible players to the grid',
@@ -81,7 +87,7 @@ function SwipeableTextMobileStepper() {
                                     display: 'block',
                                     maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
                                     overflow: 'hidden',
-                                    objectFit: 'contain'
+                                    objectFit: 'contain',
                                 }}
                                 src={step.imgPath}
                                 alt={step.label}
@@ -89,14 +95,14 @@ function SwipeableTextMobileStepper() {
                             <Card
                                 sx={{
                                     width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
-                                    maxWidth: '20rem',
+                                    maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
                                     mt: '1rem',
                                     boxShadow: 3,
                                     borderRadius: '2.5rem',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'center',
-                                    height: '11rem' // Fixed height for uniformity
+                                    height: '11rem', // Fixed height for uniformity
                                 }}
                             >
                                 <CardContent>
