@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
+import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
-import SwipeableViews from 'react-swipeable-views';
+import Slider from 'react-slick';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const images = [
     {
@@ -38,94 +39,90 @@ const images = [
 ];
 
 function SwipeableTextMobileStepper() {
-    const theme = useTheme();
+    const sliderRef = useRef(null);
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = images.length;
 
+    const settings = {
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        beforeChange: (current, next) => setActiveStep(next),
+    };
+
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => (prevActiveStep + 1) % maxSteps);
+        sliderRef.current.slickNext();
     };
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => (prevActiveStep - 1 + maxSteps) % maxSteps);
-    };
-
-    const handleStepChange = (step) => {
-        setActiveStep(step);
+        sliderRef.current.slickPrev();
     };
 
     return (
         <Box sx={{ maxWidth: '100%', flexGrow: 1, p: '1rem' }}>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-                enableMouseEvents
-                resistance
-            >
-                {images.map((step, index) => (
+            <Slider ref={sliderRef} {...settings}>
+                {images.map((step) => (
                     <div key={step.label}>
-                        {Math.abs(activeStep - index) <= 2 && (
+                        <Box
+                            component="div"
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                pb: '1rem'
+                            }}
+                        >
                             <Box
-                                component="div"
+                                component="img"
                                 sx={{
+                                    height: { xs: '9rem', sm: '11.5rem', md: '17.75rem' },
+                                    display: 'block',
+                                    maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
+                                    overflow: 'hidden',
+                                    objectFit: 'contain'
+                                }}
+                                src={step.imgPath}
+                                alt={step.label}
+                            />
+                            <Card
+                                sx={{
+                                    width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
+                                    maxWidth: '20rem',
+                                    mt: '1rem',
+                                    boxShadow: 3,
+                                    borderRadius: '2.5rem',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    alignItems: 'center',
                                     justifyContent: 'center',
-                                    pb: '1rem'
+                                    height: '11rem' // Fixed height for uniformity
                                 }}
                             >
-                                <Box
-                                    component="img"
-                                    sx={{
-                                        height: { xs: '9rem', sm: '11.5rem', md: '17.75rem' },
-                                        display: 'block',
-                                        maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
-                                        overflow: 'hidden',
-                                        objectFit: 'contain'
-                                    }}
-                                    src={step.imgPath}
-                                    alt={step.label}
-                                />
-                                <Card
-                                    sx={{
-                                        width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
-                                        maxWidth: '20rem',
-                                        mt: '1rem',
-                                        boxShadow: 3,
-                                        borderRadius: '2.5rem',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        height: '11rem' // Fixed height for uniformity
-                                    }}
-                                >
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {step.title}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary" component="div" dangerouslySetInnerHTML={{ __html: step.text }} />
-                                    </CardContent>
-                                </Card>
-                            </Box>
-                        )}
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                        {step.title}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary" component="div" dangerouslySetInnerHTML={{ __html: step.text }} />
+                                </CardContent>
+                            </Card>
+                        </Box>
                     </div>
                 ))}
-            </SwipeableViews>
+            </Slider>
 
             <MobileStepper
                 steps={maxSteps}
                 position="static"
                 activeStep={activeStep}
                 nextButton={
-                    <Button>
-                        <ArrowCircleRightIcon fontSize='large' onClick={handleNext} />
+                    <Button onClick={handleNext}>
+                        <ArrowCircleRightIcon fontSize='large' />
                     </Button>
                 }
                 backButton={
-                    <Button>
-                        <ArrowCircleLeftIcon fontSize='large' onClick={handleBack} />
+                    <Button onClick={handleBack}>
+                        <ArrowCircleLeftIcon fontSize='large' />
                     </Button>
                 }
             />
