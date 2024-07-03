@@ -10,6 +10,7 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import CancelIcon from '@mui/icons-material/Cancel';
 
 const images = [
     {
@@ -27,8 +28,8 @@ const images = [
     {
         label: 'see-team',
         imgPath: require('./images/Intro/see-team.jpeg'),
-        text: 'By clicking on the team shield, you will be forwarded to the transfermarkt web page and check which player could be a good match. (Last update from 30/6/24, season 23/24)',
-        title: 'Check the team'
+        text: 'You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web). <b>See season 23/24</b>',
+        title: 'Help'
     },
     {
         label: 'two-player',
@@ -44,10 +45,11 @@ const images = [
     }
 ];
 
-function SwipeableTextMobileStepper() {
+function SwipeableTextMobileStepper(props) {
     const sliderRef = useRef(null);
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = images.length;
+    const { setOpenModal } = { ...props }
 
     const settings = {
         infinite: true,
@@ -67,6 +69,9 @@ function SwipeableTextMobileStepper() {
 
     return (
         <Box sx={{ maxWidth: '100%', flexGrow: 1, p: '1rem' }}>
+            <Button sx={{position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpenModal(false)}>
+                <CancelIcon color='error' fontSize='large' />
+            </Button>
             <Slider ref={sliderRef} {...settings}>
                 {images.map((step) => (
                     <div key={step.label}>
@@ -77,7 +82,8 @@ function SwipeableTextMobileStepper() {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                pb: '1rem'
+                                pb: '1rem',
+                                pt: '1rem'
                             }}
                         >
                             <Box
@@ -95,7 +101,7 @@ function SwipeableTextMobileStepper() {
                             <Card
                                 sx={{
                                     width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
-                                    maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
+                                    // maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
                                     mt: '1rem',
                                     boxShadow: 3,
                                     borderRadius: '2.5rem',

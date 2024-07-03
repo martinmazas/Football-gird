@@ -116,7 +116,7 @@ function App() {
           }}
         >
           <DialogContent>
-            <SwipeableTextMobileStepper />
+            <SwipeableTextMobileStepper setOpenModal={setOpenModal} />
           </DialogContent>
         </Dialog>
         <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} />
