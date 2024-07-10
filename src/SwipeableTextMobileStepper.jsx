@@ -69,8 +69,24 @@ function SwipeableTextMobileStepper(props) {
 
     return (
         <Box sx={{ maxWidth: '100%', flexGrow: 1, p: '1rem' }}>
-            <Button sx={{position: 'absolute', top: '1rem', right: '1rem'}} onClick={() => setOpenModal(false)}>
-                <CancelIcon color='error' fontSize='large' />
+            <Button
+                sx={{
+                    position: 'absolute',
+                    top: '1rem',
+                    right: '1rem',
+                    padding: 0,  
+                    minWidth: 'auto',
+                }}
+                onClick={() => setOpenModal(false)}
+            >
+                <CancelIcon
+                    sx={{
+                        color: 'error.main',
+                        fontSize: 'large',
+                        width: '2.5rem', 
+                        height: '2.5rem'
+                    }}
+                />
             </Button>
             <Slider ref={sliderRef} {...settings}>
                 {images.map((step) => (
