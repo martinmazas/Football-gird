@@ -30,13 +30,14 @@ export const getPlayParams = async () => {
 }
 
 export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
+    // console.log(teamNames)
     axios.get(`${server}/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
         }, params: {
             playerName,
-            countryNames,
-            teamNames
+            countryNames: countryNames.map(country => country.name),
+            teamNames: teamNames.map(team => team.name)
         }
     })
         .then(data => {
@@ -63,7 +64,7 @@ export const addPhoto = (players, setIsError, setScore = null) => {
 
             // Create the player image
             const img = document.createElement('img')
-            img.src = require(`../images/${player.imgPath}.jpeg`)
+            img.src = require(`../images/Players/24-25/${player.imgPath}.jpeg`)
             img.alt = `${player.secondName}`
             img.id = 'player-img'
 

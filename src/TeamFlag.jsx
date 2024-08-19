@@ -5,8 +5,8 @@ const TeamFlag = (props) => {
     const { teamNames } = { ...props }
 
     return (
-        <a href={teamNames.web} target="_blank" rel="noopener noreferrer">
-            <img id={`shield-${teamNames.name}`} src={require(`./images/Teams/${teamNames.code}.jpeg`)} alt={`${teamNames.code}`} />
+        <a href={teamNames.url} target="_blank" rel="noopener noreferrer">
+            <img id={`shield-${teamNames.name}`} src={require(`./images/Team-shields/${teamNames.code}.jpeg`)} alt={`${teamNames.code}`} />
         </a>
     )
 }
