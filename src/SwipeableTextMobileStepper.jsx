@@ -28,7 +28,7 @@ const images = [
     {
         label: 'see-team',
         imgPath: require('./images/Intro/see-team.jpeg'),
-        text: 'You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web). <b>See season 23/24</b>',
+        text: 'You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web)',
         title: 'Help'
     },
     {
