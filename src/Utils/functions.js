@@ -30,7 +30,6 @@ export const getPlayParams = async () => {
 }
 
 export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
-    // console.log(teamNames)
     axios.get(`${server}/players/guessPlayer`, {
         headers: {
             "Content-type": "application/json",
