@@ -38,12 +38,12 @@ function SimpleDialog(props) {
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }} alignItems="center">
-                                    <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/${player.imgPath}.jpeg`)} />
+                                    <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/Players/24-25/${player.imgPath}.jpeg`)} />
                                     <ListItemText primary={`${player.first_name} ${player.secondName}`} />
                                     <Avatar id='country-avatar'>
                                         <ReactCountryFlag svg countryCode={getCountryCode(player.country)} />
                                     </Avatar>
-                                    <Avatar id='team-avatar' src={require(`./images/Teams/${getTeamCode(player.team)}.jpeg`)} />
+                                    <Avatar id='team-avatar' src={require(`./images/Team-shields/${getTeamCode(player.team)}.jpeg`)} />
                                 </Box>
                             </ListItemAvatar>
                         </ListItemButton>
