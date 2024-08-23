@@ -49,3 +49,14 @@ code {
 [id^="flag-"] {
   font-size: var(--table-element);
 }
+
+.counter {
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: var(--yellow-border)
+}
+
+.counter-container {
+  text-align: center;
+  font-family: 'Arial, sans-serif';
+}
