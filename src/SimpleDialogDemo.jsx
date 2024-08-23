@@ -22,7 +22,7 @@ function SimpleDialog(props) {
     const getTeamCode = (team) => teamNames.filter(t => t.name === team)[0].code
 
     const handleClose = () => {
-        onClose(playerOptions);
+        onClose(playerOptions)
     };
 
     const handleListItemClick = (player) => {
