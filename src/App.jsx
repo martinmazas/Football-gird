@@ -24,6 +24,14 @@ const styles = {
     color: 'white',
     marginTop: '1rem',
     textAlign: 'center',
+  },
+  howToPlay: {
+    margin: 0,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    position: 'absolute',
+    borderRadius: '3rem',
   }
 };
 
@@ -39,11 +47,13 @@ function App() {
   const [endGame, setEndGame] = useState(false);
   const [isError, setIsError] = useState(false);
   const [openModal, setOpenModal] = useState(true);
+  const [count, setCount] = useState(0)
 
   const startGame = () => {
     setScore(0);
     setRows(0);
     setColumns(0);
+    setCount(0)
     setCountryNames([]);
     setTeamNames([]);
     setFinalResult(null);
@@ -91,7 +101,7 @@ function App() {
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <Container maxWidth='sm' className="App">
-        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} />
+        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} />
         <Container maxWidth='sm' className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} isError={isError} setIsError={setIsError} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
@@ -99,24 +109,16 @@ function App() {
         {isError && <div style={styles.errorMessage}><p>{isError}</p></div>}
         {endGame && <Confetti />}
         <Dialog
+          className="how-to-play-title"
           open={openModal}
           onClose={() => setOpenModal(false)}
           aria-labelledby="how-to-play-title"
           maxWidth="sm"
           fullWidth
-          PaperProps={{
-            style: {
-              margin: 0,
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              position: 'absolute',
-              borderRadius: '3rem',
-            }
-          }}
+          PaperProps={{ style: styles.howToPlay }}
         >
           <DialogContent>
-            <SwipeableTextMobileStepper setOpenModal={setOpenModal} />
+            <SwipeableTextMobileStepper setOpenModal={setOpenModal} setEndGame={setEndGame} />
           </DialogContent>
         </Dialog>
         <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} />
