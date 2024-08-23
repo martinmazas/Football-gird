@@ -16,8 +16,9 @@ const styles = {
 
 
 export default function Cells(props) {
-    const { rows, columns, countryNames, teamNames, nonPlayers, endGame, count, setCount } = { ...props.props }
-
+    const { rows, columns, countryNames, teamNames, nonPlayers } = { ...props.props }
+    // , endGame, count, setCount
+    
     return (
         <tbody>
             {Array.from({ length: rows }, (_, rowIndex) => (
