@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080'
 
 const styles = {
     label: {
@@ -24,7 +25,7 @@ export default function AddPlayer() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post('https://football-grid-edd30e867195.herokuapp.com/players/newPlayer', {
+        axios.post(`${server}/players/newPlayer`, {
             formData
         })
             .then(data => {

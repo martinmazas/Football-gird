@@ -19,7 +19,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function WinnerDialog(props) {
-    const { endGame, setEndGame, setStartPlay } = { ...props }
+    const { endGame, setEndGame, setStartPlay, count } = { ...props }
 
     const handleClose = () => {
         setEndGame(false)
@@ -50,7 +50,7 @@ export default function WinnerDialog(props) {
                 </IconButton>
                 <DialogContent dividers>
                     <Typography gutterBottom>
-                        You have completed the Grid Football Game. To play again press Play
+                        You have completed the Grid Football Game in {count} seconds. To play again press Play
                     </Typography>
                 </DialogContent>
                 <DialogActions>
