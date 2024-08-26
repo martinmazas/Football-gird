@@ -97,11 +97,15 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score]);
 
+  useEffect(() => {
+    if (!openModal) setCount(0)
+  }, [openModal])
+
   return (
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <Container maxWidth='sm' className="App">
-        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} />
+        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
         <Container maxWidth='sm' className="play-game" style={styles.playGame}>
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} isError={isError} setIsError={setIsError} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
@@ -121,7 +125,7 @@ function App() {
             <SwipeableTextMobileStepper setOpenModal={setOpenModal} setEndGame={setEndGame} />
           </DialogContent>
         </Dialog>
-        <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} />
+        <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} count={count} />
       </Container>
       : <CircularIndeterminate />
   );
