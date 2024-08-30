@@ -2,31 +2,18 @@ import axios from 'axios'
 const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080'
 
 export const getPlayParams = async () => {
-    const teams = []
-    const countries = []
-    let gridRows = 0
-    let gridColumns = 0
-    let playerNumber = 0
-    const noPossiblePlayerList = []
+    try {
+        const { data } = await axios.get(`${server}/parameters`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
 
-    await axios.get(`${server}/parameters`, {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-        .then(data => {
-            const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data.data }
-            gridRows = rows
-            gridColumns = columns
-            playerNumber = playerNumbers
-
-            noPossiblePlayerList.push(noPossiblePlayers)
-            teams.push(randomTeams)
-            countries.push(randomCountries)
-        })
-        .catch(err => console.log(err))
-
-    return { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList }
+        return data
+    } catch (err) {
+        console.error(err);
+        throw new Error('Failed to fetch play parameters');
+    }
 }
 
 export const getPlayer = (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {

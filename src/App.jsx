@@ -72,23 +72,23 @@ function App() {
 
     getPlayParams()
       .then(data => {
-        const { gridRows, gridColumns, teams, countries, playerNumber, noPossiblePlayerList } = { ...data };
+        const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data }
 
         // Set columns, rows and the total players to guess
-        setRows(gridRows);
-        setColumns(gridColumns);
-        setFinalResult(playerNumber);
+        setRows(rows);
+        setColumns(columns);
+        setFinalResult(playerNumbers);
 
         // Set the country-team combination where there is no option
-        if (noPossiblePlayerList.length) {
-          noPossiblePlayerList[0].map(player =>
+        if (noPossiblePlayers.length) {
+          noPossiblePlayers[0].map(player =>
             setNonPlayers(nonPlayers => [...nonPlayers, player.join('-')])
           );
         }
 
         // Set teams and countries
-        teams[0].map(team => setTeamNames(teamNames => [...teamNames, team]));
-        countries[0].map(country => setCountryNames(countryNames => [...countryNames, country]));
+        randomTeams.map(team => setTeamNames(teamNames => [...teamNames, team]));
+        randomCountries.map(country => setCountryNames(countryNames => [...countryNames, country]));
       });
   }, [startPlay]);
 
