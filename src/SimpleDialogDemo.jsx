@@ -97,9 +97,7 @@ export default function SimpleDialogDemo(props) {
     };
 
     const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            handleGuess();
-        }
+        if (event.key === 'Enter') handleGuess()
     };
 
     return (

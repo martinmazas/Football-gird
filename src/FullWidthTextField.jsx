@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
+import './index.css'
 
 export default function FullWidthTextField(props) {
   const { query, handleChangeQuery, handleKeyDown, isError } = { ...props }
- 
+
   const styles = {
     box: {
       bgcolor: '#031825',
@@ -24,7 +25,11 @@ export default function FullWidthTextField(props) {
     field: {
       color: '#fff',
       width: '100%',
-      fontSize: '0.875em',
+      fontSize: '1rem', // Set to at least 16px to prevent zooming on mobile
+      '::placeholder': {
+        color: 'rgba(255, 255, 255, 0.6)', // Placeholder color with some transparency
+        fontSize: 'inherit', // Inherit the font size from the input
+      },
       '@media (minWidth: 600px)': {
         fontSize: '1.2rem',
       },
@@ -32,7 +37,7 @@ export default function FullWidthTextField(props) {
         fontSize: '1.4rem',
       },
     },
-  }
+  };
 
   return (
     <Box sx={styles.box}>
