@@ -25,7 +25,8 @@ export default function FullWidthTextField(props) {
     field: {
       color: '#fff',
       width: '100%',
-      fontSize: '1rem', // Set to at least 16px to prevent zooming on mobile
+      fontSize: '1rem', // Ensure at least 16px for mobile to prevent zooming
+      padding: '0.3rem 0', // Adjust padding to create more space
       '::placeholder': {
         color: 'rgba(255, 255, 255, 0.6)', // Placeholder color with some transparency
         fontSize: 'inherit', // Inherit the font size from the input
@@ -44,7 +45,7 @@ export default function FullWidthTextField(props) {
       <Input
         disableUnderline={true}
         style={styles.field}
-        placeholder="Type the player here"
+        placeholder="Type player here"
         id="playerName"
         value={query}
         onChange={handleChangeQuery}
