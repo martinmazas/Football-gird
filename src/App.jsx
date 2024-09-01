@@ -14,17 +14,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
 const styles = {
-  playGame: {
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    padding: '1rem',
-    maxWidth: '26rem'
-  },
-  errorMessage: {
-    color: 'white',
-    marginTop: '1rem',
-    textAlign: 'center',
-  },
   howToPlay: {
     margin: 0,
     top: '50%',
@@ -36,26 +25,23 @@ const styles = {
 };
 
 function App() {
-  const [startPlay, setStartPlay] = useState(0);
+  const [startPlay, setStartPlay] = useState(false) // Variable that indicates a new game
   const [score, setScore] = useState(0);
-  const [rows, setRows] = useState(0);
-  const [columns, setColumns] = useState(0);
+  const [rows, setRows] = useState(0); // Quantity of rows
+  const [columns, setColumns] = useState(0); // Quantity of columns
   const [countryNames, setCountryNames] = useState([]);
   const [teamNames, setTeamNames] = useState([]);
-  const [finalResult, setFinalResult] = useState(null);
-  const [nonPlayers, setNonPlayers] = useState([]);
-  const [endGame, setEndGame] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [openModal, setOpenModal] = useState(true);
-  const [count, setCount] = useState(0)
+  const [finalResult, setFinalResult] = useState(null); // Final objective of the player
+  const [nonPlayers, setNonPlayers] = useState([]); // Helper variable in case there is one or more cells that are not in use
+  const [endGame, setEndGame] = useState(false); // Flag for the game end
+  const [isError, setIsError] = useState(false); // Flag for error in search player
+  const [openModal, setOpenModal] = useState(true); // Variable that works for intro slides
+  const [count, setCount] = useState(0) // Variable that works as a time counter
 
+  // Reset all the variables in order to prepare the new board
   const startGame = () => {
-    setScore(0);
-    setRows(0);
-    setColumns(0);
+    setScore(0)
     setCount(0)
-    setCountryNames([]);
-    setTeamNames([]);
     setFinalResult(null);
     setNonPlayers([]);
     setEndGame(false);
@@ -63,13 +49,15 @@ function App() {
   };
 
   const handleClick = () => {
-    setStartPlay(startPlay => startPlay + 1);
+    setStartPlay(!startPlay);
   };
 
   // When application starts
   useEffect(() => {
+    // New game
     startGame();
 
+    // Request new params from server
     getPlayParams()
       .then(data => {
         const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data }
@@ -87,8 +75,8 @@ function App() {
         }
 
         // Set teams and countries
-        randomTeams.map(team => setTeamNames(teamNames => [...teamNames, team]));
-        randomCountries.map(country => setCountryNames(countryNames => [...countryNames, country]));
+        setTeamNames([...randomTeams])
+        setCountryNames([...randomCountries])
       });
   }, [startPlay]);
 
@@ -101,16 +89,17 @@ function App() {
     if (!openModal) setCount(0)
   }, [openModal])
 
+
   return (
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <Container maxWidth='sm' className="App">
         <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
-        <Container maxWidth='sm' className="play-game" style={styles.playGame}>
+        <Container maxWidth='sm' id="play-game">
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} isError={isError} setIsError={setIsError} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
         </Container>
-        {isError && <div style={styles.errorMessage}><p>{isError}</p></div>}
+        {isError && <div id="error-message"><p>{isError}</p></div>}
         {endGame && <Confetti />}
         <Dialog
           className="how-to-play-title"

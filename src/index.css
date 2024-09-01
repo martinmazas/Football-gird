@@ -25,6 +25,19 @@ code {
   background-color: var(--background-color);
 }
 
+#play-game {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem;
+  max-width: 26rem;
+}
+
+#error-message {
+  color: white;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 #guess-button {
   font-size: 1rem;
   background-color: var(--yellow-border);
