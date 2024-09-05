@@ -34,7 +34,7 @@ function SimpleDialog(props) {
             <DialogTitle>Select one of the players</DialogTitle>
             <List sx={{ pt: 0 }}>
                 {playerOptions.map((player) => (
-                    <ListItem disableGutters key={`${player.first_name}-${player.secondName}`}>
+                    <ListItem disableGutters key={`${player.first_name}-${player.secondName}-${player.team}-${player.country}`}>
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }} alignItems="center">
@@ -66,8 +66,8 @@ export default function SimpleDialogDemo(props) {
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
-        const { first_name, secondName } = { ...value }
-        const player = playerOptions.filter(p => p.first_name === first_name && p.secondName === secondName)
+        const { first_name, secondName, imgPath } = { ...value }
+        const player = playerOptions.filter(p => p.first_name === first_name && p.secondName === secondName && p.imgPath === imgPath)
         setPlayerOptions(player)
     }
 
