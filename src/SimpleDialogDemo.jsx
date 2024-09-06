@@ -16,10 +16,11 @@ import ReactCountryFlag from "react-country-flag"
 import { Box } from '@mui/material';
 
 function SimpleDialog(props) {
-    const { onClose, open, playerOptions, countryNames, teamNames } = props;
+    const { onClose, open, playerOptions, countries, teams } = props;
 
-    const getCountryCode = (country) => countryNames.filter(c => c.name === country)[0].code
-    const getTeamCode = (team) => teamNames.filter(t => t.name === team)[0].code
+    // console.log(countries)
+    const getCountryCode = (country) => countries.filter(c => c.name === country)[0].code
+    const getTeamCode = (team) => teams.filter(t => t.name === team)[0].code
 
     const handleClose = () => {
         onClose(playerOptions)
@@ -62,7 +63,7 @@ SimpleDialog.propTypes = {
 export default function SimpleDialogDemo(props) {
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
-    const { setScore, countryNames, teamNames, isError, setIsError } = { ...props }
+    const { setScore, countries, teams, isError, setIsError } = { ...props }
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
@@ -81,7 +82,7 @@ export default function SimpleDialogDemo(props) {
     };
 
     const handleGuess = () => {
-        getPlayer(query, setScore, setPlayerOptions, countryNames, teamNames, setIsError)
+        getPlayer(query, setScore, setPlayerOptions, countries, teams, setIsError)
         setQuery('')
         handleClickOpen()
     };
@@ -109,8 +110,8 @@ export default function SimpleDialogDemo(props) {
                     open={open}
                     onClose={handleClose}
                     playerOptions={playerOptions}
-                    countryNames={countryNames}
-                    teamNames={teamNames}
+                    countries={countries}
+                    teams={teams}
                 />
             }
         </>
