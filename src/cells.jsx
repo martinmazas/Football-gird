@@ -14,22 +14,22 @@ const styles = {
     }
 };
 
-const renderCellContent = (rowIndex, cellIndex, countryNames, teamNames, nonPlayers, endGame, count, setCount, openModal) => {
+const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, setCount, openModal) => {
     // Counter on 0,0
     if (rowIndex === 0 && cellIndex === 0) {
         return <Counter endGame={endGame} count={count} setCount={setCount} openModal={openModal} />;
     }
     // Countries on x-axis
     if (rowIndex === 0 && cellIndex > 0) {
-        return <CountryFlag country={countryNames[cellIndex - 1]} cellIndex={cellIndex} />;
+        return <CountryFlag country={countries[cellIndex - 1]} cellIndex={cellIndex} />;
     }
     // Teams on y-axis
     if (cellIndex === 0 && rowIndex > 0) {
-        return <TeamFlag teamNames={teamNames[rowIndex - 1]} rowIndex={rowIndex} />;
+        return <TeamFlag team={teams[rowIndex - 1]} rowIndex={rowIndex} />;
     }
     // Players
     if (cellIndex !== 0 && rowIndex !== 0) {
-        const cellKey = `${countryNames[cellIndex - 1].name}-${teamNames[rowIndex - 1].name}`;
+        const cellKey = `${countries[cellIndex - 1].name}-${teams[rowIndex - 1].name}`;
         return (
             <div className={cellKey}>
                 {nonPlayers.includes(cellKey) && <CloseIcon fontSize="large" color="error" />}
@@ -40,7 +40,7 @@ const renderCellContent = (rowIndex, cellIndex, countryNames, teamNames, nonPlay
 };
 
 export default function Cells({ props }) {
-    const { rows, columns, countryNames, teamNames, nonPlayers, endGame, count, setCount, openModal } = props;
+    const { rows, columns, countries, teams, nonPlayers, endGame, count, setCount, openModal } = props;
 
     return (
         <tbody>
@@ -48,7 +48,7 @@ export default function Cells({ props }) {
                 <tr key={rowIndex}>
                     {Array.from({ length: columns }, (_, cellIndex) => (
                         <td className={`${rowIndex}-${cellIndex}`} style={styles.td} key={`${rowIndex}-${cellIndex}`}>
-                            {renderCellContent(rowIndex, cellIndex, countryNames, teamNames, nonPlayers, endGame, count, setCount, openModal)}
+                            {renderCellContent(rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, setCount, openModal)}
                         </td>
                     ))}
                 </tr>

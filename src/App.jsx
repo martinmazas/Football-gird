@@ -29,6 +29,8 @@ function App() {
   const [score, setScore] = useState(0);
   const [rows, setRows] = useState(0); // Quantity of rows
   const [columns, setColumns] = useState(0); // Quantity of columns
+  const [countries, setCountries] = useState([]);
+  const [teams, setTeams] = useState([]);
   const [countryNames, setCountryNames] = useState([]);
   const [teamNames, setTeamNames] = useState([]);
   const [finalResult, setFinalResult] = useState(null); // Final objective of the player
@@ -75,8 +77,11 @@ function App() {
         }
 
         // Set teams and countries
-        setTeamNames([...randomTeams])
-        setCountryNames([...randomCountries])
+        setTeams([...randomTeams])
+        setCountries([...randomCountries])
+
+        setTeamNames(() => randomTeams.map(team => team.name))
+        setCountryNames(() => randomCountries.map(country => country.name))
       });
   }, [startPlay]);
 
@@ -94,7 +99,7 @@ function App() {
     // Wait until finalResult and nonPlayers is ready
     (finalResult && nonPlayers) ?
       <Container maxWidth='sm' className="App">
-        <GridTable rows={rows} columns={columns} countryNames={countryNames} teamNames={teamNames} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
+        <GridTable rows={rows} columns={columns} countries={countries} teams={teams} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
         <Container maxWidth='sm' id="play-game">
           <SimpleDialogDemo setScore={setScore} countryNames={countryNames} teamNames={teamNames} isError={isError} setIsError={setIsError} />
           <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>

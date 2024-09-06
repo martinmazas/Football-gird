@@ -2,11 +2,11 @@ import React from "react"
 import './index.css'
 
 const TeamFlag = (props) => {
-    const { teamNames } = { ...props }
+    const { team } = { ...props }
 
     return (
-        <a href={teamNames.url} target="_blank" rel="noopener noreferrer">
-            <img id={`shield-${teamNames.name}`} src={require(`./images/Team-shields/${teamNames.code}.jpeg`)} alt={`${teamNames.code}`} />
+        <a href={team.url} target="_blank" rel="noopener noreferrer">
+            <img id={`shield-${team.name}`} src={require(`./images/Team-shields/${team.code}.jpeg`)} alt={`${team.code}`} />
         </a>
     )
 }
