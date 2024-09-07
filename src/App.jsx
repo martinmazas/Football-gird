@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import GridTable from "./gridTable";
 import Button from '@mui/material/Button';
 import { getPlayParams } from "./Utils/functions";
@@ -25,25 +25,26 @@ const styles = {
 };
 
 function App() {
-  const [startPlay, setStartPlay] = useState(false) // Variable that indicates a new game
+  const [startPlay, setStartPlay] = useState(false);
   const [score, setScore] = useState(0);
-  const [rows, setRows] = useState(0); // Quantity of rows
-  const [columns, setColumns] = useState(0); // Quantity of columns
+  const [rows, setRows] = useState(0);
+  const [columns, setColumns] = useState(0);
   const [countries, setCountries] = useState([]);
   const [teams, setTeams] = useState([]);
-  // const [countryNames, setCountryNames] = useState([]);
-  // const [teamNames, setTeamNames] = useState([]);
-  const [finalResult, setFinalResult] = useState(null); // Final objective of the player
-  const [nonPlayers, setNonPlayers] = useState([]); // Helper variable in case there is one or more cells that are not in use
-  const [endGame, setEndGame] = useState(false); // Flag for the game end
-  const [isError, setIsError] = useState(false); // Flag for error in search player
-  const [openModal, setOpenModal] = useState(true); // Variable that works for intro slides
-  const [count, setCount] = useState(0) // Variable that works as a time counter
+  const [finalResult, setFinalResult] = useState(null);
+  const [nonPlayers, setNonPlayers] = useState([]);
+  const [endGame, setEndGame] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
+  const [count, setCount] = useState(0);
 
-  // Reset all the variables in order to prepare the new board
+  // For handling transitions
+  const [isPending, startTransition] = useTransition();
+
+  // Reset all the variables to prepare for a new game
   const startGame = () => {
-    setScore(0)
-    setCount(0)
+    setScore(0);
+    setCount(0);
     setFinalResult(null);
     setNonPlayers([]);
     setEndGame(false);
@@ -56,53 +57,49 @@ function App() {
 
   // When application starts
   useEffect(() => {
-    // New game
+    // Reset the game
     startGame();
 
-    // Request new params from server
-    getPlayParams()
-      .then(data => {
-        const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = { ...data }
+    // Request new parameters from server
+    getPlayParams().then(data => {
+      // Wrap the state updates in startTransition for smooth updates
+      startTransition(() => {
+        const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = data;
 
-        // Set columns, rows and the total players to guess
         setRows(rows);
         setColumns(columns);
         setFinalResult(playerNumbers);
 
-        // Set the country-team combination where there is no option
         if (noPossiblePlayers.length) {
-          noPossiblePlayers[0].map(player =>
-            setNonPlayers(nonPlayers => [...nonPlayers, player.join('-')])
+          noPossiblePlayers[0].forEach(player =>
+            setNonPlayers(prevNonPlayers => [...prevNonPlayers, player.join('-')])
           );
         }
 
-        // Set teams and countries
-        setTeams([...randomTeams])
-        setCountries([...randomCountries])
-
-        // setTeamNames(() => randomTeams.map(team => team.name))
-        // setCountryNames(() => randomCountries.map(country => country.name))
+        setTeams([...randomTeams]);
+        setCountries([...randomCountries]);
       });
+    });
   }, [startPlay]);
 
   useEffect(() => {
-    if (score === finalResult) setEndGame(true)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [score]);
+    if (score === finalResult) setEndGame(true);
+  }, [score, finalResult]);
 
   useEffect(() => {
-    if (!openModal) setCount(0)
-  }, [openModal])
-
+    if (!openModal) setCount(0);
+  }, [openModal]);
 
   return (
-    // Wait until finalResult and nonPlayers is ready
-    (finalResult && nonPlayers) ?
+    // Show loading spinner while in transition
+    isPending ? <CircularIndeterminate /> : (
       <Container maxWidth='sm' className="App">
         <GridTable rows={rows} columns={columns} countries={countries} teams={teams} nonPlayers={nonPlayers} endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
         <Container maxWidth='sm' id="play-game">
           <SimpleDialogDemo setScore={setScore} countries={countries} teams={teams} isError={isError} setIsError={setIsError} />
-          <Button size="small" id="restart-button" onClick={handleClick} variant="contained"><RestartAltIcon sx={{ color: '#fff' }} /></Button>
+          <Button size="small" id="restart-button" onClick={handleClick} variant="contained">
+            <RestartAltIcon sx={{ color: '#fff' }} />
+          </Button>
         </Container>
         {isError && <div id="error-message"><p>{isError}</p></div>}
         {endGame && <Confetti />}
@@ -121,7 +118,7 @@ function App() {
         </Dialog>
         <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} count={count} />
       </Container>
-      : <CircularIndeterminate />
+    )
   );
 }
 

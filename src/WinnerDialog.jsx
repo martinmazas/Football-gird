@@ -23,7 +23,7 @@ export default function WinnerDialog(props) {
 
     const handleClose = () => {
         setEndGame(endGame => !endGame)
-        setStartPlay(true)
+        setStartPlay(startPlay => startPlay++)
     };
 
     return (

@@ -17,8 +17,6 @@ import { Box } from '@mui/material';
 
 function SimpleDialog(props) {
     const { onClose, open, playerOptions, countries, teams } = props;
-
-    // console.log(countries)
     const getCountryCode = (country) => countries.filter(c => c.name === country)[0].code
     const getTeamCode = (team) => teams.filter(t => t.name === team)[0].code
 
@@ -61,6 +59,7 @@ SimpleDialog.propTypes = {
 };
 
 export default function SimpleDialogDemo(props) {
+    // console.log('line 64')
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const { setScore, countries, teams, isError, setIsError } = { ...props }
