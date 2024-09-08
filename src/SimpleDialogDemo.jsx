@@ -59,7 +59,6 @@ SimpleDialog.propTypes = {
 };
 
 export default function SimpleDialogDemo(props) {
-    // console.log('line 64')
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState('');
     const { setScore, countries, teams, isError, setIsError } = { ...props }
