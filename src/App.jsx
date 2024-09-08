@@ -6,9 +6,6 @@ import './index.css';
 import Container from '@mui/material/Container';
 import Confetti from 'react-confetti';
 import WinnerDialog from "./WinnerDialog";
-// import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
-// import Dialog from '@mui/material/Dialog';
-// import DialogContent from '@mui/material/DialogContent';
 import GameOptions from "./GameOptions";
 import GameInstructions from "./GameInstructions";
 
@@ -39,9 +36,7 @@ function App() {
     setIsError(false);
   };
 
-  const handleClick = () => {
-    setStartPlay(!startPlay);
-  };
+  const handleClick = () => setStartPlay(!startPlay)
 
   // When application starts
   useEffect(() => {
@@ -59,7 +54,7 @@ function App() {
         setFinalResult(playerNumbers);
 
         if (noPossiblePlayers.length) {
-          noPossiblePlayers[0].forEach(player =>
+          noPossiblePlayers[0].map(player =>
             setNonPlayers(prevNonPlayers => [...prevNonPlayers, player.join('-')])
           );
         }

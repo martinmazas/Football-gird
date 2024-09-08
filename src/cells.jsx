@@ -3,22 +3,14 @@ import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
 import CloseIcon from '@mui/icons-material/Close';
 import Counter from './Counter';
-
-const styles = {
-    td: {
-        textAlign: 'center',
-        backgroundColor: '#052031',
-        border: '1px solid #0096a9',
-        height: '5rem',
-        width: '5rem'
-    }
-};
+import './index.css'
 
 const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, setCount, openModal) => {
     // Counter on 0,0
     if (rowIndex === 0 && cellIndex === 0) {
-        return <Counter endGame={endGame} count={count} setCount={setCount} openModal={openModal} />;
+        return <Counter endGame={endGame} count={count} setCount={setCount} openModal={openModal} />
     }
+
     // Countries on x-axis
     if (rowIndex === 0 && cellIndex > 0) {
         return <CountryFlag country={countries[cellIndex - 1]} cellIndex={cellIndex} />;
@@ -47,7 +39,7 @@ export default function Cells({ props }) {
             {Array.from({ length: rows }, (_, rowIndex) => (
                 <tr key={rowIndex}>
                     {Array.from({ length: columns }, (_, cellIndex) => (
-                        <td className={`${rowIndex}-${cellIndex}`} style={styles.td} key={`${rowIndex}-${cellIndex}`}>
+                        <td className={`${rowIndex}-${cellIndex}`} id='td-cell' key={`${rowIndex}-${cellIndex}`}>
                             {renderCellContent(rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, setCount, openModal)}
                         </td>
                     ))}

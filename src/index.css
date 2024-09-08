@@ -48,13 +48,15 @@ code {
   border-radius: 0.3rem;
 }
 
-#country-avatar, #team-avatar {
+#country-avatar,
+#team-avatar {
   width: 2rem;
-  height: 2rem; 
-  background-color: #fff 
+  height: 2rem;
+  background-color: #fff
 }
 
-[id^="shield-"], [id^="player-img"] {
+[id^="shield-"],
+[id^="player-img"] {
   width: var(--table-element);
   height: var(--table-element);
 }
@@ -72,4 +74,12 @@ code {
 .counter-container {
   text-align: center;
   font-family: 'Arial, sans-serif';
+}
+
+#td-cell {
+  text-align: center;
+  background-color: #052031;
+  border: 1px solid #0096a9;
+  height: 5rem;
+  width: 5rem;
 }
