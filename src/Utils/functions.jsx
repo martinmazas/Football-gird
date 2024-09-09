@@ -24,6 +24,9 @@ export const getPlayParams = async () => {
 
 export const getPlayer = async (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
     try {
+        countryNames = countryNames.map(country => country.name)
+        teamNames = teamNames.map(team => team.name)
+        
         const { data } = await axios.get(`${server}/players/guessPlayer`, {
             ...axiosConfig,
             params: {
