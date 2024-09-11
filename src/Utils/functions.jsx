@@ -26,7 +26,7 @@ export const getPlayer = async (playerName, setScore, setPlayerOptions, countryN
     try {
         countryNames = countryNames.map(country => country.name)
         teamNames = teamNames.map(team => team.name)
-        
+
         const { data } = await axios.get(`${server}/players/guessPlayer`, {
             ...axiosConfig,
             params: {
@@ -70,9 +70,9 @@ export const addPhoto = (players, setIsError, setScore = null) => {
 
             // Update the score asynchronously
             if (setScore) {
-                setTimeout(() => {
-                    setScore(prevScore => prevScore + 1);
-                }, 200);
+                // setTimeout(() => {
+                setScore(prevScore => prevScore + 1);
+                // }, 200);
             }
         } else {
             setIsError(`The chosen position for ${player.country}-${player.team} is already in use`);
