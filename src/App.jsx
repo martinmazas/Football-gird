@@ -73,10 +73,6 @@ function App() {
     if (!openModal) setCount(0)
   }, [openModal])
 
-  useEffect(() => {
-    console.log(isPending)
-  }, [isPending])
-
   return (
     // Show loading spinner while in transition
     isPending ? <CircularIndeterminate /> : (
