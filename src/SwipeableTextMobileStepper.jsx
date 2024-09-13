@@ -1,49 +1,15 @@
 import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
-import MobileStepper from '@mui/material/MobileStepper';
 import Button from '@mui/material/Button';
 import Slider from 'react-slick';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CancelIcon from '@mui/icons-material/Cancel';
-
-const images = [
-    {
-        label: 'start-game',
-        imgPath: require('./images/Intro/start-game.jpeg'),
-        text: 'Based on <a href="https://futbol-11.com/futbol-gridFootball">Football Grid</a>. You have a 3x3 football grid featuring countries at the top and clubs on the columns.',
-        title: 'How to play'
-    },
-    {
-        label: 'one-player',
-        imgPath: require('./images/Intro/one-player.jpeg'),
-        text: 'You need to fill the grid with players who are currently playing for the same club and country in a specific position of the grid',
-        title: 'Guess a player'
-    },
-    {
-        label: 'see-team',
-        imgPath: require('./images/Intro/see-team.jpeg'),
-        text: 'You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web)',
-        title: 'Help'
-    },
-    {
-        label: 'two-player',
-        imgPath: require('./images/Intro/two-player.jpeg'),
-        text: 'The game will continue until you successfully add all the possible players to the grid',
-        title: 'Game flow'
-    },
-    {
-        label: 'restart',
-        imgPath: require('./images/Intro/restart.jpeg'),
-        text: 'You can restart the grid whenever you want, the teams and countries will be restarted and the play will start again',
-        title: 'Restart the game'
-    }
-];
+import MobileStepperComponent from './MobileStepperComponent';
+const images = require('./Utils/introImages.json')
 
 function SwipeableTextMobileStepper(props) {
     const sliderRef = useRef(null);
@@ -74,7 +40,7 @@ function SwipeableTextMobileStepper(props) {
                     position: 'absolute',
                     top: '1rem',
                     right: '1rem',
-                    padding: 0,  
+                    padding: 0,
                     minWidth: 'auto',
                 }}
                 onClick={() => setOpenModal(false)}
@@ -83,7 +49,7 @@ function SwipeableTextMobileStepper(props) {
                     sx={{
                         color: 'error.main',
                         fontSize: 'large',
-                        width: '2.5rem', 
+                        width: '2.5rem',
                         height: '2.5rem'
                     }}
                     onClick={() => setEndGame(false)}
@@ -112,13 +78,12 @@ function SwipeableTextMobileStepper(props) {
                                     overflow: 'hidden',
                                     objectFit: 'contain',
                                 }}
-                                src={step.imgPath}
+                                src={require(`${step.imgPath}`)}
                                 alt={step.label}
                             />
                             <Card
                                 sx={{
                                     width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
-                                    // maxWidth: { xs: '12.5rem', sm: '18.75rem', md: '25rem' },
                                     mt: '1rem',
                                     boxShadow: 3,
                                     borderRadius: '2.5rem',
@@ -140,21 +105,7 @@ function SwipeableTextMobileStepper(props) {
                 ))}
             </Slider>
 
-            <MobileStepper
-                steps={maxSteps}
-                position="static"
-                activeStep={activeStep}
-                nextButton={
-                    <Button onClick={handleNext}>
-                        <ArrowCircleRightIcon fontSize='large' />
-                    </Button>
-                }
-                backButton={
-                    <Button onClick={handleBack}>
-                        <ArrowCircleLeftIcon fontSize='large' />
-                    </Button>
-                }
-            />
+            <MobileStepperComponent maxSteps={maxSteps} activeStep={activeStep} handleNext={handleNext} handleBack={handleBack} />
         </Box>
     );
 }

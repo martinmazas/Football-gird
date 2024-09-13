@@ -37,9 +37,9 @@ function App() {
 
   const handleClick = () => setStartPlay(startPlay => startPlay + 1)
 
-  // When application starts
+  // Start application
   useEffect(() => {
-    // Reset the game
+    // Reset parameters
     startGame()
 
     // Request new parameters from server

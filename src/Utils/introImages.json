@@ -1,0 +1,32 @@
+[
+    {
+        "label": "start-game",
+        "imgPath": "./images/Intro/start-game.jpeg",
+        "text": "Based on <a href='https://futbol-11.com/futbol-gridFootball'>Football Grid</a>. You have a 3x3 football grid featuring countries at the top and clubs on the columns.",
+        "title": "How to play"
+    },
+    {
+        "label": "one-player",
+        "imgPath": "./images/Intro/one-player.jpeg",
+        "text": "You need to fill the grid with players who are currently playing for the same club and country in a specific position of the grid",
+        "title": "Guess a player"
+    },
+    {
+        "label": "see-team",
+        "imgPath": "./images/Intro/see-team.jpeg",
+        "text": "You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web)",
+        "title": "Help"
+    },
+    {
+        "label": "two-player",
+        "imgPath": "./images/Intro/two-player.jpeg",
+        "text": "The game will continue until you successfully add all the possible players to the grid",
+        "title": "Game flow"
+    },
+    {
+        "label": "restart",
+        "imgPath": "./images/Intro/restart.jpeg",
+        "text": "You can restart the grid whenever you want, the teams and countries will be restarted and the play will start again",
+        "title": "Restart the game"
+    }
+]

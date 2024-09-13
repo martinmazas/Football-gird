@@ -14,6 +14,7 @@ const handleError = (err, customMessage) => {
 
 
 export const getPlayParams = async () => {
+    console.log('getParams')
     try {
         const { data } = await axios.get(`${server}/parameters`, { ...axiosConfig });
         return data
