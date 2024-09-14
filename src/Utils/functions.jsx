@@ -71,9 +71,7 @@ export const addPhoto = (players, setIsError, setScore = null) => {
 
             // Update the score asynchronously
             if (setScore) {
-                // setTimeout(() => {
                 setScore(prevScore => prevScore + 1);
-                // }, 200);
             }
         } else {
             setIsError(`The chosen position for ${player.country}-${player.team} is already in use`);
