@@ -25,6 +25,7 @@ function App() {
   const [openModal, setOpenModal] = useState(true)
   const [count, setCount] = useState(0)
   const [isPending, startTransition] = useTransition()
+  const [tournament, setTournament] = useState('CHAMPIONS LEAGUE')
 
   // Reset game parameters
   const startGame = () => {
@@ -40,7 +41,7 @@ function App() {
   // Fetch game parameters
   useEffect(() => {
     startGame()
-    getPlayParams().then(data => {
+    getPlayParams(tournament).then(data => {
       startTransition(() => {
         const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = data
 
@@ -54,7 +55,7 @@ function App() {
         setFinalResult(playerNumbers)
       })
     })
-  }, [startPlay])
+  }, [startPlay, tournament])
 
   // End game when score reaches final result
   useEffect(() => {
