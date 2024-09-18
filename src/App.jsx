@@ -34,6 +34,7 @@ function App() {
     setGameParams({ rows: 0, columns: 0, countries: [], teams: [], nonPlayers: [] })
     setEndGame(false)
     setIsError(false)
+    setTournament('CHAMPIONS LEAGUE') // Temporary
   }
 
   const handleClick = () => setStartPlay(prev => !prev)
