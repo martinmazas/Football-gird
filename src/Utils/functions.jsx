@@ -15,7 +15,7 @@ const handleError = (err, customMessage) => {
 
 export const getPlayParams = async (tournament) => {
     try {
-        const { data } = await axios.get(`${server}/parameters/${tournament}`, { ...axiosConfig });
+        const { data } = await axios.get(`${server}/api/parameters/${tournament}`, { ...axiosConfig });
         return data
     } catch (err) {
         handleError(err, 'Failed to fetch play parameters')
@@ -27,7 +27,7 @@ export const getPlayer = async (playerName, setScore, setPlayerOptions, countryN
         countryNames = countryNames.map(country => country.name)
         teamNames = teamNames.map(team => team.name)
 
-        const { data } = await axios.get(`${server}/players/guessPlayer`, {
+        const { data } = await axios.get(`${server}/api/players/guessPlayer`, {
             ...axiosConfig,
             params: {
                 playerName,

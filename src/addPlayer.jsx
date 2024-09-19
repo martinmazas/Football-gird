@@ -25,7 +25,7 @@ export default function AddPlayer() {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        axios.post(`${server}/players/newPlayer`, {
+        axios.post(`${server}/api/players/newPlayer`, {
             formData
         })
             .then(data => {
