@@ -14,8 +14,9 @@ const handleError = (err, customMessage) => {
 
 
 export const getPlayParams = async (tournament) => {
+    console.log(tournament)
     try {
-        const { data } = await axios.get(`${server}/api/parameters/${tournament}`, { ...axiosConfig });
+        const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
         return data
     } catch (err) {
         handleError(err, 'Failed to fetch play parameters')
