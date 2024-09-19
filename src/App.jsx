@@ -8,6 +8,7 @@ import Confetti from 'react-confetti'
 import WinnerDialog from "./WinnerDialog"
 import GameOptions from "./GameOptions"
 import GameInstructions from "./GameInstructions"
+import TournamentTab from "./TournamentTab"
 
 function App() {
   const [startPlay, setStartPlay] = useState(false)
@@ -34,7 +35,6 @@ function App() {
     setGameParams({ rows: 0, columns: 0, countries: [], teams: [], nonPlayers: [] })
     setEndGame(false)
     setIsError(false)
-    setTournament('CHAMPIONS LEAGUE') // Temporary
   }
 
   const handleClick = () => setStartPlay(prev => !prev)
@@ -71,10 +71,11 @@ function App() {
 
   return (
     isPending ? <CircularIndeterminate /> : (
-      <Container maxWidth='sm' className="App">
+      <Container style={{ marginTop: '2rem' }} maxWidth='sm' className="App">
         <GameInstructions openModal={openModal} setOpenModal={setOpenModal} setEndGame={setEndGame} />
         {gameParams.rows > 0 &&
           <>
+            <TournamentTab tournament={tournament} setTournament={setTournament} handleClick={handleClick} />
             <GridTable
               rows={gameParams.rows}
               columns={gameParams.columns}
