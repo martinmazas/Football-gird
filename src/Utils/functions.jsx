@@ -3,7 +3,7 @@ const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-ed
 
 const axiosConfig = {
     headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
     },
 }
 
@@ -14,7 +14,7 @@ const handleError = (err, customMessage) => {
 
 
 export const getPlayParams = async (tournament) => {
-    console.log(tournament)
+    axiosConfig.headers["tournament"] = tournament
     try {
         const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
         return data
