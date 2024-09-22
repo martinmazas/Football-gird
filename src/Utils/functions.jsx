@@ -23,7 +23,7 @@ export const getPlayParams = async (tournament) => {
     }
 }
 
-export const getPlayer = async (playerName, setScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
+export const getPlayer = async (playerName, handleScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
     try {
         countryNames = countryNames.map(country => country.name)
         teamNames = teamNames.map(team => team.name)
@@ -40,7 +40,7 @@ export const getPlayer = async (playerName, setScore, setPlayerOptions, countryN
         if (typeof data === 'string' || data.length === 0) {
             setIsError(data);
         } else if (data.length === 1) {
-            addPhoto(data, setIsError, setScore);
+            addPhoto(data, setIsError, handleScore);
         } else {
             setPlayerOptions(data);
         }
@@ -48,7 +48,7 @@ export const getPlayer = async (playerName, setScore, setPlayerOptions, countryN
 }
 
 
-export const addPhoto = (players, setIsError, setScore = null) => {
+export const addPhoto = (players, setIsError, handleScore) => {
     if (players.length === 0) return alert(`No matches`)
 
     const player = players[0]
@@ -70,9 +70,10 @@ export const addPhoto = (players, setIsError, setScore = null) => {
             parentDiv.removeChild(playerDiv[0]);
 
             // Update the score asynchronously
-            if (setScore) {
-                setScore(prevScore => prevScore + 1);
-            }
+            handleScore()
+            // if (setScore) {
+            //     setScore(prevScore => prevScore + 1);
+            // }
         } else {
             setIsError(`The chosen position for ${player.country}-${player.team} is already in use`);
         }

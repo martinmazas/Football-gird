@@ -13,7 +13,7 @@ const styles = {
 };
 
 export default function GameInstructions(props) {
-    const { openModal, setOpenModal, setEndGame } = { ...props }
+    const { openModal, setOpenModal, handleSetEndGame } = { ...props }
     return (
         <Dialog
             className="how-to-play-title"
@@ -25,7 +25,7 @@ export default function GameInstructions(props) {
             PaperProps={{ style: styles.howToPlay }}
         >
             <DialogContent>
-                <SwipeableTextMobileStepper setOpenModal={setOpenModal} setEndGame={setEndGame} />
+                <SwipeableTextMobileStepper setOpenModal={setOpenModal} handleSetEndGame={handleSetEndGame} />
             </DialogContent>
         </Dialog>
     )

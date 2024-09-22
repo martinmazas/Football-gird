@@ -10,39 +10,49 @@ import GameOptions from "./GameOptions"
 import GameInstructions from "./GameInstructions"
 import TournamentTab from "./TournamentTab"
 
+const useCounter = (initialValue = 0) => {
+  const [count, setCount] = useState(initialValue)
+  const incrementCount = () => setCount((count) => count + 1)
+  const resetCounter = () => setCount(0)
+
+  return { count, incrementCount, resetCounter }
+}
+
+const INITIAL_GAME_PARAMS = {
+  rows: 0,
+  columns: 0,
+  countries: [],
+  teams: [],
+  nonPlayers: []
+}
+
 function App() {
   const [startPlay, setStartPlay] = useState(false)
   const [score, setScore] = useState(0)
-  const [gameParams, setGameParams] = useState({
-    rows: 0,
-    columns: 0,
-    countries: [],
-    teams: [],
-    nonPlayers: []
-  })
+  const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS)
   const [finalResult, setFinalResult] = useState(null)
   const [endGame, setEndGame] = useState(false)
   const [isError, setIsError] = useState(false)
   const [openModal, setOpenModal] = useState(true)
-  const [count, setCount] = useState(0)
+  const { count, incrementCount, resetCounter } = useCounter(0)
   const [isPending, startTransition] = useTransition()
-  const [tournament, setTournament] = useState('CHAMPIONS LEAGUE')
+  const [tournament, setTournament] = useState("CHAMPIONS LEAGUE")
 
-  // Reset game parameters
   const startGame = () => {
     setScore(0)
-    setCount(0)
-    setGameParams({ rows: 0, columns: 0, countries: [], teams: [], nonPlayers: [] })
+    resetCounter()
+    setGameParams(INITIAL_GAME_PARAMS)
     setEndGame(false)
     setIsError(false)
   }
 
-  const handleClick = () => setStartPlay(prev => !prev)
+  const handleSetEndGame = () => setEndGame(false)
 
-  // Fetch game parameters
+  const handleClick = () => setStartPlay((prev) => !prev)
+
   useEffect(() => {
     startGame()
-    getPlayParams(tournament).then(data => {
+    getPlayParams(tournament).then((data) => {
       startTransition(() => {
         const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = data
 
@@ -51,29 +61,26 @@ function App() {
           columns,
           countries: randomCountries,
           teams: randomTeams,
-          nonPlayers: noPossiblePlayers[0]?.map(player => player.join('-')) || []
+          nonPlayers: noPossiblePlayers[0]?.map((player) => player.join("-")) || []
         })
         setFinalResult(playerNumbers)
       })
     })
   }, [startPlay, tournament])
 
-  // End game when score reaches final result
   useEffect(() => {
     if (score === finalResult) setEndGame(true)
-    //eslint-disable-next-line
-  }, [score])
+  }, [score, finalResult])
 
-  // Reset count when modal closes
   useEffect(() => {
-    if (!openModal) setCount(0)
+    if (!openModal) resetCounter()
   }, [openModal])
 
   return (
     isPending ? <CircularIndeterminate /> : (
-      <Container style={{ marginTop: '2rem' }} maxWidth='sm' className="App">
-        <GameInstructions openModal={openModal} setOpenModal={setOpenModal} setEndGame={setEndGame} />
-        {gameParams.rows > 0 &&
+      <Container className="App-container">
+        <GameInstructions openModal={openModal} setOpenModal={setOpenModal} handleSetEndGame={handleSetEndGame} />
+        {gameParams.rows > 0 && (
           <>
             <TournamentTab tournament={tournament} setTournament={setTournament} handleClick={handleClick} />
             <GridTable
@@ -84,11 +91,11 @@ function App() {
               nonPlayers={gameParams.nonPlayers}
               endGame={endGame}
               count={count}
-              setCount={setCount}
+              incrementCount={incrementCount}
               openModal={openModal}
             />
             <GameOptions
-              setScore={setScore}
+              handleScore={() => setScore(score + 1)}
               countries={gameParams.countries}
               teams={gameParams.teams}
               isError={isError}
@@ -96,10 +103,10 @@ function App() {
               handleClick={handleClick}
             />
           </>
-        }
+        )}
         {isError && <div id="error-message"><p>{isError}</p></div>}
         {endGame && <Confetti />}
-        <WinnerDialog endGame={endGame} setEndGame={setEndGame} setStartPlay={setStartPlay} count={count} />
+        <WinnerDialog endGame={endGame} handleSetEndGame={handleSetEndGame} handleClick={handleClick} count={count} />
       </Container>
     )
   )

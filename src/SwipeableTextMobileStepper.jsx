@@ -15,7 +15,7 @@ function SwipeableTextMobileStepper(props) {
     const sliderRef = useRef(null);
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = images.length;
-    const { setOpenModal, setEndGame } = { ...props }
+    const { setOpenModal, handleSetEndGame } = { ...props }
 
     const settings = {
         infinite: true,
@@ -52,7 +52,7 @@ function SwipeableTextMobileStepper(props) {
                         width: '2.5rem',
                         height: '2.5rem'
                     }}
-                    onClick={() => setEndGame(false)}
+                    onClick={() => handleSetEndGame()}
                 />
             </Button>
             <Slider ref={sliderRef} {...settings}>
