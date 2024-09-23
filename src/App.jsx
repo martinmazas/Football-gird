@@ -26,7 +26,7 @@ const INITIAL_GAME_PARAMS = {
   nonPlayers: []
 }
 
-function App() {
+const App = () => {
   const [startPlay, setStartPlay] = useState(false)
   const [score, setScore] = useState(0)
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS)

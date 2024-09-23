@@ -15,7 +15,7 @@ import './index.css'
 import ReactCountryFlag from "react-country-flag"
 import { Box } from '@mui/material';
 
-function SimpleDialog(props) {
+const SimpleDialog = (props) => {
     const { onClose, open, playerOptions, countries, teams } = props;
     const getCountryCode = (country) => countries.filter(c => c.name === country)[0].code
     const getTeamCode = (team) => teams.filter(t => t.name === team)[0].code
