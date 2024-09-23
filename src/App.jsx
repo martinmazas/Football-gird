@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from "react"
+import React, { useEffect, useState, useTransition, useCallback } from "react"
 import GridTable from "./gridTable"
 import { getPlayParams } from "./Utils/functions"
 import CircularIndeterminate from "./CircularIndeterminate"
@@ -11,9 +11,9 @@ import GameInstructions from "./GameInstructions"
 import TournamentTab from "./TournamentTab"
 
 const useCounter = (initialValue = 0) => {
-  const [count, setCount] = useState(initialValue)
-  const incrementCount = () => setCount((count) => count + 1)
-  const resetCounter = () => setCount(0)
+  const [count, setCount] = useState(initialValue);
+  const incrementCount = useCallback(() => setCount((count) => count + 1), []);
+  const resetCounter = useCallback(() => setCount(0), []);
 
   return { count, incrementCount, resetCounter }
 }
@@ -38,13 +38,13 @@ function App() {
   const [isPending, startTransition] = useTransition()
   const [tournament, setTournament] = useState("CHAMPIONS LEAGUE")
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setScore(0)
     resetCounter()
     setGameParams(INITIAL_GAME_PARAMS)
     setEndGame(false)
     setIsError(false)
-  }
+  }, [resetCounter])
 
   const handleSetEndGame = () => setEndGame(false)
 
@@ -66,7 +66,7 @@ function App() {
         setFinalResult(playerNumbers)
       })
     })
-  }, [startPlay, tournament])
+  }, [startPlay, tournament, startGame])
 
   useEffect(() => {
     if (score === finalResult) setEndGame(true)
@@ -74,6 +74,7 @@ function App() {
 
   useEffect(() => {
     if (!openModal) resetCounter()
+    // eslint-disable-next-line
   }, [openModal])
 
   return (
