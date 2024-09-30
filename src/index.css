@@ -2,22 +2,21 @@
   --background-color: #1a1724;
   --yellow-border: #f2b705;
   --table-element: 4rem;
+  /* --font-family: 'Roboto', 'Arial', sans-serif; */
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background-color)
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* code {
+  /* font-family: var(--font-family); */
+    /* monospace; */
+/* } */
 
 #restart-button,
 #guess-button {
@@ -73,7 +72,7 @@ code {
 
 .counter-container {
   text-align: center;
-  font-family: 'Arial, sans-serif';
+  /* font-family: var(--font-family); */
 }
 
 #td-cell {
@@ -86,9 +85,13 @@ code {
 
 #tab {
   color: var(--yellow-border);
-  font-family: 'Arial, sans-serif';
+  /* font-family: var(--font-family); */
 }
 
 #tab {
   border: var(--yellow-border);
+}
+
+.App-container {
+  margin-top: 2rem;
 }

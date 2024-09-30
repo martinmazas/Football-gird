@@ -3,7 +3,7 @@ import React from 'react';
 
 const styles = {
     table: {
-        margin: '3rem auto 0',
+        margin: '2rem auto 0',
     }
 }
 

@@ -8,7 +8,7 @@ const styles = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         position: 'absolute',
-        borderRadius: '3rem', 
+        borderRadius: '3rem',
     }
 };
 

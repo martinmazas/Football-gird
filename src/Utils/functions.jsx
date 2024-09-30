@@ -1,4 +1,6 @@
 import axios from 'axios'
+import ResponsiveImage from '../ResponsiveImage';
+import { createRoot } from 'react-dom/client';
 const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080'
 
 const axiosConfig = {
@@ -59,14 +61,16 @@ export const addPhoto = (players, setIsError, handleScore) => {
         if (playerDiv[0]) {
             const parentDiv = playerDiv[0].parentNode;
 
-            // Create and add the player image
-            const img = document.createElement('img');
-            img.src = require(`../images/Players/24-25/${player.imgPath}.jpeg`);
-            img.alt = `${player.secondName}`;
-            img.id = 'player-img';
+            createRoot(
+                parentDiv
+            ).render(
+                <ResponsiveImage
+                    src={require(`../images/Players/24-25/${player.imgPath}.jpeg`)}
+                    alt={player.secondName}
+                    roundedBorder={true}
+                />
+            )
 
-            // Insert the image and remove the old div
-            parentDiv.prepend(img);
             parentDiv.removeChild(playerDiv[0]);
 
             // Update the score asynchronously

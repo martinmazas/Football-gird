@@ -20,7 +20,6 @@ export default function TournamentTab(props) {
                 onChange={handleChange}
                 aria-label="disabled tabs example"
                 centered
-                variant="fullWidth"
                 TabIndicatorProps={{
                     style:{
                         backgroundColor: '#f2b705',
