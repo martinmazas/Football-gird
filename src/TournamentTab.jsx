@@ -4,13 +4,13 @@ import Tab from '@mui/material/Tab';
 import './index.css';
 
 export default function TournamentTab(props) {
-    const { setTournament, handleClick, tournament } = {...props}
+    const { setTournament, handleClick, tournament } = { ...props }
     const [value, setValue] = React.useState(tournament === 'CHAMPIONS LEAGUE' ? 0 : 1);
 
     const handleChange = (event, newValue) => {
         handleClick()
-        setTournament(event.target.innerText)
-        setValue(newValue);
+        setTournament(newValue === 0 ? 'CHAMPIONS LEAGUE' : 'COPA LIBERTADORES')
+        setValue(newValue)
     };
 
     return (
@@ -18,10 +18,9 @@ export default function TournamentTab(props) {
             <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="disabled tabs example"
                 centered
                 TabIndicatorProps={{
-                    style:{
+                    style: {
                         backgroundColor: '#f2b705',
                     }
                 }}
