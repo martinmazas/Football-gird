@@ -13,11 +13,6 @@ body {
   background-color: var(--background-color)
 }
 
-/* code {
-  /* font-family: var(--font-family); */
-    /* monospace; */
-/* } */
-
 #restart-button,
 #guess-button {
   border: 0.2rem solid var(--yellow-border);

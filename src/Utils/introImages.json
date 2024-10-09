@@ -2,7 +2,7 @@
     {
         "label": "start-game",
         "imgPath": "./images/Intro/start-game.jpeg",
-        "text": "Based on <a href='https://futbol-11.com/futbol-gridFootball'>Football Grid</a>. You have a 3x3 football grid featuring countries at the top and clubs on the columns.",
+        "text": "Based on <a href='https://futbol-11.com/futbol-grid' target='_blank'>Football Grid</a>. You have a 3x3 football grid featuring countries at the top and clubs on the columns.",
         "title": "How to play"
     },
     {
