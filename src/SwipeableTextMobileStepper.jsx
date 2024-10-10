@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CancelIcon from '@mui/icons-material/Cancel';
 import MobileStepperComponent from './MobileStepperComponent';
+import { LogService } from './Utils/functions';
 const images = require('./Utils/introImages.json')
 
 const SwipeableTextMobileStepper = (props) => {
@@ -68,10 +69,12 @@ const SwipeableTextMobileStepper = (props) => {
 
     const handleNext = () => {
         sliderRef.current.slickNext();
+        LogService('Next button clicked')
     };
 
     const handleBack = () => {
         sliderRef.current.slickPrev();
+        LogService('Back button clicked')
     };
 
     return (

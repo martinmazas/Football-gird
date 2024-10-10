@@ -82,3 +82,18 @@ export const addPhoto = (players, setIsError, handleScore) => {
         handleError(err, 'Error while adding player photo');
     }
 }
+
+export const LogService = (message, level = 'info') => {
+    const logEntry = {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+        location: window.location.href,
+    }
+
+    try {
+        axios.post(`${server}/api/logs`, { ...axiosConfig, logEntry });
+    } catch (err) {
+        handleError(err, 'Failed to fetch play parameters')
+    }
+}
