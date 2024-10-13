@@ -13,7 +13,7 @@
     },
     {
         "label": "restart",
-        "imgPath": "./images/Intro/Restart.jpeg",
+        "imgPath": "./images/Intro/restart.jpeg",
         "text": "You can restart the grid whenever you want, the teams and countries will be restarted and the play will start again",
         "title": "Restart the game"
     },
