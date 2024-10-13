@@ -83,16 +83,16 @@ export const addPhoto = (players, setIsError, handleScore) => {
     }
 }
 
-export const LogService = (message, level = 'info') => {
-    const logEntry = {
-        message,
-        level,
-        timestamp: new Date().toISOString(),
-        location: window.location.href,
-    }
+export const LogService = async (message, level = 'info') => {
+    // const logEntry = {
+    //     message,
+    //     level,
+    //     timestamp: new Date().toISOString(),
+    //     location: window.location.href,
+    // }
 
     try {
-        axios.post(`${server}/api/logs`, { ...axiosConfig, logEntry });
+       await axios.post(`${server}/api/logs`, { ...axiosConfig, message });
     } catch (err) {
         handleError(err, 'Failed to fetch play parameters')
     }
