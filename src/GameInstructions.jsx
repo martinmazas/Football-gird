@@ -1,5 +1,6 @@
 import { Dialog, DialogContent } from "@mui/material";
 import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
+import './index.css'
 
 const styles = {
     howToPlay: {
@@ -8,7 +9,8 @@ const styles = {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         position: 'absolute',
-        borderRadius: '3rem',
+        maxWidth: '30rem',
+        // backgroundColor: '#1a1724'
     }
 };
 

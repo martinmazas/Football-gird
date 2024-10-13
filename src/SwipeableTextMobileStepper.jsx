@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CancelIcon from '@mui/icons-material/Cancel';
 import MobileStepperComponent from './MobileStepperComponent';
+import './index.css'
 // import { LogService } from './Utils/functions';
 const images = require('./Utils/introImages.json')
 
@@ -27,7 +28,7 @@ const SwipeableTextMobileStepper = (props) => {
             alignItems: 'center',
             justifyContent: 'center',
             pb: '1rem',
-            pt: '1rem'
+            pt: '1rem',
         },
         openModalBox: {
             position: 'absolute',
@@ -43,10 +44,9 @@ const SwipeableTextMobileStepper = (props) => {
             height: '2.5rem'
         },
         boxCard: {
-            width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
+            width: { xs: '90%', sm: '80%', md: '70%', lg: '75%' },
             mt: '1rem',
             boxShadow: 3,
-            borderRadius: '2.5rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

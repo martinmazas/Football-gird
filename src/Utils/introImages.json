@@ -1,32 +1,26 @@
 [
     {
         "label": "start-game",
-        "imgPath": "./images/Intro/start-game.jpeg",
-        "text": "Based on <a href='https://futbol-11.com/futbol-grid' target='_blank'>Football Grid</a>. You have a 3x3 football grid featuring countries at the top and clubs on the columns.",
-        "title": "How to play"
+        "imgPath": "./images/Intro/initial.jpeg",
+        "text": "Based on <a href='https://futbol-11.com/futbol-grid' target='_blank'>Football Grid</a>. You have a 3x3 grid with countries at the top and clubs on the columns. You can play with Champions League or Copa Libertadores players",
+        "title": "About the game"
     },
     {
         "label": "one-player",
-        "imgPath": "./images/Intro/one-player.jpeg",
-        "text": "You need to fill the grid with players who are currently playing for the same club and country in a specific position of the grid",
-        "title": "Guess a player"
-    },
-    {
-        "label": "see-team",
-        "imgPath": "./images/Intro/see-team.jpeg",
-        "text": "You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web)",
-        "title": "Help"
-    },
-    {
-        "label": "two-player",
-        "imgPath": "./images/Intro/two-player.jpeg",
-        "text": "The game will continue until you successfully add all the possible players to the grid",
-        "title": "Game flow"
+        "imgPath": "./images/Intro/Image2.jpeg",
+        "text": "You have to fill the grid with players who are <u>currently</u> playing in the team on the left and are from the country above in the shortest possible time.",
+        "title": "The goal"
     },
     {
         "label": "restart",
-        "imgPath": "./images/Intro/restart.jpeg",
+        "imgPath": "./images/Intro/Restart.jpeg",
         "text": "You can restart the grid whenever you want, the teams and countries will be restarted and the play will start again",
         "title": "Restart the game"
+    },
+    {
+        "label": "see-team",
+        "imgPath": "./images/Intro/team-help.jpeg",
+        "text": "You can check which player could be a good match by clicking the team shield (redirect to transfermarkt web)",
+        "title": "Help"
     }
 ]

@@ -90,3 +90,7 @@ body {
 .App-container {
   margin-top: 2rem;
 }
+
+.slick-arrow {
+  visibility: hidden;
+}
