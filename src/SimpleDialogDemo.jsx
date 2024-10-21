@@ -33,12 +33,12 @@ const SimpleDialog = (props) => {
             <DialogTitle>Select one of the players</DialogTitle>
             <List sx={{ pt: 0 }}>
                 {playerOptions.map((player) => (
-                    <ListItem disableGutters key={`${player.first_name}-${player.secondName}-${player.team}-${player.country}`}>
+                    <ListItem disableGutters key={`${player.first_name}-${player.second_name}-${player.team}-${player.country}`}>
                         <ListItemButton onClick={() => handleListItemClick(player)}>
                             <ListItemAvatar>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }} alignItems="center">
-                                    <Avatar alt={`${player.first_name}-${player.secondName}`} src={require(`./images/Players/24-25/${player.imgPath}.jpeg`)} />
-                                    <ListItemText primary={`${player.first_name} ${player.secondName}`} />
+                                    <Avatar alt={`${player.first_name}-${player.second_name}`} src={require(`./images/Players/24-25/${player.imgPath}.jpeg`)} />
+                                    <ListItemText primary={`${player.first_name} ${player.second_name}`} />
                                     <Avatar id='country-avatar'>
                                         <ReactCountryFlag svg countryCode={getCountryCode(player.country)} />
                                     </Avatar>
@@ -65,8 +65,9 @@ export default function SimpleDialogDemo(props) {
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
-        const { first_name, secondName, imgPath } = { ...value }
-        const player = playerOptions.filter(p => p.first_name === first_name && p.secondName === secondName && p.imgPath === imgPath)
+        console.log(value)
+        const { first_name, second_name, imgPath } = { ...value }
+        const player = playerOptions.filter(p => p.first_name === first_name && p.second_name === second_name && p.imgPath === imgPath)
         setPlayerOptions(player)
     }
 

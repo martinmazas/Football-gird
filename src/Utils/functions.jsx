@@ -30,12 +30,17 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
         countryNames = countryNames.map(country => country.name)
         teamNames = teamNames.map(team => team.name)
 
+        const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
+        let combinations = []
+        possibleCombinations.forEach(combination => combinations.push(combination.className))
+
         const { data } = await axios.get(`${server}/api/players/guessPlayer`, {
             ...axiosConfig,
             params: {
                 playerName,
-                countryNames,
-                teamNames
+                // countryNames,
+                // teamNames
+                combinations
             }
         })
 
@@ -57,7 +62,7 @@ export const addPhoto = (players, setIsError, handleScore) => {
     if (!player) return
 
     try {
-        const playerDiv = document.getElementsByClassName(`${player.country}-${player.team}`);
+        const playerDiv = document.getElementsByClassName(`grid-place-${player.country}-${player.team}`);
         if (playerDiv[0]) {
             const parentDiv = playerDiv[0].parentNode;
 
@@ -66,7 +71,7 @@ export const addPhoto = (players, setIsError, handleScore) => {
             ).render(
                 <ResponsiveImage
                     src={require(`../images/Players/24-25/${player.imgPath}.jpeg`)}
-                    alt={player.secondName}
+                    alt={player.second_name}
                     roundedBorder={true}
                 />
             )

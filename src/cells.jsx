@@ -22,8 +22,9 @@ const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, en
     // Players
     if (cellIndex !== 0 && rowIndex !== 0) {
         const cellKey = `${countries[cellIndex - 1].name}-${teams[rowIndex - 1].name}`;
+
         return (
-            <div className={cellKey}>
+            <div className={`grid-place-${cellKey}`}>
                 {nonPlayers.includes(cellKey) && <CloseIcon fontSize="large" color="error" />}
             </div>
         );
