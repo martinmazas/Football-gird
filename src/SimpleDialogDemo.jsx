@@ -65,7 +65,6 @@ export default function SimpleDialogDemo(props) {
     const [playerOptions, setPlayerOptions] = useState([])
 
     const handleSubmit = (value) => {
-        console.log(value)
         const { first_name, second_name, imgPath } = { ...value }
         const player = playerOptions.filter(p => p.first_name === first_name && p.second_name === second_name && p.imgPath === imgPath)
         setPlayerOptions(player)
