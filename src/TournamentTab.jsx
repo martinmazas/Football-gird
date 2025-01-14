@@ -3,14 +3,23 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import './index.css';
 
-export default function TournamentTab(props) {
-    const { setTournament, handleClick, tournament } = { ...props }
-    const [value, setValue] = React.useState(tournament === 'CHAMPIONS LEAGUE' ? 0 : 1);
+const TOURNAMENTS = {
+    'CHAMPIONS LEAGUE': 0,
+    'COPA LIBERTADORES': 1,
+    'MLS': 2,
+};
+
+const TOURNAMENT_NAMES = Object.fromEntries(
+    Object.entries(TOURNAMENTS).map(([key, value]) => [value, key])
+);
+
+export default function TournamentTab({ setTournament, handleClick, tournament }) {
+    const [value, setValue] = React.useState(TOURNAMENTS[tournament] ?? 0);
 
     const handleChange = (event, newValue) => {
-        handleClick()
-        setTournament(newValue === 0 ? 'CHAMPIONS LEAGUE' : 'COPA LIBERTADORES')
-        setValue(newValue)
+        handleClick();
+        setTournament(TOURNAMENT_NAMES[newValue]);
+        setValue(newValue);
     };
 
     return (
@@ -25,8 +34,9 @@ export default function TournamentTab(props) {
                     }
                 }}
             >
-                <Tab id='tab' label="Champions League" />
-                <Tab id='tab' label="Copa Libertadores" />
+                <Tab id='tab' label="Champions League 24/25" />
+                {/* <Tab id='tab' label="Copa Libertadores 2024" /> */}
+                <Tab id='tab' label="MLS 2025" />
             </Tabs>
         </div>
     );
