@@ -33,7 +33,7 @@ const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, en
 };
 
 export default function Cells({ props }) {
-    const { rows, columns, countries, teams, nonPlayers, endGame, count, incrementCount, openModal } = props;
+    const { rows, columns, countries, teams, nonPlayers, endGame, count, incrementCount, openModal } = props
 
     return (
         <tbody>
