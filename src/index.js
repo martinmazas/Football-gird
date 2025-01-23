@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import HomePage from './Components/HomePage';
 // import AddPlayer from './AddPlayer';
 
 createRoot(
@@ -11,6 +12,7 @@ createRoot(
   <>
     <Router>
       <Routes>
+        {/* <Route exact path='/' Component={HomePage} /> */}
         <Route exact path='/' Component={App} />
         {/* <Route path='/addPlayer' Component={AddPlayer} /> */}
       </Routes>
