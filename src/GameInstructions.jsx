@@ -10,7 +10,6 @@ const styles = {
         transform: 'translate(-50%, -50%)',
         position: 'absolute',
         maxWidth: '30rem',
-        // backgroundColor: '#1a1724'
     }
 };
 
