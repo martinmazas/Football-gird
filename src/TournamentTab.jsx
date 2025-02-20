@@ -5,8 +5,8 @@ import './index.css';
 
 const TOURNAMENTS = {
     'CHAMPIONS LEAGUE': 0,
-    // 'LIBERTADORES': 1,
-    'MLS': 1,
+    'LIBERTADORES': 1,
+    // 'MLS': 1,
 };
 
 const TOURNAMENT_NAMES = Object.fromEntries(
@@ -35,8 +35,8 @@ export default function TournamentTab({ setTournament, handleClick, tournament }
                 }}
             >
                 <Tab id='tab' label='Champions League 24/25' />
-                {/* <Tab id='tab' label="Copa Libertadores 2025" /> */}
-                <Tab id='tab' label="MLS 2025" />
+                <Tab id='tab' label="Copa Libertadores 2025" />
+                {/* <Tab id='tab' label="MLS 2025" /> */}
             </Tabs>
         </div>
     );
