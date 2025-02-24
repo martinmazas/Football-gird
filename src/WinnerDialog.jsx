@@ -7,14 +7,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Box } from '@mui/material';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
-        padding: theme.spacing(2),
+        padding: theme.spacing(3),
     },
     '& .MuiDialogActions-root': {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
     },
 }));
 
@@ -22,8 +24,8 @@ export default function WinnerDialog(props) {
     const { endGame, handleSetEndGame, handleClick, count } = { ...props }
 
     const handleClose = () => {
-        handleSetEndGame()
-        handleClick()
+        handleSetEndGame();
+        handleClick();
     };
 
     return (
@@ -32,8 +34,20 @@ export default function WinnerDialog(props) {
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={endGame}
+                maxWidth="sm"
+                fullWidth
             >
-                <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+                <DialogTitle
+                    sx={{
+                        m: 0,
+                        p: 3,
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        textAlign: 'center',
+                        color: '#4caf50', // Green for success
+                    }}
+                    id="customized-dialog-title"
+                >
                     Congratulations!
                 </DialogTitle>
                 <IconButton
@@ -48,14 +62,39 @@ export default function WinnerDialog(props) {
                 >
                     <CloseIcon />
                 </IconButton>
-                <DialogContent dividers>
-                    <Typography gutterBottom>
-                        You have completed the Grid Football Game in {count} seconds. To play again press Play
-                    </Typography>
+                <DialogContent dividers sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                        }}
+                    >
+                        <CheckCircleIcon sx={{ fontSize: 60, color: '#4caf50', mb: 2 }} />
+                        <Typography variant="h6" gutterBottom>
+                            You have completed the Grid Football Game!
+                        </Typography>
+                        <Typography variant="body1" color="textSecondary">
+                            It took you <strong>{count} seconds</strong> to finish. Great job!
+                        </Typography>
+                    </Box>
                 </DialogContent>
-                <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Play
+                <DialogActions sx={{ justifyContent: 'center' }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleClose}
+                        sx={{
+                            textTransform: 'none',
+                            fontWeight: 'bold',
+                            px: 4,
+                            py: 1.5,
+                            borderRadius: '8px',
+                        }}
+                    >
+                        Play Again
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
