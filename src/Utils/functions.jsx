@@ -1,8 +1,7 @@
 import axios from 'axios'
 import ResponsiveImage from '../ResponsiveImage';
 import { createRoot } from 'react-dom/client';
-const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080'
-
+const server = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PRODUCTION_SERVER : process.env.REACT_APP_DEVELOPMENT_SERVER;
 const axiosConfig = {
     headers: {
         "Content-Type": "application/json"
@@ -38,8 +37,6 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
             ...axiosConfig,
             params: {
                 playerName,
-                // countryNames,
-                // teamNames
                 combinations
             }
         })
@@ -87,18 +84,3 @@ export const addPhoto = (players, setIsError, handleScore) => {
         handleError(err, 'Error while adding player photo');
     }
 }
-
-// export const LogService = async (message, level = 'info') => {
-//     // const logEntry = {
-//     //     message,
-//     //     level,
-//     //     timestamp: new Date().toISOString(),
-//     //     location: window.location.href,
-//     // }
-
-//     try {
-//        await axios.post(`${server}/api/logs`, { ...axiosConfig, message });
-//     } catch (err) {
-//         handleError(err, 'Failed to fetch play parameters')
-//     }
-// }

@@ -9,14 +9,7 @@ import WinnerDialog from "./WinnerDialog"
 import GameOptions from "./GameOptions"
 import GameInstructions from "./GameInstructions"
 import TournamentTab from "./TournamentTab"
-
-const useCounter = (initialValue = 0) => {
-  const [count, setCount] = useState(initialValue);
-  const incrementCount = useCallback(() => setCount((count) => count + 1), []);
-  const resetCounter = useCallback(() => setCount(0), []);
-
-  return { count, incrementCount, resetCounter }
-}
+import { useCounter } from "./Hooks/useCounter"
 
 const INITIAL_GAME_PARAMS = {
   rows: 0,
