@@ -1,7 +1,7 @@
 import axios from 'axios'
 import ResponsiveImage from '../ResponsiveImage';
 import { createRoot } from 'react-dom/client';
-const server = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PRODUCTION_SERVER : process.env.REACT_APP_DEVELOPMENT_SERVER;
+const server = process.env.NODE_ENV === 'production' ? 'http://localhost:8080' : 'https://football-grid-edd30e867195.herokuapp.com';
 const axiosConfig = {
     headers: {
         "Content-Type": "application/json"
@@ -15,6 +15,7 @@ const handleError = (err, customMessage) => {
 
 
 export const getPlayParams = async (tournament) => {
+    // tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim()
     axiosConfig.headers["tournament"] = tournament
     try {
         const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
