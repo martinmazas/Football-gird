@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import './index.css';
 
 const Counter = (props) => {
-    const { endGame, count, incrementCount, openModal } = { ...props }
+    const { endGame, count, incrementCount } = { ...props }
 
     // useEffect to handle the automatic increment every second
     useEffect(() => {
-        if (!endGame && !openModal) {
+        if (!endGame) {
             const intervalId = setInterval(() => {
                 incrementCount()
             }, 1000);
@@ -15,7 +15,7 @@ const Counter = (props) => {
             return () => clearInterval(intervalId);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [endGame, openModal]);
+    }, [endGame]);
 
     return (
         <div className='counter-container'>

@@ -10,6 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { useEndGame } from './Hooks/endGame';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -21,7 +22,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function WinnerDialog(props) {
-    const { endGame, handleSetEndGame, handleClick, count } = props;
+    // const { endGame, handleSetEndGame, handleClick, count } = props;
+    const { handleClick, count } = props;
+    const { handleSetEndGame } = useEndGame()
 
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Detect mobile screens
@@ -35,7 +38,7 @@ export default function WinnerDialog(props) {
         <BootstrapDialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
-            open={endGame}
+            open={true}
             maxWidth="sm"
             fullWidth
             sx={{

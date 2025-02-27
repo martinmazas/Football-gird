@@ -13,9 +13,9 @@ const handleError = (err, customMessage) => {
     throw new Error(customMessage || 'An error occurred');
 }
 
-
 export const getPlayParams = async (tournament) => {
-    // tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim()
+    // Request from the back the teams and countries for the specific tournament
+    tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
     axiosConfig.headers["tournament"] = tournament
     try {
         const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
@@ -51,7 +51,6 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
         }
     } catch (err) { handleError(err, err) }
 }
-
 
 export const addPhoto = (players, setIsError, handleScore) => {
     if (players.length === 0) return alert(`No matches`)
