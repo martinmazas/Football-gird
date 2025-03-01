@@ -1,11 +1,10 @@
 import React from 'react';
 import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
-import CloseIcon from '@mui/icons-material/Close';
 import Counter from './Counter';
 import './index.css'
 
-const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, incrementCount) => {
+const renderCellContent = (rowIndex, cellIndex, countries, teams, endGame, count, incrementCount) => {
     // Counter on 0,0
     if (rowIndex === 0 && cellIndex === 0) {
         return <Counter endGame={endGame} count={count} incrementCount={incrementCount} />
@@ -24,9 +23,7 @@ const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, en
         const cellKey = `${countries[cellIndex - 1].name}-${teams[rowIndex - 1].name}`;
 
         return (
-            <div className={`grid-place-${cellKey}`}>
-                {nonPlayers.includes(cellKey) && <CloseIcon fontSize="large" color="error" />}
-            </div>
+            <div className={`grid-place-${cellKey}`}></div>
         );
     }
     return null;
@@ -34,7 +31,7 @@ const renderCellContent = (rowIndex, cellIndex, countries, teams, nonPlayers, en
 
 export default function Cells({ props }) {
     const { gameParams, endGame, count, incrementCount } = props
-    const { rows, columns, countries, teams, nonPlayers } = { ...gameParams }
+    const { rows, columns, countries, teams } = { ...gameParams }
 
     return (
         <tbody>
@@ -42,7 +39,7 @@ export default function Cells({ props }) {
                 <tr key={rowIndex}>
                     {Array.from({ length: columns }, (_, cellIndex) => (
                         <td className={`${rowIndex}-${cellIndex}`} id='td-cell' key={`${rowIndex}-${cellIndex}`}>
-                            {renderCellContent(rowIndex, cellIndex, countries, teams, nonPlayers, endGame, count, incrementCount)}
+                            {renderCellContent(rowIndex, cellIndex, countries, teams, endGame, count, incrementCount)}
                         </td>
                     ))}
                 </tr>

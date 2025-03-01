@@ -18,7 +18,6 @@ const INITIAL_GAME_PARAMS = {
   columns: 0,
   countries: [],
   teams: [],
-  nonPlayers: []
 };
 
 const App = () => {
@@ -52,13 +51,12 @@ const App = () => {
       startGame();
       getPlayParams(tournament).then((data) => {
         startTransition(() => {
-          const { rows, columns, randomTeams, randomCountries, playerNumbers, noPossiblePlayers } = data;
+          const { rows, columns, randomTeams, randomCountries, playerNumbers } = data;
           setGameParams({
             rows,
             columns,
             countries: randomCountries,
             teams: randomTeams,
-            nonPlayers: noPossiblePlayers[0]?.map((player) => player.join("-")) || []
           });
           setFinalResult(playerNumbers);
         });

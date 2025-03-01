@@ -10,5 +10,9 @@
     {
         "name": "MLS 2025",
         "img": "mls"
+    },
+    {
+        "name": "Europe League 24/25",
+        "img": "europa"
     }
 ]

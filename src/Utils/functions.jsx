@@ -30,6 +30,7 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
         countryNames = countryNames.map(country => country.name)
         teamNames = teamNames.map(team => team.name)
 
+        // Prepare all the possible combination of team-country
         const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
         let combinations = []
         possibleCombinations.forEach(combination => combinations.push(combination.className))
