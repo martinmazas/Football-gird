@@ -23,7 +23,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
             <CardMedia
                 component="img"
                 alt={tournament.name}
-                image={require(`../images/Tournaments/${tournament.img}.jpeg`)}
+                src={`https://football-grid-s3.s3.us-east-2.amazonaws.com/Tournaments/${tournament.img}.jpeg`}
                 sx={{
                     height: "80%",
                     width: "100%",
