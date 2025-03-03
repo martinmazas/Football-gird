@@ -1,7 +1,7 @@
 import React from "react"
 import './index.css'
 import ResponsiveImage from "./ResponsiveImage"
-const s3Path = 'https://football-grid-s3.s3.us-east-2.amazonaws.com/images/Team-shields/'
+const s3Path = 'https://db3l8v64ekfvu.cloudfront.net/images/Team-shields/'
 
 const TeamFlag = (props) => {
     const { team } = { ...props }

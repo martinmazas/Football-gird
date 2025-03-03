@@ -7,6 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="alternate" href="URL" hreflang="en" />
   <link rel="alternate" href="URL" hreflang="es" />
+  <link rel="preload" as="image" href="https://db3l8v64ekfvu.cloudfront.net/Tournaments/champions.jpeg">
+  <link rel="preload" as="image" href="https://db3l8v64ekfvu.cloudfront.net/Tournaments/europa.jpeg">
+  <link rel="preload" as="image" href="https://db3l8v64ekfvu.cloudfront.net/Tournaments/libertadores.jpeg">
+  <link rel="preload" as="image" href="https://db3l8v64ekfvu.cloudfront.net/Tournaments/mls.jpeg">
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -14,23 +19,25 @@
   <!-- Descriptions for SEO -->
   <meta name="google-site-verification" content="V1tD9xm5H5lLMIAZT0d-zZ7PLTeRBLsCxxZ0OZCw0vI" />
   <meta name="description"
-    content="Play the ultimate Football Grid Game! Test your football knowledge with Champions League, Copa Libertadores and MLS trivia. Fun for all ages!" />
+    content="Play the Football Grid Game! Test your football knowledge with Champions League, Copa Libertadores, Europa League, and MLS trivia. Can you guess all the players? Challenge yourself now!">
+
   <meta name="keywords"
     content="Football Grid, Champions League, Copa Libertadores, MLS, Soccer Game, Football Game, Futbol Game, Soccer Quiz, Football Quiz, Tic Tac Toe Game, Football Trivia, Champions League Quiz, Libertadores Quiz, MLS Quiz, Global Football Game, Kids Football Game, Interactive Football, Sports Quiz, Football Puzzle Game, Online Soccer Game, Champions Guess Player, Libertadores Guess Player" />
 
 
   <!-- Open Graph for social media sharing -->
-  <meta property="og:title" content="Football Grid Game" />
+  <meta property="og:title" content="Football Grid Game - Test Your Soccer Knowledge!" />
   <meta property="og:description"
-    content="Test your football knowledge with this exciting grid game! Featuring teams from the Champions League ." />
+    content="Play the ultimate Football Grid Game featuring MLS, Champions League, Copa Libertadores, and Europa League! Can you guess all the players?" />
+
   <meta property="og:image" content="%PUBLIC_URL%/football-grid-thumbnail.png" />
-  <meta property="og:url" content="http://https://football-grid.netlify.app" />
+  <meta property="og:url" content="https://football-grid.netlify.app" />
   <meta property="og:type" content="website" />
 
   <!-- Twitter Card for social media sharing -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Football Grid Game" />
-  <meta name="twitter:description" content="Play the Football Grid game with teams from Champions League." />
+  <meta name="twitter:title" content="Football Grid Game - MLS, Champions, Libertadores & Europa" />
+  <meta name="twitter:description"
+    content="Can you guess all the players? Play the Football Grid Game with teams from MLS, Champions League, Libertadores & Europa League!" />
   <meta name="twitter:image" content="%PUBLIC_URL%/football-grid-thumbnail.png" />
 
   <link rel="icon" href="%PUBLIC_URL%/ball.png" />
@@ -39,6 +46,24 @@
   <!-- Page Title -->
   <title>Football Grid Game</title>
   <meta name="google-adsense-account" content="ca-pub-6840620846200583">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Football Grid Game",
+      "url": "https://football-grid.netlify.app",
+      "description": "Play the Football Grid Game featuring MLS, Champions League, Copa Libertadores, and Europa League!",
+      "sameAs": [
+        "https://twitter.com/yourpage",
+        "https://www.facebook.com/yourpage"
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://football-grid.netlify.app/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840620846200583"
     crossorigin="anonymous"></script>
 </head>
