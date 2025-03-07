@@ -68,7 +68,7 @@ export const addPhoto = (players, setIsError, handleScore) => {
                 parentDiv
             ).render(
                 <ResponsiveImage
-                    src={require(`../images/Players/24-25/${player.imgPath}.jpeg`)}
+                    src={require(`../images/Players/24-25/${player.imgPath}.webp`)}
                     alt={player.second_name}
                     roundedBorder={true}
                 />
