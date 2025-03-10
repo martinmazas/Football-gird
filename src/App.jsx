@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import GridTable from "./GridTable";
+import GridTable from "./gridTable";
 import { getPlayParams } from "./Utils/functions";
 import './index.css';
 import Container from '@mui/material/Container';
