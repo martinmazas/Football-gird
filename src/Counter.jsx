@@ -18,9 +18,7 @@ const Counter = (props) => {
     }, [endGame]);
 
     return (
-        <div className='counter-container'>
-            <div className='counter'>{count}</div>
-        </div>
+        <div className='counter'>{count}</div>
     );
 };
 

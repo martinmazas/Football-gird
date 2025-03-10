@@ -22,7 +22,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function WinnerDialog(props) {
-    // const { endGame, handleSetEndGame, handleClick, count } = props;
     const { handleClick, count } = props;
     const { handleSetEndGame } = useEndGame()
 

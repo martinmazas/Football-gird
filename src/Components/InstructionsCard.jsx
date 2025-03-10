@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography, Box, CardMedia, Button } from "@mui/material";
 import CancelIcon from '@mui/icons-material/Cancel';
 
-const instructionImg = require("../images/Intro/intro.jpeg");
+const instructionImg = require("../images/Intro/intro.webp");
 const instruction = {
     "label": "instructions",
     "text": "Pick a Football Grid Tournament and match the players to their teams and countries as fast as you can! All players are currently playing for the selected team. Can you complete the challenge in record time?",

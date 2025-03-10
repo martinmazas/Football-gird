@@ -62,12 +62,8 @@ body {
 .counter {
   font-size: 2rem;
   margin: 1rem 0;
-  color: var(--yellow-border)
-}
-
-.counter-container {
+  color: var(--yellow-border);
   text-align: center;
-  /* font-family: var(--font-family); */
 }
 
 #td-cell {

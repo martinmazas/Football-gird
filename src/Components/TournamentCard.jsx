@@ -24,7 +24,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
                 component="img"
                 loading="lazy"
                 alt={tournament.name}
-                src={`https://db3l8v64ekfvu.cloudfront.net/Tournaments/${tournament.img}.jpeg`}
+                src={`https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`}
                 sx={{
                     height: "80%",
                     width: "100%",

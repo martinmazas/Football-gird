@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useTransition, useCallback } from "react";
-import GridTable from "./gridTable";
+import React, { useEffect, useState, useCallback } from "react";
+import GridTable from "./GridTable";
 import { getPlayParams } from "./Utils/functions";
 import './index.css';
 import Container from '@mui/material/Container';
@@ -25,7 +25,6 @@ const App = () => {
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const tournament = searchParams.get("tournament");
-
   const [startPlay, setStartPlay] = useState(false);
   const [score, setScore] = useState(0);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
@@ -33,7 +32,6 @@ const App = () => {
   const { endGame, setEndGame } = useEndGame();
   const [isError, setIsError] = useState(false);
   const { count, incrementCount, resetCounter } = useCounter(0);
-  const [isPending, startTransition] = useTransition();
 
   const startGame = useCallback(() => {
     setScore(0);
@@ -50,27 +48,25 @@ const App = () => {
     if (tournament) {
       startGame();
       getPlayParams(tournament).then((data) => {
-        startTransition(() => {
-          const { rows, columns, randomTeams, randomCountries, playerNumbers } = data;
-          setGameParams({
-            rows,
-            columns,
-            countries: randomCountries,
-            teams: randomTeams,
-          });
-          setFinalResult(playerNumbers);
+        const { rows, columns, randomTeams, randomCountries, playerNumbers } = data;
+        setGameParams({
+          rows,
+          columns,
+          countries: randomCountries,
+          teams: randomTeams,
         });
+        setFinalResult(playerNumbers);
       });
     }
   }, [startPlay, tournament, startGame]);
 
+  // Check if the player won the game
   useEffect(() => {
     if (score === finalResult) setEndGame(true);
     // eslint-disable-next-line
   }, [score, finalResult]);
 
   return (
-    !isPending &&
     <Container className="App-container">
       <Box
         sx={{
