@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useState, useCallback } from "react";
 import GridTable from "./gridTable";
 import { getPlayParams } from "./Utils/functions";
 import './index.css';
@@ -23,7 +23,7 @@ const INITIAL_GAME_PARAMS = {
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const tournament = searchParams.get("tournament");
   const [startPlay, setStartPlay] = useState(false);
   const [score, setScore] = useState(0);
@@ -39,10 +39,9 @@ const App = () => {
     setGameParams(INITIAL_GAME_PARAMS);
     setEndGame(false);
     setIsError(false);
-    // eslint-disable-next-line
-  }, [resetCounter]);
+  }, [resetCounter, setEndGame]);
 
-  const handleClick = () => setStartPlay((prev) => !prev);
+  const handleClick = useCallback(() => setStartPlay((prev) => !prev), []);
 
   useEffect(() => {
     if (tournament) {
@@ -63,8 +62,7 @@ const App = () => {
   // Check if the player won the game
   useEffect(() => {
     if (score === finalResult) setEndGame(true);
-    // eslint-disable-next-line
-  }, [score, finalResult]);
+  }, [score, finalResult, setEndGame]);
 
   return (
     <Container className="App-container">
