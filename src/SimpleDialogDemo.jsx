@@ -42,7 +42,7 @@ const SimpleDialog = (props) => {
                                     <Avatar id='country-avatar'>
                                         <ReactCountryFlag svg countryCode={getCountryCode(player.country)} />
                                     </Avatar>
-                                    <Avatar id='team-avatar' src={`https://db3l8v64ekfvu.cloudfront.net/images/Team-shields/${getTeamCode(player.team)}.jpeg`} />
+                                    <Avatar id='team-avatar' src={`https://db3l8v64ekfvu.cloudfront.net/images/Team-shield/${getTeamCode(player.team)}.webp`} />
                                 </Box>
                             </ListItemAvatar>
                         </ListItemButton>
