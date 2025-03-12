@@ -31,7 +31,7 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
         teamNames = teamNames.filter(team => team.name)
 
         // Prepare all the possible combination of team-country
-        const combinations = Array.from(document.querySelectorAll('[class^=grid-place]')).map(combination => combination.className.split('grid-place-')[1])
+        const combinations = Array.from(document.querySelectorAll('[class^=grid-place]')).map(combination => combination.className)
 
         const { data } = await axios.get(`${server}/api/players/guessPlayer`, {
             ...axiosConfig,
@@ -41,7 +41,7 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, count
             }
         })
 
-        if (typeof data === 'string' || data.length === 0) {
+        if (typeof data === 'string' || !data.length) {
             setIsError(data);
         } else if (data.length === 1) {
             addPhoto(data, setIsError, handleScore);
