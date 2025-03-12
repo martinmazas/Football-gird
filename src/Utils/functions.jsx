@@ -27,13 +27,11 @@ export const getPlayParams = async (tournament) => {
 
 export const getPlayer = async (playerName, handleScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
     try {
-        countryNames = countryNames.map(country => country.name)
-        teamNames = teamNames.map(team => team.name)
+        countryNames = countryNames.filter(country => country.name)
+        teamNames = teamNames.filter(team => team.name)
 
         // Prepare all the possible combination of team-country
-        const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
-        let combinations = []
-        possibleCombinations.forEach(combination => combinations.push(combination.className))
+        const combinations = Array.from(document.querySelectorAll('[class^=grid-place]')).map(combination => combination.className.split('grid-place-')[1])
 
         const { data } = await axios.get(`${server}/api/players/guessPlayer`, {
             ...axiosConfig,
