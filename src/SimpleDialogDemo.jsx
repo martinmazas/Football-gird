@@ -8,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { getPlayer, addPhoto } from './Utils/functions';
 import FullWidthTextField from './FullWidthTextField';
 import './index.css'
@@ -16,17 +16,25 @@ import ReactCountryFlag from "react-country-flag"
 import { Box } from '@mui/material';
 
 const SimpleDialog = (props) => {
-    const { onClose, open, playerOptions, countries, teams } = props;
-    const getCountryCode = (country) => countries.filter(c => c.name === country)[0].code
-    const getTeamCode = (team) => teams.filter(t => t.name === team)[0].code
+    const { onClose, open, playerOptions, countries, teams } = props
+    const countryCodeMap = useMemo(() => {
+        return countries.reduce((map, country) => {
+            map[country.name] = country.code;
+            return map;
+        }, {});
+    }, [countries]);
 
-    const handleClose = () => {
-        onClose(playerOptions)
-    };
+    const teamCodeMap = useMemo(() => {
+        return teams.reduce((map, team) => {
+            map[team.name] = team.code;
+            return map;
+        }, {});
+    }, [teams]);
 
-    const handleListItemClick = (player) => {
-        onClose(player);
-    };
+    const getCountryCode = (country) => countryCodeMap[country];
+    const getTeamCode = (team) => teamCodeMap[team];
+    const handleClose = () => onClose(playerOptions)
+    const handleListItemClick = (player) => onClose(player);
 
     return (
         <Dialog fullWidth={true} onClose={handleClose} open={open}>
@@ -75,12 +83,10 @@ export default function SimpleDialogDemo(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [playerOptions])
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleClickOpen = () => setOpen(true);
 
     const handleGuess = () => {
-        getPlayer(query, handleScore, setPlayerOptions, countries, teams, setIsError)
+        getPlayer(query, handleScore, setPlayerOptions, setIsError)
         setQuery('')
         handleClickOpen()
     };
@@ -95,9 +101,7 @@ export default function SimpleDialogDemo(props) {
         handleSubmit(value)
     };
 
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') handleGuess()
-    };
+    const handleKeyDown = (event) => event.key === 'Enter' && handleGuess()
 
     return (
         <>

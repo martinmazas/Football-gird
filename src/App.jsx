@@ -23,8 +23,10 @@ const INITIAL_GAME_PARAMS = {
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const tournament = searchParams.get("tournament");
+
   const [startPlay, setStartPlay] = useState(false);
   const [score, setScore] = useState(0);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
@@ -59,6 +61,13 @@ const App = () => {
     }
   }, [startPlay, tournament, startGame]);
 
+  const memoizedGameParams = useMemo(() => ({
+    rows: gameParams.rows,
+    columns: gameParams.columns,
+    countries: gameParams.countries,
+    teams: gameParams.teams,
+  }), [gameParams]);
+
   // Check if the player won the game
   useEffect(() => {
     if (score === finalResult) setEndGame(true);
@@ -89,18 +98,18 @@ const App = () => {
         </IconButton>
       </Box>
 
-      {gameParams.rows > 0 && (
+      {memoizedGameParams.rows > 0 && (
         <>
           <GridTable
-            gameParams={gameParams}
+            gameParams={memoizedGameParams}
             endGame={endGame}
             count={count}
             incrementCount={incrementCount}
           />
           <GameOptions
             handleScore={() => setScore(score + 1)}
-            countries={gameParams.countries}
-            teams={gameParams.teams}
+            countries={memoizedGameParams.countries}
+            teams={memoizedGameParams.teams}
             isError={isError}
             setIsError={setIsError}
             handleClick={handleClick}

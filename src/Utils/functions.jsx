@@ -25,11 +25,8 @@ export const getPlayParams = async (tournament) => {
     }
 }
 
-export const getPlayer = async (playerName, handleScore, setPlayerOptions, countryNames, teamNames, setIsError) => {
+export const getPlayer = async (playerName, handleScore, setPlayerOptions, setIsError) => {
     try {
-        countryNames = countryNames.map(country => country.name)
-        teamNames = teamNames.map(team => team.name)
-
         // Prepare all the possible combination of team-country
         let combinations = []
         const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
