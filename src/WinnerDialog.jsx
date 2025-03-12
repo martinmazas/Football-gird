@@ -10,7 +10,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { useEndGame } from './Hooks/endGame';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -22,14 +21,13 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function WinnerDialog(props) {
-    const { handleClick, count } = props;
-    const { handleSetEndGame } = useEndGame()
+    const { handleClick, count, setEndGame } = props;
 
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Detect mobile screens
 
     const handleClose = () => {
-        handleSetEndGame();
+        setEndGame(false);
         handleClick();
     };
 

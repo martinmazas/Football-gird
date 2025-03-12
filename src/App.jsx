@@ -8,7 +8,6 @@ import WinnerDialog from "./WinnerDialog";
 import GameOptions from "./GameOptions";
 import { useCounter } from "./Hooks/useCounter";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEndGame } from "./Hooks/endGame";
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
 import { Box } from "@mui/material";
@@ -31,7 +30,7 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
   const [finalResult, setFinalResult] = useState(null);
-  const { endGame, setEndGame } = useEndGame();
+  const [endGame, setEndGame] = useState(false)
   const [isError, setIsError] = useState(false);
   const { count, incrementCount, resetCounter } = useCounter(0);
 
@@ -122,7 +121,7 @@ const App = () => {
       {endGame && (
         <>
           <Confetti />
-          <WinnerDialog handleClick={handleClick} count={count} />
+          <WinnerDialog handleClick={handleClick} count={count} setEndGame={setEndGame} />
         </>
       )}
     </Container>
