@@ -60,13 +60,14 @@ export const addPhoto = (players, setIsError, handleScore) => {
     try {
         const playerDiv = document.getElementsByClassName(`grid-place-${player.country}-${player.team}`);
         if (playerDiv[0]) {
+            const img = require(`../images/Players/24-25/${player.imgPath}.webp`)
             const parentDiv = playerDiv[0].parentNode;
 
             createRoot(
                 parentDiv
             ).render(
                 <ResponsiveImage
-                    src={require(`../images/Players/24-25/${player.imgPath}.webp`)}
+                    src={img}
                     alt={player.second_name}
                     roundedBorder={true}
                 />
