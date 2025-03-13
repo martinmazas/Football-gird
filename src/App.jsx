@@ -48,14 +48,14 @@ const App = () => {
     if (tournament) {
       startGame();
       getPlayParams(tournament).then((data) => {
-        const { rows, columns, randomTeams, randomCountries, playerNumbers } = data;
+        const { rows, columns, randomTeams, randomCountries } = data;
         setGameParams({
           rows,
           columns,
           countries: randomCountries,
           teams: randomTeams,
         });
-        setFinalResult(playerNumbers);
+        setFinalResult((rows - 1) * (columns - 1));
       });
     }
   }, [startPlay, tournament, startGame]);
