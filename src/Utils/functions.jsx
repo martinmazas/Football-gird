@@ -25,14 +25,27 @@ export const getPlayParams = async (tournament) => {
     }
 }
 
-export const getPlayer = async (playerName, handleScore, setPlayerOptions, setIsError) => {
+export const getPlayer = async (playerName) => {
     try {
-        // Prepare all the possible combination of team-country
-        let combinations = []
-        const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
-        possibleCombinations.forEach(combination => combinations.push(combination.className))
+        const { data } = await axios.get(`${server}/api/players/options`, {
+            ...axiosConfig,
+            params: {
+                playerName
+            }
+        })
+        return data
+    } catch (err) {
+        handleError(err, 'Failed to fetch player options')
+    }
+}
 
-        const { data } = await axios.get(`${server}/api/players/guessPlayer`, {
+export const guessPlayer = async (playerName, handleScore, setIsError) => {
+    let combinations = []
+    const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
+    possibleCombinations.forEach(combination => combinations.push(combination.className))
+
+    try {
+        const { data } = await axios.get(`${server}/api/players/guess`, {
             ...axiosConfig,
             params: {
                 playerName,
@@ -40,24 +53,24 @@ export const getPlayer = async (playerName, handleScore, setPlayerOptions, setIs
             }
         })
 
-        if (typeof data === 'string' || !data.length) {
-            setIsError(data);
-        } else if (data.length === 1) {
-            addPhoto(data, setIsError, handleScore);
-        } else {
-            setPlayerOptions(data);
+        if (data.length) {
+            addPhoto(data, handleScore);
+        } else{
+            setIsError(`No place for ${playerName}`)
         }
-    } catch (err) { handleError(err, err) }
+    } catch (err) {
+        handleError(err, 'Failed to guess player')
+    }
 }
 
-export const addPhoto = (players, setIsError, handleScore) => {
+export const addPhoto = (players, handleScore) => {
     const player = players[0]
     if (!player) return
 
     try {
         const playerDiv = document.getElementsByClassName(`grid-place-${player.country}-${player.team}`);
         if (playerDiv[0]) {
-            const img = require(`../images/Players/24-25/${player.imgPath}.webp`)
+            const img = require(`../images/Players/24-25/${player.imgPath.trim()}.webp`)
             const parentDiv = playerDiv[0].parentNode;
 
             createRoot(
@@ -75,7 +88,7 @@ export const addPhoto = (players, setIsError, handleScore) => {
             // Update the score asynchronously
             handleScore()
         } else {
-            setIsError(`The chosen position for ${player.country}-${player.team} is already in use`);
+            console.log('Unexpected error')
         }
     } catch (err) {
         handleError(err, 'Error while adding player photo');

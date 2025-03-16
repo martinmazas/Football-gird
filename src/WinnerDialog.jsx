@@ -21,14 +21,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function WinnerDialog(props) {
-    const { handleClick, count, setEndGame } = props;
+    const { handleRestartButton, count, setEndGame } = props;
 
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Detect mobile screens
 
     const handleClose = () => {
         setEndGame(false);
-        handleClick();
+        handleRestartButton();
     };
 
     return (

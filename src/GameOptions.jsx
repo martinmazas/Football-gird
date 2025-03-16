@@ -1,15 +1,16 @@
 import { Button, Container } from "@mui/material";
-import SimpleDialogDemo from "./SimpleDialogDemo";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import PlayerSearch from "./Components/PlayerSearch";
 
 
 export default function GameOptions(props) {
-    const { handleScore, countries, teams, isError, setIsError, handleClick } = { ...props }
+    const { handleRestartButton, handleScore, setIsError } = { ...props }
+
     return (
         <Container maxWidth='sm' id="play-game">
-            <SimpleDialogDemo handleScore={handleScore} countries={countries} teams={teams} isError={isError} setIsError={setIsError} />
-            <Button size="small" id="restart-button" onClick={handleClick} variant="contained">
-                <RestartAltIcon sx={{ color: '#fff' }} />
+            <PlayerSearch handleScore={handleScore} setIsError={setIsError} />
+            <Button size="small" id="restart-button" onClick={handleRestartButton} variant="contained">
+                <RestartAltIcon />
             </Button>
         </Container>
     )
