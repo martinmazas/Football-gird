@@ -17,6 +17,7 @@ const INITIAL_GAME_PARAMS = {
   columns: 0,
   countries: [],
   teams: [],
+  finalResult: false
 };
 
 const App = () => {
@@ -29,7 +30,6 @@ const App = () => {
   const [startPlay, setStartPlay] = useState(false);
   const [score, setScore] = useState(0);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
-  const [finalResult, setFinalResult] = useState(null);
   const [endGame, setEndGame] = useState(false)
   const [isError, setIsError] = useState(false);
   const { count, incrementCount, resetCounter } = useCounter(0);
@@ -42,7 +42,8 @@ const App = () => {
     setIsError(false);
   }, [resetCounter, setEndGame]);
 
-  const handleClick = useCallback(() => setStartPlay((prev) => !prev), []);
+  // Restart the game
+  const handleRestartButton = useCallback(() => setStartPlay((prev) => !prev), []);
 
   useEffect(() => {
     if (tournament) {
@@ -54,8 +55,8 @@ const App = () => {
           columns,
           countries: randomCountries,
           teams: randomTeams,
+          finalResult: (rows - 1) * (columns - 1)
         });
-        setFinalResult((rows - 1) * (columns - 1));
       });
     }
   }, [startPlay, tournament, startGame]);
@@ -65,12 +66,13 @@ const App = () => {
     columns: gameParams.columns,
     countries: gameParams.countries,
     teams: gameParams.teams,
+    finalResult: gameParams.finalResult
   }), [gameParams]);
 
   // Check if the player won the game
   useEffect(() => {
-    if (score === finalResult) setEndGame(true);
-  }, [score, finalResult, setEndGame]);
+    if (score === memoizedGameParams.finalResult) setEndGame(true);
+  }, [score, memoizedGameParams.finalResult, setEndGame]);
 
   return (
     <Container className="App-container">
@@ -107,11 +109,8 @@ const App = () => {
           />
           <GameOptions
             handleScore={() => setScore(score + 1)}
-            countries={memoizedGameParams.countries}
-            teams={memoizedGameParams.teams}
-            isError={isError}
             setIsError={setIsError}
-            handleClick={handleClick}
+            handleRestartButton={handleRestartButton}
           />
         </>
       )}
@@ -121,7 +120,7 @@ const App = () => {
       {endGame && (
         <>
           <Confetti />
-          <WinnerDialog handleClick={handleClick} count={count} setEndGame={setEndGame} />
+          <WinnerDialog handleRestartButton={handleRestartButton} count={count} setEndGame={setEndGame} />
         </>
       )}
     </Container>
