@@ -49,13 +49,19 @@ export const guessPlayer = async (playerName, setIsError, combinations, setCombi
             }
         })
 
-        const playerCombination = `${data.country}-${data.team}`
-        if (data === 'Player not found' || !combinations.includes(playerCombination)) {
+        if (data === 'Player not found') {
             setIsError(`No place for ${playerName}`)
         } else {
-            addPhoto(data, playerCombination);
-            const removeCombinationIndex = combinations.indexOf(playerCombination)
-            setCombinations(combinations.filter((_, index) => index !== removeCombinationIndex))
+            Array.from(data).forEach(player => {
+                const playerCombination = `${player.country}-${player.team}`
+                addPhoto(player, playerCombination);
+
+                setCombinations(prevCombinations => {
+                    // Remove the current combination from the previous state
+                    const removeCombinationIndex = prevCombinations.indexOf(playerCombination);
+                    return prevCombinations.filter((_, index) => index !== removeCombinationIndex);
+                });
+            })
         }
     } catch (err) {
         handleError(err, 'Failed to guess player')
