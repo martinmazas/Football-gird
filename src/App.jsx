@@ -44,20 +44,18 @@ const App = () => {
   const handleRestartButton = useCallback(() => setStartPlay((prev) => !prev), []);
 
   useEffect(() => {
-    if (tournament) {
-      startGame();
-      getPlayParams(tournament).then((data) => {
-        const { rows, columns, randomTeams, randomCountries } = data;
-        setGameParams({
-          rows,
-          columns,
-          countries: randomCountries,
-          teams: randomTeams,
-        });
-        setCombinations(randomCountries.flatMap(country => randomTeams.map(team => `${country.name}-${team.name}`))
-        );
+    startGame();
+    getPlayParams(tournament).then((data) => {
+      const { rows, columns, randomTeams, randomCountries } = data;
+      setGameParams({
+        rows,
+        columns,
+        countries: randomCountries,
+        teams: randomTeams,
       });
-    }
+      setCombinations(randomCountries.flatMap(country => randomTeams.map(team => `${country.name}-${team.name}`))
+      );
+    });
   }, [startPlay, tournament, startGame]);
 
   const memoizedGameParams = useMemo(() => ({
