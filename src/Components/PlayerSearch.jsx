@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import '../index.css'
 
 export default function PlayerSearch(props) {
-    const { handleScore, setIsError } = props;
+    const { setIsError, combinations, setCombinations } = props;
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -44,7 +44,7 @@ export default function PlayerSearch(props) {
     const handleSelect = (player) => {
         setOptions([]);
         setIsDropdownVisible(false);
-        guessPlayer(player, handleScore, setIsError);
+        guessPlayer(player, setIsError, combinations, setCombinations);
         setInputValue('');
 
         // Close mobile keyboard
