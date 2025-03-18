@@ -2,7 +2,7 @@ import React from 'react';
 import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
 import Counter from './Counter';
-import './index.css'
+import './Styles/index.css'
 
 const renderCellContent = (rowIndex, cellIndex, countries, teams, endGame, count, incrementCount) => {
     // Counter on 0,0

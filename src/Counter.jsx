@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './index.css';
+import './Styles/index.css';
 
 const Counter = (props) => {
     const { endGame, count, incrementCount } = { ...props }

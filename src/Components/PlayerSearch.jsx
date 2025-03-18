@@ -2,7 +2,7 @@ import { getPlayer, guessPlayer } from "../Utils/functions";
 import { useCallback, useState } from "react";
 import { Box, Input } from "@mui/material";
 import debounce from 'lodash/debounce';
-import '../index.css'
+import '../Styles/index.css'
 
 export default function PlayerSearch(props) {
     const { setIsError, combinations, setCombinations } = props;

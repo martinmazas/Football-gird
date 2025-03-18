@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState, useCallback } from "react";
 import GridTable from "./gridTable";
 import { getPlayParams } from "./Utils/functions";
-import './index.css';
+import './Styles/index.css';
 import Container from '@mui/material/Container';
 import Confetti from 'react-confetti';
 import WinnerDialog from "./WinnerDialog";

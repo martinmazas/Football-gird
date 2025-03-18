@@ -1,6 +1,6 @@
 import ReactCountryFlag from "react-country-flag"
 import React from "react"
-import './index.css'
+import './Styles/index.css'
 
 export default function CountryFlag(props) {
     const { country } = { ...props }
