@@ -39,11 +39,7 @@ export const getPlayer = async (playerName) => {
     }
 }
 
-export const guessPlayer = async (playerName, handleScore, setIsError) => {
-    let combinations = []
-    const possibleCombinations = document.querySelectorAll('[class^=grid-place]')
-    possibleCombinations.forEach(combination => combinations.push(combination.className))
-
+export const guessPlayer = async (playerName, setIsError, combinations, setCombinations) => {
     try {
         const { data } = await axios.get(`${server}/api/players/guess`, {
             ...axiosConfig,
@@ -53,22 +49,25 @@ export const guessPlayer = async (playerName, handleScore, setIsError) => {
             }
         })
 
-        if (data.length) {
-            addPhoto(data, handleScore);
-        } else{
+        const playerCombination = `${data.country}-${data.team}`
+        if (data === 'Player not found' || !combinations.includes(playerCombination)) {
             setIsError(`No place for ${playerName}`)
+        } else {
+            addPhoto(data, playerCombination);
+            const removeCombinationIndex = combinations.indexOf(playerCombination)
+            setCombinations(combinations.filter((_, index) => index !== removeCombinationIndex))
         }
     } catch (err) {
         handleError(err, 'Failed to guess player')
     }
 }
 
-export const addPhoto = (players, handleScore) => {
-    const player = players[0]
+export const addPhoto = (player, playerCombination) => {
     if (!player) return
 
     try {
-        const playerDiv = document.getElementsByClassName(`grid-place-${player.country}-${player.team}`);
+        const playerDiv = document.getElementsByClassName(`grid-place-${playerCombination}`);
+
         if (playerDiv[0]) {
             const img = require(`../images/Players/24-25/${player.imgPath.trim()}.webp`)
             const parentDiv = playerDiv[0].parentNode;
@@ -84,9 +83,6 @@ export const addPhoto = (players, handleScore) => {
             )
 
             parentDiv.removeChild(playerDiv[0]);
-
-            // Update the score asynchronously
-            handleScore()
         } else {
             console.log('Unexpected error')
         }

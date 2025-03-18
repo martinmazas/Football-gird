@@ -17,7 +17,6 @@ const INITIAL_GAME_PARAMS = {
   columns: 0,
   countries: [],
   teams: [],
-  finalResult: false
 };
 
 const App = () => {
@@ -28,14 +27,13 @@ const App = () => {
   const tournament = searchParams.get("tournament");
 
   const [startPlay, setStartPlay] = useState(false);
-  const [score, setScore] = useState(0);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
   const [endGame, setEndGame] = useState(false)
   const [isError, setIsError] = useState(false);
+  const [combinations, setCombinations] = useState(false)
   const { count, incrementCount, resetCounter } = useCounter(0);
 
   const startGame = useCallback(() => {
-    setScore(0);
     resetCounter();
     setGameParams(INITIAL_GAME_PARAMS);
     setEndGame(false);
@@ -55,8 +53,9 @@ const App = () => {
           columns,
           countries: randomCountries,
           teams: randomTeams,
-          finalResult: (rows - 1) * (columns - 1)
         });
+        setCombinations(randomCountries.flatMap(country => randomTeams.map(team => `${country.name}-${team.name}`))
+        );
       });
     }
   }, [startPlay, tournament, startGame]);
@@ -66,13 +65,12 @@ const App = () => {
     columns: gameParams.columns,
     countries: gameParams.countries,
     teams: gameParams.teams,
-    finalResult: gameParams.finalResult
   }), [gameParams]);
 
   // Check if the player won the game
   useEffect(() => {
-    if (score === memoizedGameParams.finalResult) setEndGame(true);
-  }, [score, memoizedGameParams.finalResult, setEndGame]);
+    if (combinations.length === 0) setEndGame(true);
+  }, [combinations]);
 
   return (
     <Container className="App-container">
@@ -108,9 +106,10 @@ const App = () => {
             incrementCount={incrementCount}
           />
           <GameOptions
-            handleScore={() => setScore(score + 1)}
             setIsError={setIsError}
             handleRestartButton={handleRestartButton}
+            combinations={combinations}
+            setCombinations={setCombinations}
           />
         </>
       )}

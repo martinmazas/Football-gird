@@ -4,11 +4,11 @@ import PlayerSearch from "./Components/PlayerSearch";
 
 
 export default function GameOptions(props) {
-    const { handleRestartButton, handleScore, setIsError } = { ...props }
+    const { handleRestartButton, setIsError, combinations, setCombinations } = { ...props }
 
     return (
         <Container maxWidth='sm' id="play-game">
-            <PlayerSearch handleScore={handleScore} setIsError={setIsError} />
+            <PlayerSearch setIsError={setIsError} combinations={combinations} setCombinations={setCombinations} />
             <Button size="small" id="restart-button" onClick={handleRestartButton} variant="contained">
                 <RestartAltIcon />
             </Button>
