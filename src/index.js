@@ -8,12 +8,10 @@ import HomePage from './Components/HomePage';
 createRoot(
   document.getElementById('root')
 ).render(
-  <>
-    <Router>
-      <Routes>
-        <Route exact path='/' Component={HomePage} />
-        <Route exact path='/app' Component={App} />
-      </Routes>
-    </Router>
-  </>
+  <Router>
+    <Routes>
+      <Route exact path='/' Component={HomePage} />
+      <Route exact path='/app' Component={App} />
+    </Routes>
+  </Router>
 )

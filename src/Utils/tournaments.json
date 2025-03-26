@@ -4,12 +4,16 @@
         "img": "champions"
     },
     {
-        "name": "Europe League 24/25",
-        "img": "europa"
-    },
-    {
         "name": "Premier League 24/25",
         "img": "premier"
+    },
+    {
+        "name": "La Liga 24/25",
+        "img": "laliga"
+    },
+    {
+        "name": "Europe League 24/25",
+        "img": "europa"
     },
     {
         "name": "Libertadores 2025",

@@ -1,6 +1,19 @@
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 export default function TournamentCard({ tournament, onCardClick }) {
+    const [fitMode, setFitMode] = useState("scale-down");
+
+    useEffect(() => {
+        const img = new Image();
+        img.src = `https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`;
+
+        img.onload = () => {
+            const aspectRatio = img.width / img.height;
+            setFitMode(aspectRatio >= 1.3 ? "cover" : "scale-down"); 
+        };
+    }, [tournament.img]);
+
     return (
         <Card
             sx={{
@@ -18,7 +31,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
                     transform: "scale(1.05)",
                 },
             }}
-            onClick={() => onCardClick(tournament)} // Ensure click works
+            onClick={() => onCardClick(tournament)}
         >
             <CardMedia
                 component="img"
@@ -28,7 +41,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
                 sx={{
                     height: "80%",
                     width: "100%",
-                    objectFit: "cover",
+                    objectFit: fitMode,
                 }}
             />
             <CardContent
