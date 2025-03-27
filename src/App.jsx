@@ -13,8 +13,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import { Box } from "@mui/material";
 
 const INITIAL_GAME_PARAMS = {
-  rows: 0,
-  columns: 0,
   countries: [],
   teams: [],
 };
@@ -46,10 +44,8 @@ const App = () => {
   useEffect(() => {
     startGame();
     getPlayParams(tournament).then((data) => {
-      const { rows, columns, randomTeams, randomCountries } = data;
+      const { randomTeams, randomCountries } = data;
       setGameParams({
-        rows,
-        columns,
         countries: randomCountries,
         teams: randomTeams,
       });
@@ -59,8 +55,6 @@ const App = () => {
   }, [startPlay, tournament, startGame]);
 
   const memoizedGameParams = useMemo(() => ({
-    rows: gameParams.rows,
-    columns: gameParams.columns,
     countries: gameParams.countries,
     teams: gameParams.teams,
   }), [gameParams]);
@@ -95,22 +89,21 @@ const App = () => {
         </IconButton>
       </Box>
 
-      {memoizedGameParams.rows > 0 && (
-        <>
-          <GridTable
-            gameParams={memoizedGameParams}
-            endGame={endGame}
-            count={count}
-            incrementCount={incrementCount}
-          />
-          <GameOptions
-            setIsError={setIsError}
-            handleRestartButton={handleRestartButton}
-            combinations={combinations}
-            setCombinations={setCombinations}
-          />
-        </>
+      {memoizedGameParams.teams.length && (
+        <GridTable
+          gameParams={memoizedGameParams}
+          endGame={endGame}
+          count={count}
+          incrementCount={incrementCount}
+        />
       )}
+
+      <GameOptions
+        setIsError={setIsError}
+        handleRestartButton={handleRestartButton}
+        combinations={combinations}
+        setCombinations={setCombinations}
+      />
 
       {isError && <div id="error-message"><p>{isError}</p></div>}
 
