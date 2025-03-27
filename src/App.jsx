@@ -84,19 +84,17 @@ const App = () => {
           }
         }}
       >
-        <IconButton onClick={() => navigate("/")} sx={{ color: "white" }}>
+        <IconButton onClick={() => navigate(-1)} sx={{ color: "white" }}>
           <HomeIcon sx={{ fontSize: "2rem" }} />
         </IconButton>
       </Box>
 
-      {memoizedGameParams.teams.length && (
-        <GridTable
-          gameParams={memoizedGameParams}
-          endGame={endGame}
-          count={count}
-          incrementCount={incrementCount}
-        />
-      )}
+      <GridTable
+        gameParams={memoizedGameParams}
+        endGame={endGame}
+        count={count}
+        incrementCount={incrementCount}
+      />
 
       <GameOptions
         setIsError={setIsError}

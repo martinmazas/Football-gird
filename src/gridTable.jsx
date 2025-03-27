@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import Cells from "./cells";
-import React from 'react';
 
 export default function GridTable(props) {
     return (
@@ -10,11 +9,11 @@ export default function GridTable(props) {
                 margin: {
                     xs: "5rem auto 0",
                     md: "7rem auto 0",
-                    sm: '11rem auto 0'
+                    sm: "11rem auto 0"
                 }
             }}
         >
-            <Cells props={props} />
+            {props.gameParams.teams.length > 0 && <Cells props={props} />}
         </Box>
-    )
+    );
 }
