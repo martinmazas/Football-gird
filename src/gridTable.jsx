@@ -7,9 +7,9 @@ export default function GridTable(props) {
             component="table"
             sx={{
                 margin: {
-                    xs: "5rem auto 0",
-                    md: "7rem auto 0",
-                    sm: "11rem auto 0"
+                    xs: "3rem auto 0",
+                    md: "5rem auto 0",
+                    sm: "9rem auto 0"
                 }
             }}
         >

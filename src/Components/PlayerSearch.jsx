@@ -84,7 +84,8 @@ export default function PlayerSearch(props) {
     const styles = {
         box: {
             bgcolor: '#031825',
-            maxWidth: '60rem',
+            width: '13rem',
+            // maxWidth: '60rem',
             outline: 'none',
             padding: '0.2rem 0.4rem',
             borderRadius: '0.4rem',
