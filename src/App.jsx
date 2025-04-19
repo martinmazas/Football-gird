@@ -65,45 +65,80 @@ const App = () => {
   }, [combinations]);
 
   return (
-    <Container className="App-container">
-      <Box
+    <>
+      <Container
+        className="App-container"
+        maxWidth="lg"
         sx={{
-          position: "absolute",
-          top: "1rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "50%",
-          padding: "0.5rem",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-          transition: "all 0.3s ease",
-          "&:hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.3)",
-            transform: "translateX(-50%) scale(1.1)",
-          }
+          position: 'relative',
+          paddingTop: { xs: '4rem', sm: '3rem', md: '2rem' },
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+          gap: { xs: 3, md: 4 },
         }}
       >
-        <IconButton onClick={() => navigate(-1)} sx={{ color: "white" }}>
-          <HomeIcon sx={{ fontSize: "2rem" }} />
-        </IconButton>
-      </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            top: { xs: '1rem', sm: '1.5rem', md: '2rem' },
+            left: "50%",
+            transform: "translateX(-50%)",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backdropFilter: "blur(10px)",
+            borderRadius: "50%",
+            padding: "0.5rem",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+            transition: "all 0.3s ease",
+            zIndex: 10,
+            "&:hover": {
+              backgroundColor: "rgba(255, 255, 255, 0.3)",
+              transform: "translateX(-50%) scale(1.1)",
+            }
+          }}
+        >
+          <IconButton onClick={() => navigate(-1)} sx={{ color: "white" }}>
+            <HomeIcon sx={{ fontSize: "2rem" }} />
+          </IconButton>
+        </Box>
 
-      <GridTable
-        gameParams={memoizedGameParams}
-        endGame={endGame}
-        count={count}
-        incrementCount={incrementCount}
-      />
+        {/* Main Grid Table */}
+        <Box
+          sx={{
+            width: '100%',
+            maxWidth: '900px',
+            display: 'flex',
+            justifyContent: 'center',
+            px: { xs: 1, sm: 2 },
+          }}
+        >
+          <GridTable
+            gameParams={memoizedGameParams}
+            endGame={endGame}
+            count={count}
+            incrementCount={incrementCount}
+          />
+        </Box>
 
-      <GameOptions
-        setIsError={setIsError}
-        handleRestartButton={handleRestartButton}
-        combinations={combinations}
-        setCombinations={setCombinations}
-      />
+        {/* Game Options */}
+        <Box
+          sx={{
+            width: '100%',
+          }}
+        >
+          <GameOptions
+            setIsError={setIsError}
+            handleRestartButton={handleRestartButton}
+            combinations={combinations}
+            setCombinations={setCombinations}
+          />
+        </Box>
 
-      {isError && <div id="error-message"><p>{isError}</p></div>}
+        {/* Error Message */}
+        {isError && <div id="error-message"><p style={{ margin: 0 }}>{isError}</p></div>}
+      </Container>
 
       {endGame && (
         <>
@@ -111,7 +146,7 @@ const App = () => {
           <WinnerDialog handleRestartButton={handleRestartButton} count={count} setEndGame={setEndGame} />
         </>
       )}
-    </Container>
+    </>
   );
 };
 

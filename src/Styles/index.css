@@ -2,7 +2,6 @@
   --background-color: #1a1724;
   --yellow-border: #f2b705;
   --table-element: 4rem;
-  /* --font-family: 'Roboto', 'Arial', sans-serif; */
 }
 
 body {
@@ -22,13 +21,11 @@ body {
 #play-game {
   display: flex;
   justify-content: space-evenly;
-  padding: 1rem;
-  max-width: 26rem;
+  padding: 0;
 }
 
 #error-message {
   color: white;
-  margin-top: 1rem;
   text-align: center;
 }
 
@@ -76,7 +73,6 @@ body {
 
 #tab {
   color: var(--yellow-border);
-  /* font-family: var(--font-family); */
 }
 
 #tab {
@@ -84,7 +80,8 @@ body {
 }
 
 .App-container {
-  margin-top: 2rem;
+  position: relative;
+  /* margin-top: 2rem; */
 }
 
 .slick-arrow {
