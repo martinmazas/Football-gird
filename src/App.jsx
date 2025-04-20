@@ -7,10 +7,8 @@ import Confetti from 'react-confetti';
 import WinnerDialog from "./WinnerDialog";
 import GameOptions from "./GameOptions";
 import { useCounter } from "./Hooks/useCounter";
-import { useLocation, useNavigate } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import HomeIcon from '@mui/icons-material/Home';
 import { Box } from "@mui/material";
+import { useLocation } from "react-router-dom";
 
 const INITIAL_GAME_PARAMS = {
   countries: [],
@@ -18,9 +16,7 @@ const INITIAL_GAME_PARAMS = {
 };
 
 const App = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
+  const location = useLocation()
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const tournament = searchParams.get("tournament");
 
@@ -68,7 +64,7 @@ const App = () => {
     <>
       <Container
         className="App-container"
-        maxWidth="lg"
+        maxWidth="xs"
         sx={{
           position: 'relative',
           paddingTop: { xs: '4rem', sm: '3rem', md: '2rem' },
@@ -80,29 +76,6 @@ const App = () => {
           gap: { xs: 3, md: 4 },
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: { xs: '1rem', sm: '1.5rem', md: '2rem' },
-            left: "50%",
-            transform: "translateX(-50%)",
-            backgroundColor: "rgba(255, 255, 255, 0.1)",
-            backdropFilter: "blur(10px)",
-            borderRadius: "50%",
-            padding: "0.5rem",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-            transition: "all 0.3s ease",
-            zIndex: 10,
-            "&:hover": {
-              backgroundColor: "rgba(255, 255, 255, 0.3)",
-              transform: "translateX(-50%) scale(1.1)",
-            }
-          }}
-        >
-          <IconButton onClick={() => navigate(-1)} sx={{ color: "white" }}>
-            <HomeIcon sx={{ fontSize: "2rem" }} />
-          </IconButton>
-        </Box>
 
         {/* Main Grid Table */}
         <Box

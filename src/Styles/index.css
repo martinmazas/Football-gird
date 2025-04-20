@@ -13,14 +13,15 @@ body {
 }
 
 #restart-button,
-#guess-button {
+#guess-button,
+#home-button {
   border: 0.2rem solid var(--yellow-border);
   background-color: var(--background-color);
 }
 
 #play-game {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 0;
 }
 
@@ -73,15 +74,7 @@ body {
 
 #tab {
   color: var(--yellow-border);
-}
-
-#tab {
   border: var(--yellow-border);
-}
-
-.App-container {
-  position: relative;
-  /* margin-top: 2rem; */
 }
 
 .slick-arrow {
