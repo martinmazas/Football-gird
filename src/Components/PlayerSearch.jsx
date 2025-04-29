@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import '../Styles/index.css'
 
 export default function PlayerSearch(props) {
-    const { setIsError, combinations, setCombinations } = props;
+    const { setIsError, combinations, setCombinations, tournament } = props;
     const [inputValue, setInputValue] = useState('');
     const [options, setOptions] = useState([]);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -15,7 +15,7 @@ export default function PlayerSearch(props) {
         if (!query) return;
 
         try {
-            const data = await getPlayer(query);
+            const data = await getPlayer(query, tournament);
             const strData = data.map(player => `${player.first_name} ${player.second_name}`);
             setOptions(strData || []);
             setHighlightedIndex(-1);
@@ -44,7 +44,7 @@ export default function PlayerSearch(props) {
     const handleSelect = (player) => {
         setOptions([]);
         setIsDropdownVisible(false);
-        guessPlayer(player, setIsError, combinations, setCombinations);
+        guessPlayer(player, setIsError, combinations, setCombinations, tournament);
         setInputValue('');
 
         // Close mobile keyboard

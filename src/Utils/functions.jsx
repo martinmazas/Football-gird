@@ -25,8 +25,10 @@ export const getPlayParams = async (tournament) => {
     }
 }
 
-export const getPlayer = async (playerName) => {
+export const getPlayer = async (playerName, tournament) => {
     try {
+        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
+        axiosConfig.headers["tournament"] = tournament
         const { data } = await axios.get(`${server}/api/players/options`, {
             ...axiosConfig,
             params: {
@@ -39,8 +41,10 @@ export const getPlayer = async (playerName) => {
     }
 }
 
-export const guessPlayer = async (playerName, setIsError, combinations, setCombinations) => {
+export const guessPlayer = async (playerName, setIsError, combinations, setCombinations, tournament) => {
     try {
+        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
+        axiosConfig.headers["tournament"] = tournament
         const { data } = await axios.get(`${server}/api/players/guess`, {
             ...axiosConfig,
             params: {

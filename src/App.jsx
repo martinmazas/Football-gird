@@ -106,6 +106,7 @@ const App = () => {
             handleRestartButton={handleRestartButton}
             combinations={combinations}
             setCombinations={setCombinations}
+            tournament={tournament}
           />
         </Box>
 

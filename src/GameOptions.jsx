@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 
 export default function GameOptions(props) {
-    const { handleRestartButton, setIsError, combinations, setCombinations } = { ...props }
+    const { handleRestartButton, setIsError, combinations, setCombinations, tournament } = { ...props }
     const navigate = useNavigate();
 
     return (
         <Container maxWidth='sm' id="play-game">
-            <PlayerSearch setIsError={setIsError} combinations={combinations} setCombinations={setCombinations} />
+            <PlayerSearch setIsError={setIsError} combinations={combinations} setCombinations={setCombinations} tournament={tournament} />
             <Button size="small" id="restart-button" onClick={handleRestartButton} variant="contained">
                 <RestartAltIcon />
             </Button>
