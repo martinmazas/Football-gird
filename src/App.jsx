@@ -9,6 +9,8 @@ import GameOptions from "./GameOptions";
 import { useCounter } from "./Hooks/useCounter";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import tournamentAdSlots from "./Components/TournamentAd";
+import TournamentAd from "./Components/TournamentAd";
 
 const INITIAL_GAME_PARAMS = {
   countries: [],
@@ -19,6 +21,7 @@ const App = () => {
   const location = useLocation()
   const searchParams = useMemo(() => new URLSearchParams(location.search), [location.search]);
   const tournament = searchParams.get("tournament");
+  const slotId = tournamentAdSlots[tournament]
 
   const [startPlay, setStartPlay] = useState(false);
   const [gameParams, setGameParams] = useState(INITIAL_GAME_PARAMS);
@@ -112,6 +115,7 @@ const App = () => {
 
         {/* Error Message */}
         {isError && <div id="error-message"><p style={{ margin: 0 }}>{isError}</p></div>}
+        <TournamentAd slotId={slotId} />
       </Container>
 
       {endGame && (

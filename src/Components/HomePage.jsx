@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import TournamentCard from "./TournamentCard";
 import { useState } from "react";
 import InstructionsCard from "./InstructionsCard";
+import AdBanner from "./AdBanner";
 const tournaments = require("../Utils/tournaments.json");
 
 export default function HomePage() {
@@ -64,6 +65,7 @@ export default function HomePage() {
                                 <TournamentCard key={index} tournament={tournament} onCardClick={handleCardClick} />
                             ))}
                         </Box>
+                        <AdBanner slot="1939413371" />
                     </Container>
                 </Box>
             )}
