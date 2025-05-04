@@ -5,6 +5,7 @@ const tournamentAdSlots = {
     "MLS 25": "1563190611",
     "Premier League": "8320988899",
     "La Liga": "1775536505",
+    "Serie A": "6112939593"
 };
 
 export default tournamentAdSlots;
