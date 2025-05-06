@@ -57,15 +57,15 @@ export default function HomePage() {
                                 display: "flex",
                                 flexWrap: "wrap",
                                 justifyContent: "center",
-                                gap: "1.5rem",
-                                mt: 4,
+                                gap: 2,
+                                px: { xs: 1, sm: 3 },
                             }}
                         >
-                            {tournaments.map((tournament, index) => (
-                                <TournamentCard key={index} tournament={tournament} onCardClick={handleCardClick} />
+                            {tournaments.map((t) => (
+                                <TournamentCard key={t.id} tournament={t} onCardClick={handleCardClick} />
                             ))}
                         </Box>
-                        <TournamentAd slot="1939413371" />
+                        <TournamentAd slotId="1939413371" />
                     </Container>
                 </Box>
             )}

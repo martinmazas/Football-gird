@@ -9,8 +9,8 @@ import GameOptions from "./GameOptions";
 import { useCounter } from "./Hooks/useCounter";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import tournamentAdSlots from "./Components/TournamentAd";
 import TournamentAd from "./Components/TournamentAd";
+import tournamentAdSlots from "./Utils/adSlots";
 
 const INITIAL_GAME_PARAMS = {
   countries: [],

@@ -4,64 +4,81 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 export default function TournamentCard({ tournament, onCardClick }) {
     const [fitMode, setFitMode] = useState("scale-down");
 
+    const imageUrl = `https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`;
+
     useEffect(() => {
         const img = new Image();
-        img.src = `https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`;
+        img.src = imageUrl;
 
         img.onload = () => {
             const aspectRatio = img.width / img.height;
             setFitMode(aspectRatio >= 1.3 ? "cover" : "scale-down");
         };
-    }, [tournament.img]);
+    }, [imageUrl]);
 
     return (
         <Card
+            onClick={() => onCardClick(tournament)}
             sx={{
-                width: { xs: "90%", sm: "48%", md: "30%" },
-                height: "14rem", // Reduced height for the card
-                maxWidth: "350px",
+                width: {
+                    xs: "80vw", // mobile
+                    sm: "45%",  // tablet
+                    md: "30%",  // desktop
+                },
+                maxWidth: "260px",
+                minWidth: "200px",
+                aspectRatio: "3 / 2",
+                m: 1,
                 borderRadius: "1rem",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
                 cursor: "pointer",
-                backgroundColor: "#ffffff", // Lighter background for a modern, clean look
-                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.1)", // Soft shadow for a more friendly feel
-                transition: "transform 0.2s ease, box-shadow 0.2s ease", // Smooth transition for hover
+                backgroundColor: "#fff",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease",
                 "&:hover": {
-                    transform: "scale(1.03)", // Slightly scale for a soft effect
-                    boxShadow: "0px 8px 18px rgba(0, 0, 0, 0.15)", // Lighter but larger shadow on hover
+                    transform: "scale(1.03)",
+                    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
                 },
             }}
-            onClick={() => onCardClick(tournament)}
         >
             <CardMedia
                 component="img"
                 loading="lazy"
                 alt={tournament.name}
-                src={`https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`}
+                src={imageUrl}
                 sx={{
-                    height: "60%", // Reduced height of the image to make it smaller
                     width: "100%",
+                    height: "75%",
                     objectFit: fitMode,
-                    borderBottom: "1px solid #eee", // Light border for separation
+                    borderBottom: "1px solid #eee",
                 }}
             />
             <CardContent
                 sx={{
-                    textAlign: "center",
-                    flexGrow: 1,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    p: 1,
+                    padding: "0.5rem",
+                    flexGrow: 1,
                 }}
             >
-                <Typography variant="h6" color="text.primary" fontWeight="bold">
+                <Typography
+                    variant="subtitle2"
+                    fontWeight="bold"
+                    textAlign="center"
+                    noWrap
+                    sx={{
+                        fontSize: {
+                            xs: "0.9rem",
+                            sm: "1rem",
+                        },
+                    }}
+                >
                     {tournament.name}
                 </Typography>
             </CardContent>
         </Card>
-
     );
 }
