@@ -7,7 +7,8 @@ const tournamentAdSlots = {
     "La Liga 24/25": "1775536505",
     "Serie A 24/25": "6112939593",
     "Bundesliga 24/25": "2187513741",
-    "AFC Champions League 24/25": "4022258026"
+    "AFC Champions League 24/25": "4022258026",
+    "FIFA Club World Cup 25": "5252698771"
 };
 
 export default tournamentAdSlots;
