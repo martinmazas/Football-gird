@@ -23,7 +23,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
                 width: {
                     xs: "80vw", // mobile
                     sm: "45%",  // tablet
-                    md: "30%",  // desktop
+                    md: "15%",  // desktop
                 },
                 maxWidth: "260px",
                 minWidth: "200px",
@@ -73,6 +73,7 @@ export default function TournamentCard({ tournament, onCardClick }) {
                         fontSize: {
                             xs: "0.9rem",
                             sm: "1rem",
+                            md: "0.8rem"
                         },
                     }}
                 >

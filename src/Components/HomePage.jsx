@@ -22,7 +22,7 @@ export default function HomePage() {
                 <Box
                     sx={{
                         minHeight: "100vh",
-                        backgroundColor: "#121212", // your dark background
+                        backgroundColor: "#121212",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
@@ -32,7 +32,7 @@ export default function HomePage() {
                     <Container
                         maxWidth="md"
                         sx={{
-                            backgroundColor: "#1e1e1e", // matches darker tone
+                            backgroundColor: "#1e1e1e",
                             borderRadius: "12px",
                             p: 4,
                             boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
