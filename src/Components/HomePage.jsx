@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import TournamentCard from "./TournamentCard";
 import { useState } from "react";
 import InstructionsCard from "./InstructionsCard";
-import TournamentAd from "./TournamentAd";
+import BelowGameAd from "./BelowGameAd";
+// import TournamentAd from "./TournamentAd";
 const tournaments = require("../Utils/tournaments.json");
 
 export default function HomePage() {
@@ -65,7 +66,8 @@ export default function HomePage() {
                                 <TournamentCard key={t.id} tournament={t} onCardClick={handleCardClick} />
                             ))}
                         </Box>
-                        <TournamentAd slotId="1939413371" />
+                        <BelowGameAd tournament={"HOME"} />
+                        {/* <TournamentAd slotId="1939413371" /> */}
                     </Container>
                 </Box>
             )}
