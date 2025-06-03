@@ -1,3 +1,4 @@
+import React from "react"
 import './Styles/index.css'
 import ResponsiveImage from "./ResponsiveImage"
 const s3Path = 'https://db3l8v64ekfvu.cloudfront.net/images/Team-shield/'
