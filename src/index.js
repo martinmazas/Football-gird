@@ -5,13 +5,15 @@ import App from './App';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './Components/HomePage';
 
-createRoot(
-  document.getElementById('root')
-).render(
-  <Router>
-    <Routes>
-      <Route exact path='/' Component={HomePage} />
-      <Route exact path='/app' Component={App} />
-    </Routes>
-  </Router>
+const root = createRoot(document.getElementById('root'));
+
+root.render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/app' element={<App />} />
+      </Routes>
+    </Router>
+  </React.StrictMode>
 )

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import ResponsiveImage from '../ResponsiveImage';
 import { createRoot } from 'react-dom/client';
+import { formattedTournament } from './utils';
 const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080';
 const axiosConfig = {
     headers: {
@@ -15,8 +16,7 @@ const handleError = (err, customMessage) => {
 
 export const getPlayParams = async (tournament) => {
     // Request from the back the teams and countries for the specific tournament
-    tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-    axiosConfig.headers["tournament"] = tournament
+    axiosConfig.headers["tournament"] = formattedTournament(tournament)
     try {
         const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
         return data
@@ -27,8 +27,7 @@ export const getPlayParams = async (tournament) => {
 
 export const getPlayer = async (playerName, tournament) => {
     try {
-        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-        axiosConfig.headers["tournament"] = tournament
+        axiosConfig.headers["tournament"] = formattedTournament(tournament)
         const { data } = await axios.get(`${server}/api/players/options`, {
             ...axiosConfig,
             params: {
@@ -43,8 +42,7 @@ export const getPlayer = async (playerName, tournament) => {
 
 export const guessPlayer = async (playerName, setIsError, combinations, setCombinations, tournament) => {
     try {
-        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-        axiosConfig.headers["tournament"] = tournament
+        axiosConfig.headers["tournament"] = formattedTournament(tournament)
         const { data } = await axios.get(`${server}/api/players/guess`, {
             ...axiosConfig,
             params: {
