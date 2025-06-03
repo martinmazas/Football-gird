@@ -1,1 +1,0 @@
-export const formattedTournament = (tournament) => tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim()
