@@ -55,16 +55,20 @@ const adConfig = {
 export default function BelowGameAd({ tournament }) {
     const config = adConfig[tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim()];
     const adRef = useRef(null);
+    const slot = useRef(null);
+    const refreshInterval = 60000;
 
     useEffect(() => {
         if (!config || !window.googletag?.pubads) return;
 
+        let intervalId;
+        let observer;
+
         window.googletag.cmd.push(() => {
             try {
-                // Clear existing slot to avoid duplication
                 window.googletag.destroySlots();
 
-                window.googletag
+                slot.current = window.googletag
                     .defineSlot(config.adUnitPath, [[728, 90], [320, 50]], config.slotId)
                     .addService(window.googletag.pubads());
 
@@ -75,13 +79,41 @@ export default function BelowGameAd({ tournament }) {
                 console.error("AdManager error:", e);
             }
         });
+
+        if (IntersectionObserver && adRef.current) {
+            observer = new IntersectionObserver(
+                (entries) => {
+                    const entry = entries[0];
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        intervalId = setInterval(() => {
+                            if (window.googletag?.pubads && slot.current) {
+                                window.googletag.pubads().refresh([slot.current]);
+                            }
+                        }, refreshInterval);
+                        observer.disconnect();
+                    }
+                },
+                { threshold: 0.5 }
+            );
+            observer.observe(adRef.current);
+        }
+
+        return () => {
+            observer?.disconnect();
+            clearInterval(intervalId);
+        };
     }, [config]);
 
     return (
         <div
             id={config?.slotId}
             ref={adRef}
-            style={{ minWidth: "320px", minHeight: "50px", textAlign: "center", marginTop: "2rem" }}
+            style={{
+                minWidth: "320px",
+                minHeight: "50px",
+                textAlign: "center",
+                marginTop: "2rem",
+            }}
         ></div>
     );
 }

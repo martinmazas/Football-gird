@@ -50,6 +50,18 @@
   <title>Football Grid Game - Guess Players from Top Leagues</title>
   <meta name="google-adsense-account" content="ca-pub-6840620846200583">
   <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+  <script>
+    window.googletag = window.googletag || { cmd: [] };
+    googletag.cmd.push(function () {
+      googletag.pubads().enableLazyLoad({
+        fetchMarginPercent: 100, // Load ads when 100% viewport away
+        renderMarginPercent: 50, // Render ads when 50% viewport away
+        mobileScaling: 2.0        // Adjust fetch/render margin for mobile
+      });
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  </script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
