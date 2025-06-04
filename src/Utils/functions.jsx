@@ -1,7 +1,8 @@
 import axios from 'axios'
 import ResponsiveImage from '../ResponsiveImage';
 import { createRoot } from 'react-dom/client';
-const server = process.env.NODE_ENV === 'production' ? 'https://football-grid-edd30e867195.herokuapp.com' : 'http://localhost:8080';
+const server = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PRODUCTION_SERVER : 'http://localhost:8080';
+
 const axiosConfig = {
     headers: {
         "Content-Type": "application/json"
