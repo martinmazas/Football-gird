@@ -1,12 +1,18 @@
 import axios from 'axios'
 import ResponsiveImage from '../ResponsiveImage';
 import { createRoot } from 'react-dom/client';
+import { cleanTournamentName } from './formatters';
 const server = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_PRODUCTION_SERVER : 'http://localhost:8080';
 
 const axiosConfig = {
     headers: {
         "Content-Type": "application/json"
     },
+}
+
+const setTournamentHeader = (tournament) => {
+    tournament = cleanTournamentName(tournament)
+    axiosConfig.headers["tournament"] = tournament
 }
 
 const handleError = (err, customMessage) => {
@@ -16,8 +22,7 @@ const handleError = (err, customMessage) => {
 
 export const getPlayParams = async (tournament) => {
     // Request from the back the teams and countries for the specific tournament
-    tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-    axiosConfig.headers["tournament"] = tournament
+    setTournamentHeader(tournament)
     try {
         const { data } = await axios.get(`${server}/api/parameters`, { ...axiosConfig });
         return data
@@ -28,8 +33,7 @@ export const getPlayParams = async (tournament) => {
 
 export const getPlayer = async (playerName, tournament) => {
     try {
-        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-        axiosConfig.headers["tournament"] = tournament
+        setTournamentHeader(tournament)
         const { data } = await axios.get(`${server}/api/players/options`, {
             ...axiosConfig,
             params: {
@@ -44,8 +48,7 @@ export const getPlayer = async (playerName, tournament) => {
 
 export const guessPlayer = async (playerName, setIsError, combinations, setCombinations, tournament) => {
     try {
-        tournament = tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim() // Get only the tournament name
-        axiosConfig.headers["tournament"] = tournament
+        setTournamentHeader(tournament)
         const { data } = await axios.get(`${server}/api/players/guess`, {
             ...axiosConfig,
             params: {

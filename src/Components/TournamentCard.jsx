@@ -4,8 +4,8 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 export default function TournamentCard({ tournament, onCardClick }) {
     const [fitMode, setFitMode] = useState("scale-down");
 
-    const imageUrl = `https://db3l8v64ekfvu.cloudfront.net/Tournament/${tournament.img}.webp`;
-
+    const imageUrl = `${process.env.REACT_APP_S3}/Tournament/${tournament.img}.webp`;
+ 
     useEffect(() => {
         const img = new Image();
         img.src = imageUrl;

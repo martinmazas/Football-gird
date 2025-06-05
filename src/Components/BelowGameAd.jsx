@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { cleanTournamentName } from "../Utils/formatters";
 
 // Mapping tournament to adUnitPath and slotId
 const adConfig = {
@@ -53,7 +54,7 @@ const adConfig = {
 };
 
 export default function BelowGameAd({ tournament }) {
-    const config = adConfig[tournament.toUpperCase().replace(/\s\d+(\/*\d+)?/, '').trim()];
+    const config = adConfig[cleanTournamentName(tournament)];
     const adRef = useRef(null);
     const slot = useRef(null);
     const refreshInterval = 60000;

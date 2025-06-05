@@ -4,7 +4,6 @@ import TournamentCard from "./TournamentCard";
 import { useState } from "react";
 import InstructionsCard from "./InstructionsCard";
 import BelowGameAd from "./BelowGameAd";
-// import TournamentAd from "./TournamentAd";
 const tournaments = require("../Utils/tournaments.json");
 
 export default function HomePage() {
@@ -67,7 +66,6 @@ export default function HomePage() {
                             ))}
                         </Box>
                         <BelowGameAd tournament={"HOME"} />
-                        {/* <TournamentAd slotId="1939413371" /> */}
                     </Container>
                 </Box>
             )}

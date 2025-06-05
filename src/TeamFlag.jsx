@@ -1,7 +1,6 @@
-import React from "react"
 import './Styles/index.css'
 import ResponsiveImage from "./ResponsiveImage"
-const s3Path = 'https://db3l8v64ekfvu.cloudfront.net/images/Team-shield/'
+const s3Path = `${process.env.REACT_APP_S3}/images/Team-shield/`
 
 const TeamFlag = (props) => {
     const { team } = { ...props }
