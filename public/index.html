@@ -4,9 +4,15 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/ball.png" />
+  <meta http-equiv="content-language" content="en" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="alternate" href="URL" hreflang="en" />
-  <link rel="alternate" href="URL" hreflang="es" />
+
+  <!-- hreflang for multilingual SEO -->
+  <link rel="alternate" href="https://football-grid.netlify.app/" hreflang="en" />
+  <link rel="alternate" href="https://football-grid.netlify.app/es" hreflang="es" />
+  <link rel="alternate" href="https://football-grid.netlify.app/pt" hreflang="pt" />
+  <link rel="alternate" href="https://football-grid.netlify.app/fr" hreflang="fr" />
+  <link rel="alternate" href="https://football-grid.netlify.app/" hreflang="x-default" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
@@ -14,15 +20,7 @@
   <!-- Descriptions for SEO -->
   <meta name="google-site-verification" content="V1tD9xm5H5lLMIAZT0d-zZ7PLTeRBLsCxxZ0OZCw0vI" />
   <meta name="description"
-    content="Football Grid Game - Guess players from Champions League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Copa Libertadores, Concacaf Champions, Europa League, and Premier League! Can you get them all? Play now!" />
-  <meta name="description" lang="es"
-    content="Juego de Cuadrícula de Fútbol - Adivina jugadores de la Champions League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Copa Libertadores, Concacaf Champions, Europa League y Premier League. ¡Juega ahora!" />
-  <meta name="description" lang="pt"
-    content="Jogo da Grade de Futebol - Adivinhe jogadores da Champions League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Copa Libertadores, Concacaf Champions, Europa League e Premier League. Jogue agora!" />
-  <meta name="description" lang="fr"
-    content="Jeu de Grille de Football - Devinez les joueurs de la Ligue des Champions, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Copa Libertadores, Concacaf Champions, Europa League et Premier League. Jouez maintenant!" />
-
-
+    content="Football Grid Game - Guess players from Champions League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Copa Libertadores, Concacaf Champions, Europa League, and Premier League! Available in English, Spanish, Portuguese and French." />
   <meta name="keywords"
     content="Football Grid, Champions League, Premier League, Copa Libertadores, Concacaf Champions, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Europe League, Soccer Game, Football Quiz, Interactive Football, Sports Trivia, Guess Football Players, Online Soccer Game, Grilla de Futbol, Grade de futebol" />
 
@@ -31,23 +29,22 @@
     content="Football Grid Game - Guess Current Champions League, Premier League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, Copa Libertadores, Concacaf Champions, Europe League & MLS Players!" />
   <meta property="og:description"
     content="Play the Football Grid Game and test your knowledge of current Champions League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, Premier League, MLS, Copa Libertadores, Concacaf Champions & Europa League players! Can you guess them all?" />
-
-  <meta property="og:image" content="%PUBLIC_URL%/football-grid-thumbnail.png" />
+  <meta property="og:image" content="https://football-grid.netlify.app/football-grid-thumbnail.png" />
   <meta property="og:url" content="https://football-grid.netlify.app" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card for social media sharing -->
   <meta name="twitter:title"
     content="Football Grid Game - Guess Active Champions, Premier League, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, MLS, Libertadores & Europa Players!" />
   <meta name="twitter:description"
     content="Can you guess all the current Champions League, Premier League, MLS, La Liga, Serie A, Bundesliga, FIFA Club World Cup, World Cup, AFC Champions League, Libertadores & Europa League players? Play now and test your football knowledge!" />
-  <meta name="twitter:image" content="%PUBLIC_URL%/football-grid-thumbnail.png" />
-
-  <link rel="icon" href="%PUBLIC_URL%/ball.png" />
+  <meta name="twitter:image" content="https://football-grid.netlify.app/football-grid-thumbnail.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
   <!-- Page Title -->
   <title>Football Grid Game - Guess Players from Top Leagues</title>
+
   <meta name="google-adsense-account" content="ca-pub-6840620846200583">
   <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
   <script>
@@ -62,6 +59,7 @@
       googletag.enableServices();
     });
   </script>
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -75,7 +73,7 @@
         "query-input": "required name=search_term_string"
       }
     }
-    </script>
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6840620846200583"
     crossorigin="anonymous"></script>
 </head>
