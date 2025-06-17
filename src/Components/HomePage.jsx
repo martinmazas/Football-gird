@@ -39,6 +39,7 @@ export default function HomePage() {
                             border: "1px solid #2a2a2a",
                         }}
                     >
+                        <BelowGameAd tournament={"HOME"} />
                         <Typography
                             variant="h4"
                             sx={{
@@ -65,7 +66,6 @@ export default function HomePage() {
                                 <TournamentCard key={t.id} tournament={t} onCardClick={handleCardClick} />
                             ))}
                         </Box>
-                        <BelowGameAd tournament={"HOME"} />
                     </Container>
                 </Box>
             )}

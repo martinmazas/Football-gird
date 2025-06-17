@@ -76,12 +76,10 @@ const App = () => {
                     gap: { xs: 3, md: 4 },
                 }}
             >
-
                 {/* Main Grid Table */}
                 <Box
                     sx={{
                         width: '100%',
-                        maxWidth: '900px',
                         display: 'flex',
                         justifyContent: 'center',
                         px: { xs: 1, sm: 2 },

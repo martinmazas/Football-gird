@@ -110,10 +110,13 @@ export default function BelowGameAd({ tournament }) {
             id={config?.slotId}
             ref={adRef}
             style={{
-                minWidth: "320px",
+                width: '100%',
+                maxWidth: '100vw',
+                overflowX: 'hidden',
                 minHeight: "50px",
                 textAlign: "center",
-                marginTop: "2rem",
+                marginTop: "0.5rem",
+                marginBottom: '1rem',
             }}
         ></div>
     );

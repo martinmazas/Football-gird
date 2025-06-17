@@ -6,11 +6,7 @@ export default function GridTable(props) {
         <Box
             component="table"
             sx={{
-                margin: {
-                    xs: "3rem auto 0",
-                    md: "5rem auto 0",
-                    sm: "9rem auto 0"
-                }
+                // margin: '1.5rem auto 0'
             }}
         >
             {props.gameParams.teams.length > 0 && <Cells props={props} />}
