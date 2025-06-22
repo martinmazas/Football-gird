@@ -116,6 +116,8 @@ export default function BelowGameAd({ tournament }) {
                 overflowX: 'hidden',
                 marginTop: '1rem',
                 marginBottom: '1rem',
+                padding: '0 1rem',
+                boxSizing: 'border-box',
             }}
         >
             <div
@@ -124,13 +126,13 @@ export default function BelowGameAd({ tournament }) {
                 style={{
                     width: '100%',
                     maxWidth: '728px',
-                    minHeight: '50px',
+                    height: 'auto',           // Let it adjust
+                    minHeight: '50px',        // For mobile fallback
                     textAlign: 'center',
-                    // backgroundColor: '#f9f9f9', // Optional for dev styling
-                    // borderRadius: '8px',         // Optional for nice visual
-                    // boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)', // Optional soft shadow
+                    overflow: 'hidden',
                 }}
             />
         </div>
     );
+
 }
