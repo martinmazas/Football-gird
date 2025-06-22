@@ -107,17 +107,30 @@ export default function BelowGameAd({ tournament }) {
 
     return (
         <div
-            id={config?.slotId}
-            ref={adRef}
             style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 width: '100%',
                 maxWidth: '100vw',
                 overflowX: 'hidden',
-                minHeight: "50px",
-                textAlign: "center",
-                marginTop: "0.5rem",
+                marginTop: '1rem',
                 marginBottom: '1rem',
             }}
-        ></div>
+        >
+            <div
+                id={config?.slotId}
+                ref={adRef}
+                style={{
+                    width: '100%',
+                    maxWidth: '728px',
+                    minHeight: '50px',
+                    textAlign: 'center',
+                    // backgroundColor: '#f9f9f9', // Optional for dev styling
+                    // borderRadius: '8px',         // Optional for nice visual
+                    // boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)', // Optional soft shadow
+                }}
+            />
+        </div>
     );
 }
