@@ -113,7 +113,7 @@ export default function BelowGameAd({ tournament }) {
                 alignItems: 'center',
                 width: '100%',
                 maxWidth: '100vw',
-                overflowX: 'hidden',
+                // overflowX: 'hidden',
                 marginTop: '1rem',
                 marginBottom: '1rem',
                 padding: '0 1rem',
@@ -129,7 +129,7 @@ export default function BelowGameAd({ tournament }) {
                     height: 'auto',           // Let it adjust
                     minHeight: '50px',        // For mobile fallback
                     textAlign: 'center',
-                    overflow: 'hidden',
+                    // overflow: 'hidden',
                 }}
             />
         </div>
