@@ -67,10 +67,19 @@ export default function BelowGameAd({ tournament }) {
 
         window.googletag.cmd.push(() => {
             try {
+                // Remove existing slots to prevent duplication
                 window.googletag.destroySlots();
 
+                // Define size mapping for responsive ads
+                const mapping = window.googletag.sizeMapping()
+                    .addSize([728, 0], [[728, 90]])   // Desktop
+                    .addSize([0, 0], [[320, 50]])     // Mobile
+                    .build();
+
+                // Define the ad slot with responsive sizes
                 slot.current = window.googletag
                     .defineSlot(config.adUnitPath, [[728, 90], [320, 50]], config.slotId)
+                    .defineSizeMapping(mapping)
                     .addService(window.googletag.pubads());
 
                 window.googletag.pubads().enableSingleRequest();
@@ -106,18 +115,25 @@ export default function BelowGameAd({ tournament }) {
     }, [config]);
 
     return (
-
         <div
-            id={config?.slotId}
-            ref={adRef}
             style={{
-                minWidth: '320px',
-                minHeight: "50px",
-                textAlign: "center",
-                marginTop: "0.5rem",
-                marginBottom: '1rem',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                margin: '1rem 0',
+                overflowX: 'hidden',
             }}
-        />
+        >
+            <div
+                id={config?.slotId}
+                ref={adRef}
+                style={{
+                    width: '100%',
+                    maxWidth: '728px',
+                    minHeight: '90px', // reserve height to avoid layout shift
+                    textAlign: 'center',
+                }}
+            />
+        </div>
     );
-
 }
