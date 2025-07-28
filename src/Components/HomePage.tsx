@@ -4,13 +4,16 @@ import TournamentCard from "./TournamentCard";
 import { useState } from "react";
 import InstructionsCard from "./InstructionsCard";
 import BelowGameAd from "./BelowGameAd";
-const tournaments = require("../Utils/tournaments.json");
+import { Tournament } from "../Types/types";
+import tournamentsData from "../Utils/tournaments.json";
+
+const tournaments: Tournament[] = tournamentsData;
 
 export default function HomePage() {
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(true);
 
-    const handleCardClick = (tournament) => {
+    const handleCardClick = (tournament: Tournament) => {
         navigate(`/app?tournament=${tournament.name}`);
     };
 
