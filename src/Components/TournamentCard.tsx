@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { TournamentCardProps } from "../Types/types";
 
-export default function TournamentCard({ tournament, onCardClick }) {
+export default function TournamentCard({ tournament, onCardClick }: TournamentCardProps) {
     const [fitMode, setFitMode] = useState("scale-down");
 
     const imageUrl = `${process.env.REACT_APP_S3}/Tournament/${tournament.img}.webp`;

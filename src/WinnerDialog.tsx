@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
+import { WinnerDialogProps } from './Types/types';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -20,9 +20,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     },
 }));
 
-export default function WinnerDialog(props) {
-    const { handleRestartButton, count, setEndGame } = props;
-
+export default function WinnerDialog({ handleRestartButton, count, setEndGame} : WinnerDialogProps ) {
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Detect mobile screens
 
