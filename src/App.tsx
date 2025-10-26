@@ -133,12 +133,10 @@ const App: React.FC = () => {
             <p style={{ margin: 0 }}>{isError}</p>
           </div>
         )}
-        <StickyOutstreamFooter
+        {/* <StickyOutstreamFooter
           tournament={tournament ?? undefined}
           showDelayMs={3500} // or render conditionally after game over
-          onDisplayed={() => console.log("Video sticky displayed")}
-          onClose={() => console.log("Video sticky closed")}
-        />
+        /> */}
         <BelowGameAd tournament={tournament} />
       </Container>
 
