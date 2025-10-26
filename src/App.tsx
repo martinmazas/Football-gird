@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import { Country, Team } from "./Types/types";
-import StickyOutstreamFooter from "./Components/StickyOutstreamFooter";
+// import StickyOutstreamFooter from "./Components/StickyOutstreamFooter";
 
 interface GameParams {
   countries: Country[];
