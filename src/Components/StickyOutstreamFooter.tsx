@@ -1,61 +1,76 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 
 type Props = {
-  /** Optional key-value (e.g., "UCL", "Libertadores") to segment reports in GAM */
   tournament?: string;
-  /** Delay before showing the sticky (ms) */
+  /** delay before showing the sticky */
   showDelayMs?: number;
-  /** Called once when GPT actually displays the slot */
+  /** min height of the video box (visual skeleton) */
+  minHeight?: number;   // default 120
+  /** max height clamp (clips tall creatives) */
+  maxHeight?: number;   // default 220
+  /** only show on screens >= this width (px) */
+  minViewportWidth?: number; // default 360
   onDisplayed?: () => void;
-  /** Called when user closes the sticky */
   onClose?: () => void;
 };
 
-/** Your out-stream/non-instream video ad unit */
 const AD_UNIT_PATH = "/23297979034/fg_outstream_1";
-/** Use fluid for responsive out-stream */
 const AD_SIZE: googletag.GeneralSize = "fluid";
 
-/** Prevent multiple sticky footers at once */
 let stickyInUse = false;
 
 const StickyOutstreamFooter: React.FC<Props> = ({
   tournament,
-  showDelayMs = 3500,
+  showDelayMs = 2500,
+  minHeight = 120,
+  maxHeight = 220,
+  minViewportWidth = 360,
   onDisplayed,
   onClose,
 }) => {
   const [visible, setVisible] = useState(false);
   const [displayed, setDisplayed] = useState(false);
   const [closed, setClosed] = useState(false);
+  const [hasFill, setHasFill] = useState<boolean | null>(null); // null = unknown, true = filled, false = empty
 
   const divId = useId().replace(/:/g, "_");
   const slotRef = useRef<googletag.Slot | null>(null);
 
-  // Define the slot on mount (do NOT destroy all slots!)
   useEffect(() => {
+    // respect viewport threshold (avoid tiny devices)
+    if (window.innerWidth < minViewportWidth) return;
     if (!window.googletag?.pubads) return;
-    if (stickyInUse) return; // only one sticky at a time
+    if (stickyInUse) return;
     stickyInUse = true;
 
     const openTimer = window.setTimeout(() => setVisible(true), showDelayMs);
 
+    const onSlotRender = (e: googletag.events.SlotRenderEndedEvent) => {
+      if (slotRef.current && e.slot === slotRef.current) {
+        if (e.isEmpty) {
+          setHasFill(false);
+          setVisible(false); // hide if no ad
+        } else {
+          setHasFill(true);
+        }
+      }
+    };
+
     window.googletag.cmd.push(() => {
-      // Define only this slot
+      // listen for render result
+      window.googletag.pubads().addEventListener("slotRenderEnded", onSlotRender);
+
+      // define only this slot
       const slot = window.googletag.defineSlot(AD_UNIT_PATH, AD_SIZE, divId);
       if (!slot) return;
 
       slot.addService(window.googletag.pubads());
       slotRef.current = slot;
 
-      // Optional key-value targeting for your reports
       if (tournament) {
-        window.googletag
-          .pubads()
-          .setTargeting("tournament", String(tournament));
+        window.googletag.pubads().setTargeting("tournament", String(tournament));
       }
 
-      // Safe to call multiple times, GPT guards internally
       window.googletag.pubads().enableSingleRequest();
       window.googletag.enableServices();
     });
@@ -63,21 +78,18 @@ const StickyOutstreamFooter: React.FC<Props> = ({
     return () => {
       window.clearTimeout(openTimer);
       window.googletag?.cmd.push(() => {
+        try {
+          window.googletag.pubads().removeEventListener("slotRenderEnded", onSlotRender as any);
+        } catch {}
         if (slotRef.current) {
-          try {
-            window.googletag.destroySlots([slotRef.current]);
-          } catch {
-            // ignore
-          } finally {
-            slotRef.current = null;
-          }
+          try { window.googletag.destroySlots([slotRef.current]); } catch {}
+          slotRef.current = null;
         }
         stickyInUse = false;
       });
     };
-  }, [divId, showDelayMs, tournament]);
+  }, [divId, showDelayMs, minViewportWidth, tournament]);
 
-  // Display once the bar becomes visible
   useEffect(() => {
     if (closed || displayed || !visible) return;
     window.googletag?.cmd.push(() => {
@@ -87,7 +99,10 @@ const StickyOutstreamFooter: React.FC<Props> = ({
     });
   }, [closed, displayed, visible, divId, onDisplayed]);
 
-  if (closed) return null;
+  if (closed || !visible) return null;
+
+  // If render came back empty, we already hid it; guard anyway:
+  if (hasFill === false) return null;
 
   return (
     <div
@@ -98,30 +113,25 @@ const StickyOutstreamFooter: React.FC<Props> = ({
         right: 0,
         bottom: 0,
         zIndex: 2147483000,
-        display: visible ? "block" : "none",
       }}
     >
       <div
         style={{
           margin: "0 auto",
           maxWidth: 820,
-          padding: "8px 12px calc(8px + env(safe-area-inset-bottom))",
+          padding: "6px 10px calc(6px + env(safe-area-inset-bottom))",
           background: "rgba(18,18,18,0.98)",
-          boxShadow: "0 -6px 18px rgba(0,0,0,0.35)",
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
+          boxShadow: "0 -6px 16px rgba(0,0,0,0.35)",
+          borderTopLeftRadius: 14,
+          borderTopRightRadius: 14,
           color: "#fff",
         }}
       >
-        {/* header */}
-        <div style={{ display: "flex", alignItems: "center", marginBottom: 6 }}>
-          <span style={{ fontSize: 12, opacity: 0.7 }}>Sponsored</span>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: 4 }}>
+          <span style={{ fontSize: 11, opacity: 0.7 }}>Sponsored</span>
           <button
             aria-label="Close ad"
-            onClick={() => {
-              setClosed(true);
-              onClose?.();
-            }}
+            onClick={() => { setClosed(true); onClose?.(); }}
             style={{
               marginLeft: "auto",
               background: "transparent",
@@ -137,13 +147,13 @@ const StickyOutstreamFooter: React.FC<Props> = ({
           </button>
         </div>
 
-        {/* the out-stream slot (fluid) */}
+        {/* slot wrapper — compact & clipped */}
         <div
           id={divId}
           style={{
             width: "100%",
-            minHeight: 180, // prevents “empty bar” while loading
-            maxHeight: "42vh", // don’t cover too much of the game
+            minHeight,            // smaller skeleton while loading
+            maxHeight,            // clip tall creatives; reduces “visual noise”
             overflow: "hidden",
             borderRadius: 12,
             background: "#111",

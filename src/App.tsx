@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import { Country, Team } from "./Types/types";
-// import StickyOutstreamFooter from "./Components/StickyOutstreamFooter";
+import StickyOutstreamFooter from "./Components/StickyOutstreamFooter";
 
 interface GameParams {
   countries: Country[];
@@ -133,10 +133,10 @@ const App: React.FC = () => {
             <p style={{ margin: 0 }}>{isError}</p>
           </div>
         )}
-        {/* <StickyOutstreamFooter
+        <StickyOutstreamFooter
           tournament={tournament ?? undefined}
           showDelayMs={3500} // or render conditionally after game over
-        /> */}
+        />
         <BelowGameAd tournament={tournament} />
       </Container>
 
