@@ -1,7 +1,9 @@
-export {};
+import "google-publisher-tag";
 
 declare global {
   interface Window {
-    googletag?: any; // You can replace `any` with a more specific type later if needed
+    googletag: googletag.Googletag;
   }
 }
+
+export {};

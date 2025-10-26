@@ -3,10 +3,7 @@ import { cleanTournamentName } from "../Utils/formatters";
 
 // Mapping tournament to adUnitPath and slotId
 const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
-  HOME: {
-    adUnitPath: "/23297979034/below_game_table",
-    slotId: "div-gpt-ad",
-  },
+  HOME: { adUnitPath: "/23297979034/below_game_table", slotId: "div-gpt-ad" },
   "CHAMPIONS LEAGUE": {
     adUnitPath: "/23297979034/below_game_table_cl",
     slotId: "div-gpt-ad-cl",
@@ -53,24 +50,30 @@ const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
   },
 };
 
-const BelowGameAd = ({ tournament }: { tournament: string | null }) => {
+type Props = { tournament: string | null };
+
+const BelowGameAd = ({ tournament }: Props) => {
   const config = adConfig[cleanTournamentName(tournament)];
   const adRef = useRef<HTMLDivElement | null>(null);
-  const slot = useRef<any>(null);
-  const refreshInterval = 60000;
+  const slotRef = useRef<googletag.Slot | null>(null);
+  const refreshIntervalMs = 60_000;
 
   useEffect(() => {
+    // Guard: need config and GPT loaded
     if (!config || !window.googletag?.pubads) return;
 
-    let intervalId: NodeJS.Timeout;
-    let observer: IntersectionObserver;
+    let intervalId: ReturnType<typeof setInterval> | null = null;
+    let observer: IntersectionObserver | null = null;
 
     window.googletag.cmd.push(() => {
       try {
-        // Remove existing slots to prevent duplication
-        window.googletag.destroySlots();
+        // Destroy ONLY this component's previous slot
+        if (slotRef.current) {
+          window.googletag.destroySlots([slotRef.current]);
+          slotRef.current = null;
+        }
 
-        // Define size mapping for responsive ads
+        // Responsive size mapping
         const mapping = window.googletag
           .sizeMapping()
           .addSize([728, 0], [[728, 90]]) // Desktop
@@ -78,37 +81,45 @@ const BelowGameAd = ({ tournament }: { tournament: string | null }) => {
           .build();
 
         // Define the ad slot with responsive sizes
-        slot.current = window.googletag
-          .defineSlot(
-            config.adUnitPath,
-            [
-              [728, 90],
-              [320, 50],
-            ],
-            config.slotId
-          )
-          .defineSizeMapping(mapping)
-          .addService(window.googletag.pubads());
+        const slot = window.googletag.defineSlot(
+          config.adUnitPath,
+          [
+            [728, 90],
+            [320, 50],
+          ],
+          config.slotId
+        );
 
+        if (!slot) return;
+
+        slot.defineSizeMapping(mapping).addService(window.googletag.pubads());
+        slotRef.current = slot;
+
+        // Safe to call multiple times; GPT guards internally
         window.googletag.pubads().enableSingleRequest();
         window.googletag.enableServices();
+
+        // Display the slot
         window.googletag.display(config.slotId);
       } catch (e) {
+        // Keep failures non-fatal to your app
+        // eslint-disable-next-line no-console
         console.error("AdManager error:", e);
       }
     });
 
-    if (IntersectionObserver && adRef.current) {
+    // Start refreshing ONLY after it was ≥50% in view once
+    if ("IntersectionObserver" in window && adRef.current) {
       observer = new IntersectionObserver(
         (entries) => {
           const entry = entries[0];
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          if (entry?.isIntersecting && entry.intersectionRatio >= 0.5) {
             intervalId = setInterval(() => {
-              if (window.googletag?.pubads && slot.current) {
-                window.googletag.pubads().refresh([slot.current]);
+              if (window.googletag?.pubads && slotRef.current) {
+                window.googletag.pubads().refresh([slotRef.current]);
               }
-            }, refreshInterval);
-            observer.disconnect();
+            }, refreshIntervalMs);
+            observer?.disconnect();
           }
         },
         { threshold: 0.5 }
@@ -116,9 +127,22 @@ const BelowGameAd = ({ tournament }: { tournament: string | null }) => {
       observer.observe(adRef.current);
     }
 
+    // Cleanup
     return () => {
       observer?.disconnect();
-      clearInterval(intervalId);
+      if (intervalId) clearInterval(intervalId);
+
+      window.googletag?.cmd.push(() => {
+        if (slotRef.current) {
+          try {
+            window.googletag.destroySlots([slotRef.current]);
+          } catch {
+            // ignore
+          } finally {
+            slotRef.current = null;
+          }
+        }
+      });
     };
   }, [config]);
 

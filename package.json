@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/google-publisher-tag": "^1.20250811.1",
     "@types/lodash": "^4.17.20",
     "webpack-dev-middleware": "^7.2.1"
   }
