@@ -109,23 +109,23 @@ const BelowGameAd = ({ tournament }: Props) => {
     });
 
     // Start refreshing ONLY after it was ≥50% in view once
-    if ("IntersectionObserver" in window && adRef.current) {
-      observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          if (entry?.isIntersecting && entry.intersectionRatio >= 0.5) {
-            intervalId = setInterval(() => {
-              if (window.googletag?.pubads && slotRef.current) {
-                window.googletag.pubads().refresh([slotRef.current]);
-              }
-            }, refreshIntervalMs);
-            observer?.disconnect();
-          }
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(adRef.current);
-    }
+    // if ("IntersectionObserver" in window && adRef.current) {
+    //   observer = new IntersectionObserver(
+    //     (entries) => {
+    //       const entry = entries[0];
+    //       if (entry?.isIntersecting && entry.intersectionRatio >= 0.5) {
+    //         intervalId = setInterval(() => {
+    //           if (window.googletag?.pubads && slotRef.current) {
+    //             window.googletag.pubads().refresh([slotRef.current]);
+    //           }
+    //         }, refreshIntervalMs);
+    //         observer?.disconnect();
+    //       }
+    //     },
+    //     { threshold: 0.5 }
+    //   );
+    //   observer.observe(adRef.current);
+    // }
 
     // Cleanup
     return () => {
