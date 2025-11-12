@@ -95,6 +95,10 @@ const App: React.FC = () => {
           gap: { xs: 3, md: 4 },
         }}
       >
+        <Box sx={{ width: "100%", textAlign: "center", mb: 2 }}>
+          <BelowGameAd tournament={tournament} />
+        </Box>
+
         {/* Main Grid Table */}
         <Box
           sx={{
@@ -137,7 +141,7 @@ const App: React.FC = () => {
           tournament={tournament ?? undefined}
           showDelayMs={3500} // or render conditionally after game over
         />
-        <BelowGameAd tournament={tournament} />
+        {/* <BelowGameAd tournament={tournament} /> */}
       </Container>
 
       {endGame && (
