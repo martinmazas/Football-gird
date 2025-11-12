@@ -129,8 +129,8 @@ const BelowGameAd = ({ tournament }: Props) => {
 
     // Cleanup
     return () => {
-      observer?.disconnect();
-      if (intervalId) clearInterval(intervalId);
+      // observer?.disconnect();
+      // if (intervalId) clearInterval(intervalId);
 
       window.googletag?.cmd.push(() => {
         if (slotRef.current) {
