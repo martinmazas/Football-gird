@@ -56,14 +56,14 @@ const BelowGameAd = ({ tournament }: Props) => {
   const config = adConfig[cleanTournamentName(tournament)];
   const adRef = useRef<HTMLDivElement | null>(null);
   const slotRef = useRef<googletag.Slot | null>(null);
-  const refreshIntervalMs = 60_000;
+  // const refreshIntervalMs = 60_000;
 
   useEffect(() => {
     // Guard: need config and GPT loaded
     if (!config || !window.googletag?.pubads) return;
 
-    let intervalId: ReturnType<typeof setInterval> | null = null;
-    let observer: IntersectionObserver | null = null;
+    // let intervalId: ReturnType<typeof setInterval> | null = null;
+    // let observer: IntersectionObserver | null = null;
 
     window.googletag.cmd.push(() => {
       try {
