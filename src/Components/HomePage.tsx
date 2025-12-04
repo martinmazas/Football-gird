@@ -88,7 +88,7 @@ export default function HomePage() {
                                         mx: "auto",
                                     }}
                                 >
-                                    Select a competition and dive into the grid. Every pick updates in real-time, whether you&apos;re on desktop or on the go.
+                                    Select a competition and dive into the grid. Every pick updates in real-time.
                                 </Typography>
                             </Box>
 
