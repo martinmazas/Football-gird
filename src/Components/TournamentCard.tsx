@@ -21,26 +21,23 @@ export default function TournamentCard({ tournament, onCardClick }: TournamentCa
         <Card
             onClick={() => onCardClick(tournament)}
             sx={{
-                width: {
-                    xs: "80vw", // mobile
-                    sm: "45%",  // tablet
-                    md: "15%",  // desktop
-                },
-                maxWidth: "260px",
-                minWidth: "200px",
-                aspectRatio: "3 / 2",
-                m: 1,
-                borderRadius: "1rem",
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                borderRadius: "16px",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
                 cursor: "pointer",
-                backgroundColor: "#fff",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-                transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                background:
+                    "linear-gradient(160deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 18px 40px rgba(0, 0, 0, 0.35)",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease",
                 "&:hover": {
-                    transform: "scale(1.03)",
-                    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
+                    transform: "translateY(-4px)",
+                    borderColor: "rgba(242,183,5,0.5)",
+                    boxShadow: "0 22px 50px rgba(0, 0, 0, 0.45)",
                 },
             }}
         >
@@ -51,9 +48,10 @@ export default function TournamentCard({ tournament, onCardClick }: TournamentCa
                 src={imageUrl}
                 sx={{
                     width: "100%",
-                    height: "75%",
+                    aspectRatio: "16 / 9",
                     objectFit: fitMode,
-                    borderBottom: "1px solid #eee",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
+                    backgroundColor: "#0e1729",
                 }}
             />
             <CardContent
@@ -61,21 +59,18 @@ export default function TournamentCard({ tournament, onCardClick }: TournamentCa
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "0.5rem",
+                    padding: "0.9rem",
                     flexGrow: 1,
                 }}
             >
                 <Typography
-                    variant="subtitle2"
+                    variant="subtitle1"
                     fontWeight="bold"
                     textAlign="center"
-                    noWrap
                     sx={{
-                        fontSize: {
-                            xs: "0.9rem",
-                            sm: "1rem",
-                            md: "0.8rem"
-                        },
+                        color: "#fdfdfd",
+                        lineHeight: 1.2,
+                        fontSize: { xs: "1rem", sm: "1.05rem" },
                     }}
                 >
                     {tournament.name}
