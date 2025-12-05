@@ -10,6 +10,7 @@ import { useCounter } from "./Hooks/useCounter";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
+import HeaderAd from "./Components/HeaderAd";
 import { Country, Team } from "./Types/types";
 import StickyOutstreamFooter from "./Components/StickyOutstreamFooter";
 
@@ -83,10 +84,10 @@ const App: React.FC = () => {
     <>
       <Container
         className="App-container"
-        maxWidth="xs"
+        maxWidth="md"
         sx={{
           position: "relative",
-          paddingTop: { xs: "4rem", sm: "3rem", md: "2rem" },
+          paddingTop: { xs: "5rem", sm: "3.5rem", md: "3rem" },
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
@@ -95,6 +96,24 @@ const App: React.FC = () => {
           gap: { xs: 3, md: 4 },
         }}
       >
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            px: { xs: 1.5, sm: 2 },
+            py: { xs: 1, sm: 1.5 },
+            mb: { xs: 1, sm: 2 },
+            borderRadius: "14px",
+            border: "1px solid rgba(255,255,255,0.06)",
+            background: "linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
+            boxShadow: "0 12px 30px rgba(0,0,0,0.35)",
+          }}
+        >
+          <HeaderAd />
+        </Box>
+
         {/* Main Grid Table */}
         <Box
           sx={{
