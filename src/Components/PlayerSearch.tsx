@@ -1,5 +1,5 @@
 import { getPlayer, guessPlayer } from "../Utils/functions";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { Box, Input } from "@mui/material";
 import debounce from "lodash/debounce";
 import "../Styles/index.css";
@@ -17,6 +17,9 @@ export default function PlayerSearch({
   const [options, setOptions] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchMovedRef = useRef(false);
+  const activeTouchIndexRef = useRef<number | null>(null);
 
   const fetchPlayers = async (query: string) => {
     if (!query) return;
@@ -133,6 +136,8 @@ export default function PlayerSearch({
       overflowY: "auto",
       display: isDropdownVisible ? "block" : "none",
       boxShadow: "0 14px 30px rgba(0,0,0,0.35)",
+      WebkitOverflowScrolling: "touch",
+      touchAction: "pan-y",
     },
     listItem: (isHighlighted: boolean) => ({
       padding: "10px",
@@ -163,7 +168,30 @@ export default function PlayerSearch({
               key={index}
               style={styles.listItem(index === highlightedIndex)}
               onClick={() => handleSelect(player)}
-              onTouchStart={() => handleSelect(player)}
+              onTouchStart={(e) => {
+                touchStartYRef.current = e.touches[0].clientY;
+                touchMovedRef.current = false;
+                activeTouchIndexRef.current = index;
+              }}
+              onTouchMove={(e) => {
+                if (touchStartYRef.current === null) return;
+                const deltaY = Math.abs(
+                  e.touches[0].clientY - touchStartYRef.current
+                );
+                if (deltaY > 10) {
+                  touchMovedRef.current = true;
+                }
+              }}
+              onTouchEnd={() => {
+                if (
+                  !touchMovedRef.current &&
+                  activeTouchIndexRef.current === index
+                ) {
+                  handleSelect(player);
+                }
+                touchStartYRef.current = null;
+                activeTouchIndexRef.current = null;
+              }}
               onMouseEnter={() => setHighlightedIndex(index)}
             >
               {player}
