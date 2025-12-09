@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 
 const HEADER_SLOT_ID = "div-gpt-header";
 const HEADER_AD_UNIT_PATH = "/23297979034/header_leaderboard";
+const REFRESH_INTERVAL_MS = 60_000;
 
 /**
  * Simple responsive leaderboard for the app header.
@@ -11,6 +12,8 @@ const HeaderAd = () => {
   const slotRef = useRef<googletag.Slot | null>(null);
 
   useEffect(() => {
+    let intervalId: number | null = null;
+
     if (!window.googletag?.pubads) return;
 
     window.googletag.cmd.push(() => {
@@ -52,6 +55,13 @@ const HeaderAd = () => {
         window.googletag.pubads().enableSingleRequest();
         window.googletag.enableServices();
         window.googletag.display(HEADER_SLOT_ID);
+
+        // Periodic refresh (60s)
+        intervalId = window.setInterval(() => {
+          if (window.googletag?.pubads && slotRef.current) {
+            window.googletag.pubads().refresh([slotRef.current]);
+          }
+        }, REFRESH_INTERVAL_MS);
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error("HeaderAd error:", e);
@@ -59,6 +69,8 @@ const HeaderAd = () => {
     });
 
     return () => {
+      if (intervalId !== null) window.clearInterval(intervalId);
+
       window.googletag?.cmd.push(() => {
         if (slotRef.current) {
           try {

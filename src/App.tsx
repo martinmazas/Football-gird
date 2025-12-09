@@ -96,23 +96,7 @@ const App: React.FC = () => {
           gap: { xs: 3, md: 4 },
         }}
       >
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            px: { xs: 1.5, sm: 2 },
-            py: { xs: 1, sm: 1.5 },
-            mb: { xs: 1, sm: 2 },
-            borderRadius: "14px",
-            border: "1px solid rgba(255,255,255,0.06)",
-            background: "linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
-            boxShadow: "0 12px 30px rgba(0,0,0,0.35)",
-          }}
-        >
-          <HeaderAd />
-        </Box>
+        <HeaderAd />
 
         {/* Main Grid Table */}
         <Box
