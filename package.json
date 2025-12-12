@@ -61,5 +61,8 @@
     "@types/google-publisher-tag": "^1.20250811.1",
     "@types/lodash": "^4.17.20",
     "webpack-dev-middleware": "^7.2.1"
+  },
+  "overrides": {
+    "glob": "^10.5.0"
   }
 }
