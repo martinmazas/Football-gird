@@ -3,7 +3,10 @@ import { cleanTournamentName } from "../Utils/formatters";
 
 // Mapping tournament to adUnitPath and slotId
 const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
-  HOME: { adUnitPath: "/23297979034/below_game_table", slotId: "div-gpt-ad" },
+  HOME: {
+    adUnitPath: "/23297979034/below_game_table",
+    slotId: "div-gpt-ad",
+  },
   "CHAMPIONS LEAGUE": {
     adUnitPath: "/23297979034/below_game_table_cl",
     slotId: "div-gpt-ad-cl",
@@ -59,7 +62,6 @@ const BelowGameAd = ({ tournament }: Props) => {
   const refreshIntervalMs = 60_000;
 
   useEffect(() => {
-    // Guard: need config and GPT loaded
     if (!config || !window.googletag?.pubads) return;
 
     let intervalId: ReturnType<typeof setInterval> | null = null;
@@ -87,7 +89,7 @@ const BelowGameAd = ({ tournament }: Props) => {
             [728, 90],
             [320, 50],
           ],
-          config.slotId
+          config.slotId,
         );
 
         if (!slot) return;
@@ -122,7 +124,7 @@ const BelowGameAd = ({ tournament }: Props) => {
             observer?.disconnect();
           }
         },
-        { threshold: 0.5 }
+        { threshold: 0.5 },
       );
       observer.observe(adRef.current);
     }
@@ -166,6 +168,7 @@ const BelowGameAd = ({ tournament }: Props) => {
           textAlign: "center",
         }}
       />
+      {/* <h1>BELLOW</h1> */}
     </div>
   );
 };
