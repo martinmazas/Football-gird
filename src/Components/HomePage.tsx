@@ -66,7 +66,6 @@ export default function HomePage() {
               gap: { xs: 2.5, md: 3 },
             }}
           >
-            {/* ✅ Se monta en el primer render */}
             <BelowGameAd tournament={"HOME"} />
 
             <Box
