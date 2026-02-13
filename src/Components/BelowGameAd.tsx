@@ -54,18 +54,27 @@ const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
 type Props = { tournament: string | null };
 
 export default function BelowGameAd({ tournament }: Props) {
-  const config = useMemo(
-    () => adConfig[cleanTournamentName(tournament)],
-    [tournament],
-  );
+  const config = useMemo(() => {
+    const key = cleanTournamentName(tournament) || "HOME";
+    return adConfig[key] || adConfig.HOME;
+  }, [tournament]);
 
   const divRef = useRef<HTMLDivElement | null>(null);
   const slotRef = useRef<googletag.Slot | null>(null);
 
   const [isVisible, setIsVisible] = useState(false);
-  const refreshIntervalMs = 60_000;
+  const [isTabVisible, setIsTabVisible] = useState(!document.hidden);
 
-  // Track visibility
+  const REFRESH_INTERVAL_MS = 60_000;
+
+  // Tab visibility
+  useEffect(() => {
+    const onVis = () => setIsTabVisible(!document.hidden);
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+
+  // Slot visibility (50% in view)
   useEffect(() => {
     if (!divRef.current) return;
 
@@ -77,29 +86,44 @@ export default function BelowGameAd({ tournament }: Props) {
 
     obs.observe(divRef.current);
     return () => obs.disconnect();
-  }, [config?.slotId]);
+  }, [config.slotId]);
 
-  // Define + display slot when tournament changes
+  // Define + display
   useEffect(() => {
-    if (!config || !window.googletag?.cmd) return;
+    if (!window.googletag?.cmd) return;
 
     window.googletag.cmd.push(() => {
-      // destroy previous slot for this component
       if (slotRef.current) {
         window.googletag.destroySlots([slotRef.current]);
         slotRef.current = null;
       }
 
+      // ✅ Better mapping: mobile / tablet / desktop
       const mapping = window.googletag
         .sizeMapping()
-        .addSize([728, 0], [[728, 90]])
-        .addSize([0, 0], [[320, 50]])
+        .addSize([1024, 0], [[728, 90]]) // Desktop
+        .addSize(
+          [600, 0],
+          [
+            [728, 90],
+            [300, 250],
+          ],
+        ) // Tablet (both allowed)
+        .addSize(
+          [0, 0],
+          [
+            [300, 250],
+            [320, 50],
+          ],
+        ) // Mobile (try 300x250 first)
         .build();
 
+      // Important: defineSlot gets the superset of sizes
       const slot = window.googletag.defineSlot(
         config.adUnitPath,
         [
           [728, 90],
+          [300, 250],
           [320, 50],
         ],
         config.slotId,
@@ -110,9 +134,7 @@ export default function BelowGameAd({ tournament }: Props) {
       slot.defineSizeMapping(mapping).addService(window.googletag.pubads());
       slotRef.current = slot;
 
-      // OJO: idealmente esto va 1 sola vez en App init (ver nota abajo)
-      window.googletag.enableServices();
-
+      // ✅ enableServices() ya está en index.html
       window.googletag.display(config.slotId);
     });
 
@@ -124,23 +146,22 @@ export default function BelowGameAd({ tournament }: Props) {
         }
       });
     };
-  }, [config]);
+  }, [config.adUnitPath, config.slotId]);
 
-  // Refresh only when visible
+  // Refresh only when visible + tab visible
   useEffect(() => {
-    if (!config) return;
-    if (!isVisible) return;
+    if (!isVisible || !isTabVisible) return;
 
-    const id = setInterval(() => {
+    const id = window.setInterval(() => {
       window.googletag?.cmd?.push(() => {
         if (slotRef.current) {
           window.googletag.pubads().refresh([slotRef.current]);
         }
       });
-    }, refreshIntervalMs);
+    }, REFRESH_INTERVAL_MS);
 
-    return () => clearInterval(id);
-  }, [config, isVisible]);
+    return () => window.clearInterval(id);
+  }, [isVisible, isTabVisible]);
 
   return (
     <div
@@ -153,12 +174,13 @@ export default function BelowGameAd({ tournament }: Props) {
       }}
     >
       <div
-        id={config?.slotId}
+        id={config.slotId}
         ref={divRef}
         style={{
           width: "100%",
           maxWidth: "728px",
-          minHeight: "90px",
+          // ✅ reserve enough for 300x250 on mobile/tablet to avoid CLS
+          minHeight: "250px",
           textAlign: "center",
         }}
       />

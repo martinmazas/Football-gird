@@ -7,7 +7,8 @@
   <meta http-equiv="content-language" content="en" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <!-- hreflang for multilingual SEO -->
   <link rel="alternate" href="https://football-grid.netlify.app/" hreflang="en" />
@@ -53,10 +54,11 @@
     window.googletag = window.googletag || { cmd: [] };
     googletag.cmd.push(function () {
       googletag.pubads().enableLazyLoad({
-        fetchMarginPercent: 100, // Load ads when 100% viewport away
-        renderMarginPercent: 50, // Render ads when 50% viewport away
-        mobileScaling: 2.0        // Adjust fetch/render margin for mobile
+        fetchMarginPercent: 300,
+        renderMarginPercent: 100,
+        mobileScaling: 2.0
       });
+
       googletag.pubads().enableSingleRequest();
       googletag.enableServices();
     });
