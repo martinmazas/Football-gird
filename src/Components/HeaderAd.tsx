@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 const HEADER_SLOT_ID = "div-gpt-header";
-const adId = process.env.AD_ID;
+const adId = process.env.REACT_APP_AD_ID;
 const HEADER_AD_UNIT_PATH = `/${adId}/header_leaderboard`;
 const REFRESH_INTERVAL_MS = 60_000;
 console.log(adId);

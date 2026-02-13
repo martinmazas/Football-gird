@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { cleanTournamentName } from "../Utils/formatters";
-const adId = process.env.AD_ID;
+const adId = process.env.REACT_APP_AD_ID;
 
 // Mapping tournament to adUnitPath and slotId
 const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
