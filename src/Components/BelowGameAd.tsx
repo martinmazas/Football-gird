@@ -1,54 +1,55 @@
 import { useEffect, useRef } from "react";
 import { cleanTournamentName } from "../Utils/formatters";
+const adId = process.env.AD_ID;
 
 // Mapping tournament to adUnitPath and slotId
 const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
   HOME: {
-    adUnitPath: "/23297979034/below_game_table",
+    adUnitPath: `/${adId}/below_game_table`,
     slotId: "div-gpt-ad",
   },
   "CHAMPIONS LEAGUE": {
-    adUnitPath: "/23297979034/below_game_table_cl",
+    adUnitPath: `/${adId}/below_game_table_cl`,
     slotId: "div-gpt-ad-cl",
   },
   LIBERTADORES: {
-    adUnitPath: "/23297979034/below_game_table_lib",
+    adUnitPath: `/${adId}/below_game_table_lib`,
     slotId: "div-gpt-ad-lib",
   },
   MLS: {
-    adUnitPath: "/23297979034/below_game_table_mls",
+    adUnitPath: `/${adId}/below_game_table_mls`,
     slotId: "div-gpt-ad-mls",
   },
   "FIFA CLUB WORLD CUP": {
-    adUnitPath: "/23297979034/below_game_table_mundial",
+    adUnitPath: `/${adId}/below_game_table_mundial`,
     slotId: "div-gpt-ad-mundial",
   },
   "PREMIER LEAGUE": {
-    adUnitPath: "/23297979034/below_game_table_premier",
+    adUnitPath: `/${adId}/below_game_table_premier`,
     slotId: "div-gpt-ad-premier",
   },
   "LA LIGA": {
-    adUnitPath: "/23297979034/below_game_table_laliga",
+    adUnitPath: `/${adId}/below_game_table_laliga`,
     slotId: "div-gpt-ad-laliga",
   },
   "SERIE A": {
-    adUnitPath: "/23297979034/below_game_table_seriea",
+    adUnitPath: `/${adId}/below_game_table_seriea`,
     slotId: "div-gpt-ad-seriea",
   },
   "AFC CHAMPIONS LEAGUE": {
-    adUnitPath: "/23297979034/below_game_table_afc",
+    adUnitPath: `/${adId}/below_game_table_afc`,
     slotId: "div-gpt-ad-afc",
   },
   BUNDESLIGA: {
-    adUnitPath: "/23297979034/below_game_table_bundesliga",
+    adUnitPath: `/${adId}/below_game_table_bundesliga`,
     slotId: "div-gpt-ad-bundesliga",
   },
   "EUROPE LEAGUE": {
-    adUnitPath: "/23297979034/below_game_table_europaleague",
+    adUnitPath: `/${adId}/below_game_table_europaleague`,
     slotId: "div-gpt-ad-europaleague",
   },
   CONCACAF: {
-    adUnitPath: "/23297979034/below_game_table_concacaf",
+    adUnitPath: `/${adId}/below_game_table_concacaf`,
     slotId: "div-gpt-ad-concacaf",
   },
 };
