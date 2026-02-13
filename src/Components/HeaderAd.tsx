@@ -4,7 +4,6 @@ const HEADER_SLOT_ID = "div-gpt-header";
 const adId = process.env.REACT_APP_AD_ID;
 const HEADER_AD_UNIT_PATH = `/${adId}/header_leaderboard`;
 const REFRESH_INTERVAL_MS = 60_000;
-console.log(adId);
 
 /**
  * Simple responsive leaderboard for the app header.
@@ -106,7 +105,6 @@ const HeaderAd = () => {
           margin: "0 auto",
         }}
       />
-      {/* <h1>HEADER</h1> */}
     </div>
   );
 };

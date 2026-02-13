@@ -169,7 +169,6 @@ const BelowGameAd = ({ tournament }: Props) => {
           textAlign: "center",
         }}
       />
-      {/* <h1>BELLOW</h1> */}
     </div>
   );
 };
