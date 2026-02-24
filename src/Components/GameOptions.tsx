@@ -1,9 +1,9 @@
 import { Button, Container } from "@mui/material";
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import PlayerSearch from "./Components/PlayerSearch";
+import PlayerSearch from "./PlayerSearch";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
-import { GameOptionsProps } from "./Types/types";
+import { GameOptionsProps } from "../Types/types";
 
 export default function GameOptions({ handleRestartButton, setIsError, combinations, setCombinations, tournament, setGuessedPlayers }: GameOptionsProps) {
     const navigate = useNavigate();

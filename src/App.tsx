@@ -1,11 +1,11 @@
 import React, { useMemo, useEffect, useState, useCallback } from "react";
-import GridTable from "./gridTable";
+import GridTable from "./Components/gridTable";
 import { getPlayParams } from "./Utils/functions";
 import "./Styles/index.css";
 import Container from "@mui/material/Container";
 import Confetti from "react-confetti";
-import WinnerDialog from "./WinnerDialog";
-import GameOptions from "./GameOptions";
+import WinnerDialog from "./Components/WinnerDialog";
+import GameOptions from "./Components/GameOptions";
 import { useCounter } from "./Hooks/useCounter";
 import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";

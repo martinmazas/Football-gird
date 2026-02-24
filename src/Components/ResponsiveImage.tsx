@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { ResponsiveImageProps } from "./Types/types";
+import { ResponsiveImageProps } from "../Types/types";
 
 const ResponsiveImage = ({src, alt, id, roundedBorder}: ResponsiveImageProps) => {
   return (

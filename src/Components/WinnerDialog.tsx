@@ -9,7 +9,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { WinnerDialogProps } from './Types/types';
+import { WinnerDialogProps } from '../Types/types';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {

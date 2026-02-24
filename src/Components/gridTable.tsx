@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Cells from "./cells";
-import { GridTableProps } from "./Types/types";
+import { GridTableProps } from "../Types/types";
 
 export default function GridTable(props: GridTableProps) {
   return (
