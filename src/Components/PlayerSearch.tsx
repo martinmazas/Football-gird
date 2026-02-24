@@ -2,7 +2,6 @@ import { getPlayer, guessPlayer } from "../Utils/functions";
 import React, { useCallback, useRef, useState } from "react";
 import { Box, Input } from "@mui/material";
 import debounce from "lodash/debounce";
-import "../Styles/index.css";
 import { GuessPlayerProps } from "../Types/types";
 
 type PlayerSearchProps = Omit<GuessPlayerProps, "playerName">;

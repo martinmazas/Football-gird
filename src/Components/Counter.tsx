@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "../Styles/index.css";
 import { CounterProps } from "../Types/types";
 
 const Counter = ({ endGame, count, incrementCount }: CounterProps) => {

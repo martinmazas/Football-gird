@@ -2,7 +2,6 @@ import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
 import Counter from './Counter';
 import ResponsiveImage from './ResponsiveImage';
-import '../Styles/index.css'
 import { GridTableProps, RenderCellProps } from '../Types/types';
 
 const renderCellContent = ({rowIndex, cellIndex, countries, teams, endGame, count, incrementCount, guessedPlayers}: RenderCellProps) => {
