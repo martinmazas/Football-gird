@@ -7,7 +7,7 @@ import Confetti from "react-confetti";
 import WinnerDialog from "./Components/WinnerDialog";
 import GameOptions from "./Components/GameOptions";
 import { useCounter } from "./Hooks/useCounter";
-import { Box } from "@mui/material";
+import { Box, CircularProgress, LinearProgress, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import HeaderAd from "./Components/HeaderAd";
@@ -30,6 +30,7 @@ const App: React.FC = () => {
   const [isError, setIsError] = useState<string | false>(false);
   const [combinations, setCombinations] = useState<string[] | false>(false);
   const [guessedPlayers, setGuessedPlayers] = useState<Record<string, PlayerProps>>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { count, incrementCount, resetCounter } = useCounter(0);
 
   const startGame = useCallback(() => {
@@ -38,6 +39,7 @@ const App: React.FC = () => {
     setEndGame(false);
     setIsError(false);
     setGuessedPlayers({});
+    setIsLoading(true);
   }, [resetCounter, setEndGame]);
 
   // Restart the game
@@ -60,8 +62,12 @@ const App: React.FC = () => {
             randomTeams.map((team: Team) => `${country.name}-${team.name}`)
           )
         );
+        setIsLoading(false);
       })
-      .catch((err: Error) => setIsError(err.message));
+      .catch((err: Error) => {
+        setIsError(err.message);
+        setIsLoading(false);
+      });
   }, [startPlay, tournament, startGame]);
 
   const memoizedGameParams = useMemo(
@@ -77,6 +83,13 @@ const App: React.FC = () => {
     if (Array.isArray(combinations) && combinations.length === 0)
       setEndGame(true);
   }, [combinations]);
+
+  // Auto-dismiss error messages
+  useEffect(() => {
+    if (!isError) return;
+    const timer = setTimeout(() => setIsError(false), 2500);
+    return () => clearTimeout(timer);
+  }, [isError]);
 
   return (
     <>
@@ -105,14 +118,68 @@ const App: React.FC = () => {
             px: { xs: 1, sm: 2 },
           }}
         >
-          <GridTable
-            gameParams={memoizedGameParams}
-            endGame={endGame}
-            count={count}
-            incrementCount={incrementCount}
-            guessedPlayers={guessedPlayers}
-          />
+          {isLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "280px",
+              }}
+            >
+              <CircularProgress size={56} sx={{ color: "#f2b705" }} />
+            </Box>
+          ) : (
+            <GridTable
+              gameParams={memoizedGameParams}
+              endGame={endGame}
+              count={count}
+              incrementCount={incrementCount}
+              guessedPlayers={guessedPlayers}
+            />
+          )}
         </Box>
+
+        {/* Progress indicator */}
+        {!isLoading && gameParams.countries.length > 0 && (
+          <Box sx={{ width: "100%", maxWidth: "sm", px: { xs: 2, sm: 4 } }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                mb: 0.75,
+              }}
+            >
+              <Typography
+                variant="caption"
+                sx={{ color: "rgba(255,255,255,0.5)", letterSpacing: "0.05em" }}
+              >
+                Progress
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{ color: "#f2b705", fontWeight: 700 }}
+              >
+                {Object.keys(guessedPlayers).length} /{" "}
+                {gameParams.countries.length * gameParams.teams.length}
+              </Typography>
+            </Box>
+            <LinearProgress
+              variant="determinate"
+              value={
+                (Object.keys(guessedPlayers).length /
+                  (gameParams.countries.length * gameParams.teams.length)) *
+                100
+              }
+              sx={{
+                borderRadius: 4,
+                height: 6,
+                backgroundColor: "rgba(255,255,255,0.08)",
+                "& .MuiLinearProgress-bar": { backgroundColor: "#f2b705" },
+              }}
+            />
+          </Box>
+        )}
 
         {/* Game Options */}
         <Box

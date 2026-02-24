@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { WinnerDialogProps } from '../Types/types';
+import { useNavigate } from 'react-router-dom';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -22,11 +23,17 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 export default function WinnerDialog({ handleRestartButton, count, setEndGame} : WinnerDialogProps ) {
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Detect mobile screens
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    const navigate = useNavigate();
 
     const handleClose = () => {
         setEndGame(false);
         handleRestartButton();
+    };
+
+    const handleChooseTournament = () => {
+        setEndGame(false);
+        navigate('/');
     };
 
     return (
@@ -92,7 +99,7 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
                     </Typography>
                 </Box>
             </DialogContent>
-            <DialogActions sx={{ justifyContent: 'center', width: '100%' }}>
+            <DialogActions sx={{ justifyContent: 'center', gap: 1.5, width: '100%', flexWrap: 'wrap' }}>
                 <Button
                     variant="contained"
                     color="primary"
@@ -104,10 +111,28 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
                         py: { xs: 1, sm: 1.5 },
                         fontSize: { xs: '0.875rem', sm: '1rem' },
                         borderRadius: '8px',
-                        width: isSmallScreen ? '80%' : 'auto', // Make button larger on mobile
+                        width: isSmallScreen ? '80%' : 'auto',
                     }}
                 >
                     Play Again
+                </Button>
+                <Button
+                    variant="outlined"
+                    onClick={handleChooseTournament}
+                    sx={{
+                        textTransform: 'none',
+                        fontWeight: 'bold',
+                        px: { xs: 3, sm: 4 },
+                        py: { xs: 1, sm: 1.5 },
+                        fontSize: { xs: '0.875rem', sm: '1rem' },
+                        borderRadius: '8px',
+                        width: isSmallScreen ? '80%' : 'auto',
+                        borderColor: '#f2b705',
+                        color: '#f2b705',
+                        '&:hover': { borderColor: '#f2b705', backgroundColor: 'rgba(242,183,5,0.08)' },
+                    }}
+                >
+                    Choose Tournament
                 </Button>
             </DialogActions>
         </BootstrapDialog>

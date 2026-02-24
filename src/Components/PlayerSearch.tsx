@@ -157,7 +157,7 @@ export default function PlayerSearch({
         autoComplete="off"
         disableUnderline
         style={styles.field}
-        placeholder="Type player here"
+        placeholder="Search player (3+ letters)"
         id="playerName"
         value={inputValue}
         onChange={handleInputChange}
