@@ -11,7 +11,7 @@ import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import HeaderAd from "./Components/HeaderAd";
-import { Country, GameParams, Team } from "./Types/types";
+import { Country, GameParams, PlayerProps, Team } from "./Types/types";
 
 const INITIAL_GAME_PARAMS: GameParams = {
   countries: [],
@@ -29,6 +29,7 @@ const App: React.FC = () => {
   const [endGame, setEndGame] = useState<boolean>(false);
   const [isError, setIsError] = useState<string | false>(false);
   const [combinations, setCombinations] = useState<string[] | false>(false);
+  const [guessedPlayers, setGuessedPlayers] = useState<Record<string, PlayerProps>>({});
   const { count, incrementCount, resetCounter } = useCounter(0);
 
   const startGame = useCallback(() => {
@@ -36,6 +37,7 @@ const App: React.FC = () => {
     setGameParams(INITIAL_GAME_PARAMS);
     setEndGame(false);
     setIsError(false);
+    setGuessedPlayers({});
   }, [resetCounter, setEndGame]);
 
   // Restart the game
@@ -108,6 +110,7 @@ const App: React.FC = () => {
             endGame={endGame}
             count={count}
             incrementCount={incrementCount}
+            guessedPlayers={guessedPlayers}
           />
         </Box>
 
@@ -123,6 +126,7 @@ const App: React.FC = () => {
             combinations={combinations}
             setCombinations={setCombinations}
             tournament={tournament}
+            setGuessedPlayers={setGuessedPlayers}
           />
         </Box>
 

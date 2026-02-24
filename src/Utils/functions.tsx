@@ -1,8 +1,7 @@
 import axios from "axios";
-import ResponsiveImage from "../ResponsiveImage";
-import { createRoot } from "react-dom/client";
 import { cleanTournamentName } from "./formatters";
 import { GuessPlayerProps, PlayerProps } from "../Types/types";
+
 const server =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_PRODUCTION_SERVER
@@ -62,6 +61,7 @@ export const guessPlayer = async ({
   combinations,
   setCombinations,
   tournament,
+  setGuessedPlayers,
 }: GuessPlayerProps) => {
   try {
     setTournamentHeader(tournament);
@@ -78,7 +78,8 @@ export const guessPlayer = async ({
     } else {
       data.forEach((player: PlayerProps) => {
         const playerCombination = `${player.country}-${player.team}`;
-        addPhoto(player, playerCombination);
+
+        setGuessedPlayers((prev) => ({ ...prev, [playerCombination]: player }));
 
         setCombinations((prevCombinations) => {
           if (!Array.isArray(prevCombinations)) return prevCombinations;
@@ -93,35 +94,5 @@ export const guessPlayer = async ({
     }
   } catch (err: any) {
     handleError(err, "Failed to guess player");
-  }
-};
-
-export const addPhoto = (player: PlayerProps, playerCombination: string) => {
-  if (!player) return;
-
-  try {
-    const playerDiv = document.getElementsByClassName(
-      `grid-place-${playerCombination}`
-    );
-
-    if (playerDiv[0]) {
-      const img = require(`../images/Players/24-25/${player.imgPath.trim()}.webp`);
-      // const img = new URL(`../images/Players/24-25/${player.imgPath.trim()}.webp`, import.meta.url).href;
-      const parentDiv = playerDiv[0].parentNode as HTMLElement;
-
-      createRoot(parentDiv).render(
-        <ResponsiveImage
-          src={img}
-          alt={player.second_name}
-          roundedBorder={true}
-        />
-      );
-
-      parentDiv.removeChild(playerDiv[0]);
-    } else {
-      console.log("Unexpected error");
-    }
-  } catch (err: any) {
-    handleError(err, "Error while adding player photo");
   }
 };

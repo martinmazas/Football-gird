@@ -12,6 +12,7 @@ export default function PlayerSearch({
   combinations,
   setCombinations,
   tournament,
+  setGuessedPlayers,
 }: PlayerSearchProps) {
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -63,6 +64,7 @@ export default function PlayerSearch({
       combinations,
       setCombinations,
       tournament,
+      setGuessedPlayers,
     });
     setInputValue("");
 

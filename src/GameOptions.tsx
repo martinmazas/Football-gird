@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import { GameOptionsProps } from "./Types/types";
 
-export default function GameOptions({ handleRestartButton, setIsError, combinations, setCombinations, tournament }: GameOptionsProps) {
+export default function GameOptions({ handleRestartButton, setIsError, combinations, setCombinations, tournament, setGuessedPlayers }: GameOptionsProps) {
     const navigate = useNavigate();
 
     return (
@@ -22,7 +22,7 @@ export default function GameOptions({ handleRestartButton, setIsError, combinati
                 py: { xs: 1, sm: 1.25 },
             }}
         >
-            <PlayerSearch setIsError={setIsError} combinations={combinations} setCombinations={setCombinations} tournament={tournament} />
+            <PlayerSearch setIsError={setIsError} combinations={combinations} setCombinations={setCombinations} tournament={tournament} setGuessedPlayers={setGuessedPlayers} />
             <Button
                 size="small"
                 id="restart-button"

@@ -20,6 +20,7 @@ export type GameParams = {
 
 export type GridTableProps = CounterProps & {
   gameParams: GameParams;
+  guessedPlayers: Record<string, PlayerProps>;
 };
 
 export type ResponsiveImageProps = {
@@ -40,6 +41,7 @@ export type RenderCellProps = CounterProps & {
   countries: Country[];
   rowIndex: number;
   cellIndex: number;
+  guessedPlayers: Record<string, PlayerProps>;
 };
 
 export type WinnerDialogProps = {
@@ -65,6 +67,7 @@ export type GuessPlayerProps = {
   combinations: string[] | false;
   setCombinations: React.Dispatch<React.SetStateAction<string[] | false>>;
   tournament: string | null;
+  setGuessedPlayers: React.Dispatch<React.SetStateAction<Record<string, PlayerProps>>>;
 };
 
 export type PlayerProps = {
@@ -80,4 +83,5 @@ export type GameOptionsProps = {
   combinations: string[] | false;
   setCombinations: React.Dispatch<React.SetStateAction<string[] | false>>;
   tournament: string | null;
+  setGuessedPlayers: React.Dispatch<React.SetStateAction<Record<string, PlayerProps>>>;
 };
