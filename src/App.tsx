@@ -11,12 +11,7 @@ import { Box } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import HeaderAd from "./Components/HeaderAd";
-import { Country, Team } from "./Types/types";
-
-interface GameParams {
-  countries: Country[];
-  teams: Team[];
-}
+import { Country, GameParams, Team } from "./Types/types";
 
 const INITIAL_GAME_PARAMS: GameParams = {
   countries: [],
@@ -51,18 +46,20 @@ const App: React.FC = () => {
 
   useEffect(() => {
     startGame();
-    getPlayParams(tournament).then((data) => {
-      const { randomTeams, randomCountries } = data;
-      setGameParams({
-        countries: randomCountries,
-        teams: randomTeams,
-      });
-      setCombinations(
-        randomCountries.flatMap((country: Country) =>
-          randomTeams.map((team: Team) => `${country.name}-${team.name}`)
-        )
-      );
-    });
+    getPlayParams(tournament)
+      .then((data) => {
+        const { randomTeams, randomCountries } = data;
+        setGameParams({
+          countries: randomCountries,
+          teams: randomTeams,
+        });
+        setCombinations(
+          randomCountries.flatMap((country: Country) =>
+            randomTeams.map((team: Team) => `${country.name}-${team.name}`)
+          )
+        );
+      })
+      .catch((err: Error) => setIsError(err.message));
   }, [startPlay, tournament, startGame]);
 
   const memoizedGameParams = useMemo(

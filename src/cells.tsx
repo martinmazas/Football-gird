@@ -36,7 +36,7 @@ export default function Cells({ gameParams, endGame, count, incrementCount } : G
             {Array.from({ length: len + 1 }, (_, rowIndex) => (
                 <tr key={rowIndex}>
                     {Array.from({ length: len + 1 }, (_, cellIndex) => (
-                        <td className={`${rowIndex}-${cellIndex}`} id='td-cell' key={`${rowIndex}-${cellIndex}`}>
+                        <td className={`td-cell ${rowIndex}-${cellIndex}`} key={`${rowIndex}-${cellIndex}`}>
                             {renderCellContent({rowIndex, cellIndex, countries, teams, endGame, count, incrementCount})}
                         </td>
                     ))}
