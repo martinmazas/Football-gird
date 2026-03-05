@@ -1,5 +1,5 @@
 import { getPlayer, guessPlayer } from "../Utils/functions";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Box, Input } from "@mui/material";
 import debounce from "lodash/debounce";
 import { useGameContext } from "../Context/GameContext";
@@ -31,8 +31,7 @@ export default function PlayerSearch() {
     }
   };
 
-  // eslint-disable-next-line
-  const debouncedFetchPlayers = useCallback(debounce(fetchPlayers, 300), []);
+  const debouncedFetchPlayers = useRef(debounce(fetchPlayers, 300)).current;
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVal = event.target.value;
