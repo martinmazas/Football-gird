@@ -36,6 +36,8 @@ body {
 
 #restart-button,
 #guess-button,
+#surrender-button,
+#stats-button,
 #home-button {
   border: 1px solid rgba(242, 183, 5, 0.4);
   background: linear-gradient(120deg, rgba(242, 183, 5, 0.16), rgba(242, 183, 5, 0.28));
@@ -46,6 +48,8 @@ body {
 
 #restart-button:hover,
 #guess-button:hover,
+#surrender-button:hover,
+#stats-button:hover,
 #home-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);

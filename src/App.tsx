@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 import WinnerDialog from "./Components/WinnerDialog";
 import GameOptions from "./Components/GameOptions";
 import { useCounter } from "./Hooks/useCounter";
+import { useStats } from "./Hooks/useStats";
 import {
   Box,
   CircularProgress,
@@ -39,6 +40,7 @@ const App: React.FC = () => {
   >({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { count, incrementCount, resetCounter } = useCounter(0);
+  const { saveResult } = useStats();
 
   const startGame = useCallback(() => {
     resetCounter();
@@ -87,8 +89,14 @@ const App: React.FC = () => {
 
   // Check if the player won the game
   useEffect(() => {
-    if (Array.isArray(combinations) && combinations.length === 0)
+    if (Array.isArray(combinations) && combinations.length === 0) {
       setEndGame(true);
+      saveResult(
+        tournament ?? "Unknown",
+        gameParams.countries.length * gameParams.teams.length
+      );
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [combinations]);
 
   // Auto-dismiss error messages
@@ -108,6 +116,7 @@ const App: React.FC = () => {
     endGame,
     count,
     incrementCount,
+    saveResult,
   };
 
   return (

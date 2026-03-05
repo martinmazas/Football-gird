@@ -16,6 +16,9 @@ type GameContextType = {
   endGame: boolean;
   count: number;
   incrementCount: () => void;
+
+  // Stats
+  saveResult: (tournament: string, correctGuesses: number) => void;
 };
 
 export const GameContext = createContext<GameContextType | null>(null);
