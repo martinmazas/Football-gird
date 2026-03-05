@@ -10,6 +10,7 @@ export default function PlayerSearch() {
   const [options, setOptions] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const touchStartYRef = useRef<number | null>(null);
   const touchMovedRef = useRef(false);
   const activeTouchIndexRef = useRef<number | null>(null);
@@ -58,12 +59,7 @@ export default function PlayerSearch() {
       setGuessedPlayers,
     });
     setInputValue("");
-
-    // Close mobile keyboard
-    (document.activeElement as HTMLElement)?.blur();
-
-    // Fix Chrome mobile bug
-    setTimeout(() => window.scrollTo(0, 0), 100);
+    inputRef.current?.focus();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -145,6 +141,7 @@ export default function PlayerSearch() {
   return (
     <Box sx={styles.box}>
       <Input
+        inputRef={inputRef}
         autoComplete="off"
         disableUnderline
         style={styles.field}
