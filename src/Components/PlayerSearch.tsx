@@ -2,17 +2,10 @@ import { getPlayer, guessPlayer } from "../Utils/functions";
 import React, { useCallback, useRef, useState } from "react";
 import { Box, Input } from "@mui/material";
 import debounce from "lodash/debounce";
-import { GuessPlayerProps } from "../Types/types";
+import { useGameContext } from "../Context/GameContext";
 
-type PlayerSearchProps = Omit<GuessPlayerProps, "playerName">;
-
-export default function PlayerSearch({
-  setIsError,
-  combinations,
-  setCombinations,
-  tournament,
-  setGuessedPlayers,
-}: PlayerSearchProps) {
+export default function PlayerSearch() {
+  const { setIsError, combinations, setCombinations, tournament, setGuessedPlayers } = useGameContext();
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);

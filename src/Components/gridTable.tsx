@@ -1,11 +1,15 @@
 import { Box } from "@mui/material";
 import Cells from "./cells";
-import { GridTableProps } from "../Types/types";
+import { GameParams } from "../Types/types";
 
-export default function GridTable(props: GridTableProps) {
+type GridTableProps = {
+  gameParams: GameParams;
+};
+
+export default function GridTable({ gameParams }: GridTableProps) {
   return (
     <Box component="table">
-      {props.gameParams.teams.length > 0 && <Cells {...props} />}
+      {gameParams.teams.length > 0 && <Cells gameParams={gameParams} />}
     </Box>
   );
 }

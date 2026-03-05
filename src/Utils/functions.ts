@@ -1,6 +1,16 @@
 import axios from "axios";
 import { cleanTournamentName } from "./formatters";
-import { GuessPlayerProps, PlayerProps } from "../Types/types";
+import { PlayerProps } from "../Types/types";
+import React from "react";
+
+type GuessPlayerProps = {
+  playerName: string;
+  setIsError: (msg: string | false) => void;
+  combinations: string[] | false;
+  setCombinations: React.Dispatch<React.SetStateAction<string[] | false>>;
+  tournament: string | null;
+  setGuessedPlayers: React.Dispatch<React.SetStateAction<Record<string, PlayerProps>>>;
+};
 
 const server =
   process.env.NODE_ENV === "production"

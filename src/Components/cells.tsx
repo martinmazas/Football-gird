@@ -2,12 +2,25 @@ import CountryFlag from "./CountryFlag";
 import TeamFlag from './TeamFlag';
 import Counter from './Counter';
 import ResponsiveImage from './ResponsiveImage';
-import { GridTableProps, RenderCellProps } from '../Types/types';
+import { Country, GameParams, Team, PlayerProps } from '../Types/types';
+import { useGameContext } from '../Context/GameContext';
 
-const renderCellContent = ({rowIndex, cellIndex, countries, teams, endGame, count, incrementCount, guessedPlayers}: RenderCellProps) => {
-    // Counter on 0,0
+type CellsProps = {
+    gameParams: GameParams;
+};
+
+type RenderCellArgs = {
+    rowIndex: number;
+    cellIndex: number;
+    countries: Country[];
+    teams: Team[];
+    guessedPlayers: Record<string, PlayerProps>;
+};
+
+const renderCellContent = ({ rowIndex, cellIndex, countries, teams, guessedPlayers }: RenderCellArgs) => {
+    // Counter on 0,0 — reads endGame/count/incrementCount from context internally
     if (rowIndex === 0 && cellIndex === 0) {
-        return <Counter endGame={endGame} count={count} incrementCount={incrementCount} />
+        return <Counter />
     }
     // Countries on x-axis
     if (rowIndex === 0 && cellIndex > 0) {
@@ -34,9 +47,10 @@ const renderCellContent = ({rowIndex, cellIndex, countries, teams, endGame, coun
     return null;
 };
 
-export default function Cells({ gameParams, endGame, count, incrementCount, guessedPlayers } : GridTableProps) {
-    const { countries, teams } = { ...gameParams }
-    const len = teams.length
+export default function Cells({ gameParams }: CellsProps) {
+    const { guessedPlayers } = useGameContext();
+    const { countries, teams } = gameParams;
+    const len = teams.length;
 
     return (
         <tbody>
@@ -44,7 +58,7 @@ export default function Cells({ gameParams, endGame, count, incrementCount, gues
                 <tr key={rowIndex}>
                     {Array.from({ length: len + 1 }, (_, cellIndex) => (
                         <td className={`td-cell ${rowIndex}-${cellIndex}`} key={`${rowIndex}-${cellIndex}`}>
-                            {renderCellContent({rowIndex, cellIndex, countries, teams, endGame, count, incrementCount, guessedPlayers})}
+                            {renderCellContent({ rowIndex, cellIndex, countries, teams, guessedPlayers })}
                         </td>
                     ))}
                 </tr>

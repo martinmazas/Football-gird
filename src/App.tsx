@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import HeaderAd from "./Components/HeaderAd";
 import { Country, GameParams, PlayerProps, Team } from "./Types/types";
+import { GameContext } from "./Context/GameContext";
 
 const INITIAL_GAME_PARAMS: GameParams = {
   countries: [],
@@ -90,7 +91,20 @@ const App: React.FC = () => {
     return () => clearTimeout(timer);
   }, [isError]);
 
+  const contextValue = {
+    combinations,
+    setCombinations,
+    setIsError,
+    tournament,
+    guessedPlayers,
+    setGuessedPlayers,
+    endGame,
+    count,
+    incrementCount,
+  };
+
   return (
+    <GameContext.Provider value={contextValue}>
     <>
       <Container
         className="App-container"
@@ -131,10 +145,6 @@ const App: React.FC = () => {
           ) : (
             <GridTable
               gameParams={memoizedGameParams}
-              endGame={endGame}
-              count={count}
-              incrementCount={incrementCount}
-              guessedPlayers={guessedPlayers}
             />
           )}
         </Box>
@@ -187,12 +197,7 @@ const App: React.FC = () => {
           }}
         >
           <GameOptions
-            setIsError={setIsError}
             handleRestartButton={handleRestartButton}
-            combinations={combinations}
-            setCombinations={setCombinations}
-            tournament={tournament}
-            setGuessedPlayers={setGuessedPlayers}
           />
         </Box>
 
@@ -218,6 +223,7 @@ const App: React.FC = () => {
         </>
       )}
     </>
+    </GameContext.Provider>
   );
 };
 

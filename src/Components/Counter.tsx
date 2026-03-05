@@ -1,7 +1,9 @@
 import { useEffect } from "react";
-import { CounterProps } from "../Types/types";
+import { useGameContext } from "../Context/GameContext";
 
-const Counter = ({ endGame, count, incrementCount }: CounterProps) => {
+const Counter = () => {
+  const { endGame, count, incrementCount } = useGameContext();
+
   // useEffect to handle the automatic increment every second
   useEffect(() => {
     if (!endGame) {
