@@ -11,6 +11,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { WinnerDialogProps } from '../Types/types';
 import { useNavigate } from 'react-router-dom';
+import WinnerDialogAd from './WinnerDialogAd';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -99,6 +100,7 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
                     </Typography>
                 </Box>
             </DialogContent>
+            <WinnerDialogAd />
             <DialogActions sx={{ justifyContent: 'center', gap: 1.5, width: '100%', flexWrap: 'wrap' }}>
                 <Button
                     variant="contained"
