@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useState, useCallback, useRef } from "react";
 import GridTable from "./Components/gridTable";
 import { getPlayParams } from "./Utils/functions";
 import Container from "@mui/material/Container";
@@ -7,6 +7,7 @@ import WinnerDialog from "./Components/WinnerDialog";
 import GameOptions from "./Components/GameOptions";
 import { useCounter } from "./Hooks/useCounter";
 import { useStats } from "./Hooks/useStats";
+import { useInterstitialAd } from "./Hooks/useInterstitialAd";
 import {
   Box,
   CircularProgress,
@@ -41,6 +42,8 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { count, incrementCount, resetCounter } = useCounter(0);
   const { saveResult } = useStats();
+  const { triggerAd } = useInterstitialAd();
+  const restartCountRef = useRef(0);
 
   const startGame = useCallback(() => {
     resetCounter();
@@ -51,11 +54,14 @@ const App: React.FC = () => {
     setIsLoading(true);
   }, [resetCounter, setEndGame]);
 
-  // Restart the game
-  const handleRestartButton = useCallback(
-    () => setStartPlay((prev) => !prev),
-    [],
-  );
+  // Restart the game — show interstitial ad every 5th restart
+  const handleRestartButton = useCallback(() => {
+    restartCountRef.current += 1;
+    if (restartCountRef.current % 5 === 0) {
+      triggerAd();
+    }
+    setStartPlay((prev) => !prev);
+  }, [triggerAd]);
 
   useEffect(() => {
     startGame();
