@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-const EVERY_N_RESTARTS = 5;
+const EVERY_N_RESTARTS = 500;
 
 export function useInterstitialAd(onShow: () => void) {
   const restartCountRef = useRef(0);
