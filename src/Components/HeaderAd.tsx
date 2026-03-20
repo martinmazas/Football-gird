@@ -48,7 +48,7 @@ const HeaderAd = () => {
           ],
         ) // Large desktop
         .addSize([768, 0], [[728, 90]]) // Tablet
-        .addSize([0, 0], [[300, 250], [320, 50]]) // Mobile
+        .addSize([0, 0], [[320, 50]]) // Mobile — banner only, 300×250 served via interstitial
         .build();
 
       const slot = window.googletag.defineSlot(
@@ -56,7 +56,6 @@ const HeaderAd = () => {
         [
           [970, 90],
           [728, 90],
-          [300, 250],
           [320, 50],
         ],
         HEADER_SLOT_ID,
@@ -111,7 +110,7 @@ const HeaderAd = () => {
         style={{
           width: "100%",
           maxWidth: "980px",
-          minHeight: "clamp(90px, 30vw, 250px)", // reserves 250px on mobile, 90px on desktop
+          minHeight: "clamp(50px, 12vw, 90px)", // 50px on mobile (banner), 90px on desktop
           textAlign: "center",
           margin: "0 auto",
         }}

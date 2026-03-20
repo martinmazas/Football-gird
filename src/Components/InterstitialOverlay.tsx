@@ -8,16 +8,14 @@ type Props = {
 };
 
 export default function InterstitialOverlay({ open, onClose }: Props) {
-  const [canClose, setCanClose] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+  const canClose = countdown === 0;
 
   useEffect(() => {
     if (!open) {
-      setCanClose(false);
+      setCountdown(3);
       return;
     }
-
-    // Allow close after 3 seconds (gives ad time to load and get an impression)
-    const timer = setTimeout(() => setCanClose(true), 3000);
 
     try {
       ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push({});
@@ -25,7 +23,17 @@ export default function InterstitialOverlay({ open, onClose }: Props) {
       console.error("[InterstitialOverlay] AdSense push error:", e);
     }
 
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [open]);
 
   if (!open) return null;
@@ -83,15 +91,28 @@ export default function InterstitialOverlay({ open, onClose }: Props) {
               <CloseIcon fontSize="small" />
             </IconButton>
           ) : (
-            <Typography
+            <Box
               sx={{
-                color: "rgba(255,255,255,0.35)",
-                fontSize: "0.7rem",
-                letterSpacing: "0.06em",
+                width: 28,
+                height: 28,
+                borderRadius: "50%",
+                border: "2px solid rgba(255,255,255,0.3)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              Close in 3s…
-            </Typography>
+              <Typography
+                sx={{
+                  color: "rgba(255,255,255,0.6)",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  lineHeight: 1,
+                }}
+              >
+                {countdown}
+              </Typography>
+            </Box>
           )}
         </Box>
 
@@ -116,15 +137,17 @@ export default function InterstitialOverlay({ open, onClose }: Props) {
           />
         </Box>
 
-        <Typography
-          sx={{
-            color: "rgba(255,255,255,0.2)",
-            fontSize: "0.65rem",
-            letterSpacing: "0.06em",
-          }}
-        >
-          {canClose ? "Tap anywhere outside to close" : ""}
-        </Typography>
+        {canClose && (
+          <Typography
+            sx={{
+              color: "rgba(255,255,255,0.2)",
+              fontSize: "0.65rem",
+              letterSpacing: "0.06em",
+            }}
+          >
+            Tap anywhere outside to close
+          </Typography>
+        )}
       </Box>
     </Box>
   );
