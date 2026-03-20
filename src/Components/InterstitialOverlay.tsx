@@ -77,7 +77,7 @@ export default function InterstitialOverlay({ open, onClose }: Props) {
           className="adsbygoogle"
           style={{ display: "block", width: "300px", height: "250px" }}
           data-ad-client="ca-pub-6840620846200583"
-          data-ad-slot="23342716576"
+          data-ad-slot="3941751291"
           data-ad-format="fixed"
         />
       </Box>
