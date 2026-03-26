@@ -27,7 +27,11 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const navigate = useNavigate();
 
-    const handleClose = () => {
+    const handleDismiss = () => {
+        setEndGame(false);
+    };
+
+    const handlePlayAgain = () => {
         setEndGame(false);
         handleRestartButton();
     };
@@ -39,7 +43,7 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
 
     return (
         <BootstrapDialog
-            onClose={handleClose}
+            onClose={handleDismiss}
             aria-labelledby="customized-dialog-title"
             open={true}
             maxWidth="sm"
@@ -70,7 +74,7 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
             </DialogTitle>
             <IconButton
                 aria-label="close"
-                onClick={handleClose}
+                onClick={handleDismiss}
                 sx={{
                     position: 'absolute',
                     right: 8,
@@ -105,7 +109,7 @@ export default function WinnerDialog({ handleRestartButton, count, setEndGame} :
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleClose}
+                    onClick={handlePlayAgain}
                     sx={{
                         textTransform: 'none',
                         fontWeight: 'bold',
