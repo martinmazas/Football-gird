@@ -43,6 +43,7 @@ export type TournamentCardProps = {
 };
 
 export type PlayerProps = {
+  first_name: string;
   second_name: string;
   imgPath: string;
   country: string;

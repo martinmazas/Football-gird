@@ -36,9 +36,11 @@ const renderCellContent = ({ rowIndex, cellIndex, countries, teams, guessedPlaye
         const guessedPlayer = guessedPlayers[cellKey];
         if (guessedPlayer) {
             const img = require(`../images/Players/24-25/${guessedPlayer.imgPath.trim()}.webp`);
+            const fullName = `${guessedPlayer.first_name} ${guessedPlayer.second_name}`.trim();
             return (
-                <div className="player-appear">
-                    <ResponsiveImage src={img} alt={guessedPlayer.second_name} roundedBorder={true} />
+                <div className="player-appear player-card">
+                    <ResponsiveImage src={img} alt={fullName} roundedBorder={true} />
+                    <span className="player-card__name">{fullName}</span>
                 </div>
             );
         }
