@@ -41,6 +41,8 @@ const App: React.FC = () => {
     Record<string, PlayerProps>
   >({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [surrendered, setSurrendered] = useState<boolean>(false);
+  const [scoreAtSurrender, setScoreAtSurrender] = useState<number>(0);
   const { count, incrementCount, resetCounter } = useCounter(0);
   const { saveResult } = useStats();
   const [interstitialOpen, setInterstitialOpen] = useState(false);
@@ -52,6 +54,8 @@ const App: React.FC = () => {
     setEndGame(false);
     setIsError(false);
     setGuessedPlayers({});
+    setSurrendered(false);
+    setScoreAtSurrender(0);
     setIsLoading(true);
   }, [resetCounter, setEndGame]);
 
@@ -120,6 +124,10 @@ const App: React.FC = () => {
     endGame,
     count,
     incrementCount,
+    surrendered,
+    setSurrendered,
+    scoreAtSurrender,
+    setScoreAtSurrender,
     saveResult,
   };
 
@@ -190,14 +198,14 @@ const App: React.FC = () => {
                   variant="caption"
                   sx={{ color: "#f2b705", fontWeight: 700 }}
                 >
-                  {Object.keys(guessedPlayers).length} /{" "}
+                  {surrendered ? scoreAtSurrender : Object.keys(guessedPlayers).length} /{" "}
                   {gameParams.countries.length * gameParams.teams.length}
                 </Typography>
               </Box>
               <LinearProgress
                 variant="determinate"
                 value={
-                  (Object.keys(guessedPlayers).length /
+                  ((surrendered ? scoreAtSurrender : Object.keys(guessedPlayers).length) /
                     (gameParams.countries.length * gameParams.teams.length)) *
                   100
                 }

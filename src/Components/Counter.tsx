@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useGameContext } from "../Context/GameContext";
 
 const Counter = () => {
-  const { endGame, count, incrementCount } = useGameContext();
+  const { endGame, surrendered, count, incrementCount } = useGameContext();
 
   // useEffect to handle the automatic increment every second
   useEffect(() => {
-    if (!endGame) {
+    if (!endGame && !surrendered) {
       const intervalId = setInterval(() => {
         incrementCount();
       }, 1000);
@@ -14,7 +14,7 @@ const Counter = () => {
       // Cleanup interval on component unmount to prevent memory leaks
       return () => clearInterval(intervalId);
     }
-  }, [endGame, incrementCount]);
+  }, [endGame, surrendered, incrementCount]);
 
   return <div className="counter">{count}</div>;
 };

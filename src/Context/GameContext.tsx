@@ -17,6 +17,12 @@ type GameContextType = {
   count: number;
   incrementCount: () => void;
 
+  // Surrender
+  surrendered: boolean;
+  setSurrendered: React.Dispatch<React.SetStateAction<boolean>>;
+  scoreAtSurrender: number;
+  setScoreAtSurrender: React.Dispatch<React.SetStateAction<number>>;
+
   // Stats
   saveResult: (tournament: string, correctGuesses: number) => void;
 };

@@ -65,6 +65,22 @@ export const getPlayer = async (
   }
 };
 
+export const getSurrenderSuggestions = async (
+  combinations: string[],
+  tournament: string | null
+): Promise<PlayerProps[]> => {
+  setTournamentHeader(tournament);
+  try {
+    const { data } = await axios.get(`${server}/api/players/surrender`, {
+      ...axiosConfig,
+      params: { combinations },
+    });
+    return data;
+  } catch (err: any) {
+    return handleError(err, "Failed to fetch surrender suggestions");
+  }
+};
+
 export const guessPlayer = async ({
   playerName,
   setIsError,

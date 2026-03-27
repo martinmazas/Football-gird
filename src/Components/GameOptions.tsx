@@ -8,6 +8,7 @@ import StatsDialog from "./StatsDialog";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useGameContext } from "../Context/GameContext";
+import { getSurrenderSuggestions } from "../Utils/functions";
 
 type GameOptionsProps = {
     handleRestartButton: () => void;
@@ -17,14 +18,35 @@ const buttonSx = { color: "white", minWidth: "42px", borderRadius: "10px" };
 
 export default function GameOptions({ handleRestartButton }: GameOptionsProps) {
     const navigate = useNavigate();
-    const { guessedPlayers, tournament, saveResult } = useGameContext();
+    const { guessedPlayers, combinations, setCombinations, setGuessedPlayers, setSurrendered, setScoreAtSurrender, surrendered, endGame, tournament, saveResult } = useGameContext();
     const [surrenderOpen, setSurrenderOpen] = useState(false);
     const [statsOpen, setStatsOpen] = useState(false);
+    const [surrendering, setSurrendering] = useState(false);
 
-    const handleSurrender = () => {
+    const handleSurrender = async () => {
+        if (surrendered || endGame) return;
+
         saveResult(tournament ?? "Unknown", Object.keys(guessedPlayers).length);
         setSurrenderOpen(false);
-        handleRestartButton();
+
+        if (!Array.isArray(combinations) || combinations.length === 0) return;
+
+        setScoreAtSurrender(Object.keys(guessedPlayers).length);
+        setSurrendered(true);
+        setSurrendering(true);
+        try {
+            const suggestions = await getSurrenderSuggestions(combinations, tournament);
+            suggestions.forEach((player) => {
+                const key = `${player.country}-${player.team}`;
+                setGuessedPlayers((prev) => ({ ...prev, [key]: { ...player, isSuggestion: true } }));
+            });
+            // Set to false so the win-condition effect in App is not triggered
+            setCombinations(false);
+        } catch {
+            handleRestartButton();
+        } finally {
+            setSurrendering(false);
+        }
     };
 
     return (
@@ -55,6 +77,7 @@ export default function GameOptions({ handleRestartButton }: GameOptionsProps) {
                     size="small"
                     id="surrender-button"
                     onClick={() => setSurrenderOpen(true)}
+                    disabled={surrendered || endGame}
                     sx={buttonSx}
                 >
                     <FlagIcon />
@@ -107,9 +130,10 @@ export default function GameOptions({ handleRestartButton }: GameOptionsProps) {
                         onClick={handleSurrender}
                         variant="contained"
                         color="error"
+                        disabled={surrendering}
                         sx={{ borderRadius: "8px", textTransform: "none" }}
                     >
-                        Yes, surrender
+                        {surrendering ? "Loading..." : "Yes, surrender"}
                     </Button>
                 </DialogActions>
             </Dialog>

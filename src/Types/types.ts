@@ -48,4 +48,5 @@ export type PlayerProps = {
   imgPath: string;
   country: string;
   team: string;
+  isSuggestion?: boolean;
 };
