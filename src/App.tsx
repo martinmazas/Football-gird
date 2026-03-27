@@ -43,6 +43,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [surrendered, setSurrendered] = useState<boolean>(false);
   const [scoreAtSurrender, setScoreAtSurrender] = useState<number>(0);
+  const [gameCompleted, setGameCompleted] = useState<boolean>(false);
   const { count, incrementCount, resetCounter } = useCounter(0);
   const { saveResult } = useStats();
   const [interstitialOpen, setInterstitialOpen] = useState(false);
@@ -56,6 +57,7 @@ const App: React.FC = () => {
     setGuessedPlayers({});
     setSurrendered(false);
     setScoreAtSurrender(0);
+    setGameCompleted(false);
     setIsLoading(true);
   }, [resetCounter, setEndGame]);
 
@@ -99,6 +101,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (Array.isArray(combinations) && combinations.length === 0) {
       setEndGame(true);
+      setGameCompleted(true);
       saveResult(
         tournament ?? "Unknown",
         gameParams.countries.length * gameParams.teams.length
@@ -128,6 +131,7 @@ const App: React.FC = () => {
     setSurrendered,
     scoreAtSurrender,
     setScoreAtSurrender,
+    gameCompleted,
     saveResult,
   };
 

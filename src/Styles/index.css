@@ -129,6 +129,16 @@ table {
   background: linear-gradient(135deg, rgba(72, 104, 118, 0.5), rgba(9, 28, 46, 0.8));
 }
 
+.td-cell--guessed {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(27, 94, 32, 0.4));
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+.td-cell--surrendered {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.2), rgba(183, 28, 28, 0.4));
+  border-color: rgba(244, 67, 54, 0.5);
+}
+
 #tab {
   color: var(--yellow-border);
   border: var(--yellow-border);

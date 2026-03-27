@@ -18,13 +18,13 @@ const buttonSx = { color: "white", minWidth: "42px", borderRadius: "10px" };
 
 export default function GameOptions({ handleRestartButton }: GameOptionsProps) {
     const navigate = useNavigate();
-    const { guessedPlayers, combinations, setCombinations, setGuessedPlayers, setSurrendered, setScoreAtSurrender, surrendered, endGame, tournament, saveResult } = useGameContext();
+    const { guessedPlayers, combinations, setCombinations, setGuessedPlayers, setSurrendered, setScoreAtSurrender, surrendered, gameCompleted, tournament, saveResult } = useGameContext();
     const [surrenderOpen, setSurrenderOpen] = useState(false);
     const [statsOpen, setStatsOpen] = useState(false);
     const [surrendering, setSurrendering] = useState(false);
 
     const handleSurrender = async () => {
-        if (surrendered || endGame) return;
+        if (surrendered || gameCompleted) return;
 
         saveResult(tournament ?? "Unknown", Object.keys(guessedPlayers).length);
         setSurrenderOpen(false);
@@ -77,7 +77,7 @@ export default function GameOptions({ handleRestartButton }: GameOptionsProps) {
                     size="small"
                     id="surrender-button"
                     onClick={() => setSurrenderOpen(true)}
-                    disabled={surrendered || endGame}
+                    disabled={surrendered || gameCompleted}
                     sx={buttonSx}
                 >
                     <FlagIcon />

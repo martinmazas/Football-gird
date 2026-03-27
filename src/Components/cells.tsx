@@ -50,6 +50,20 @@ const renderCellContent = ({ rowIndex, cellIndex, countries, teams, guessedPlaye
     return null;
 };
 
+const getPlayerCellClass = (
+    rowIndex: number,
+    cellIndex: number,
+    countries: Country[],
+    teams: Team[],
+    guessedPlayers: Record<string, PlayerProps>
+): string => {
+    if (rowIndex === 0 || cellIndex === 0) return '';
+    const cellKey = `${countries[cellIndex - 1].name}-${teams[rowIndex - 1].name}`;
+    const player = guessedPlayers[cellKey];
+    if (!player) return '';
+    return player.isSuggestion ? 'td-cell--surrendered' : 'td-cell--guessed';
+};
+
 export default function Cells({ gameParams }: CellsProps) {
     const { guessedPlayers } = useGameContext();
     const { countries, teams } = gameParams;
@@ -60,7 +74,10 @@ export default function Cells({ gameParams }: CellsProps) {
             {Array.from({ length: len + 1 }, (_, rowIndex) => (
                 <tr key={rowIndex}>
                     {Array.from({ length: len + 1 }, (_, cellIndex) => (
-                        <td className={`td-cell ${rowIndex}-${cellIndex}`} key={`${rowIndex}-${cellIndex}`}>
+                        <td
+                            className={`td-cell ${rowIndex}-${cellIndex} ${getPlayerCellClass(rowIndex, cellIndex, countries, teams, guessedPlayers)}`}
+                            key={`${rowIndex}-${cellIndex}`}
+                        >
                             {renderCellContent({ rowIndex, cellIndex, countries, teams, guessedPlayers })}
                         </td>
                     ))}
