@@ -45,10 +45,6 @@ const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
     adUnitPath: `/${adId}/below_game_table_europaleague`,
     slotId: "div-gpt-ad-europaleague",
   },
-  CONCACAF: {
-    adUnitPath: `/${adId}/below_game_table_concacaf`,
-    slotId: "div-gpt-ad-concacaf",
-  },
 };
 
 type Props = { tournament: string | null };
