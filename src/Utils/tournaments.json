@@ -38,5 +38,9 @@
     {
         "name": "MLS 2026",
         "img": "mls"
+    },
+    {
+        "name": "Liga MX 2026",
+        "img": "mexico"
     }
 ]

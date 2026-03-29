@@ -45,6 +45,10 @@ const adConfig: Record<string, { adUnitPath: string; slotId: string }> = {
     adUnitPath: `/${adId}/below_game_table_europaleague`,
     slotId: "div-gpt-ad-europaleague",
   },
+  "LIGA MX": {
+    adUnitPath: `/${adId}/below_game_liga_mx`,
+    slotId:"div-gpt-ad-liga_mx",
+  }
 };
 
 type Props = { tournament: string | null };
