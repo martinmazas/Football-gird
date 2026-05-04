@@ -18,6 +18,7 @@ import {
 import { useLocation } from "react-router-dom";
 import BelowGameAd from "./Components/BelowGameAd";
 import HeaderAd from "./Components/HeaderAd";
+import ContactSection from "./Components/ContactSection";
 import { Country, GameParams, PlayerProps, Team } from "./Types/types";
 import { GameContext } from "./Context/GameContext";
 
@@ -241,6 +242,7 @@ const App: React.FC = () => {
           <Box sx={{ width: "100%", textAlign: "center", mb: 2 }}>
             <BelowGameAd tournament={tournament} />
           </Box>
+          <ContactSection />
         </Container>
 
         {endGame && (

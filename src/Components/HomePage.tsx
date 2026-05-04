@@ -5,6 +5,7 @@ import { useState } from "react";
 import TournamentCard from "./TournamentCard";
 import InstructionsCard from "./InstructionsCard";
 import BelowGameAd from "./BelowGameAd";
+import ContactSection from "./ContactSection";
 
 import { Tournament } from "../Types/types";
 import tournamentsData from "../Utils/tournaments.json";
@@ -132,6 +133,7 @@ export default function HomePage() {
                 />
               ))}
             </Box>
+            <ContactSection />
           </Box>
         </Container>
       </Box>
